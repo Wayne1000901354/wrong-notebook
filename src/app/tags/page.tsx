@@ -25,15 +25,16 @@ interface TagTreeNode {
 
 // 学科配置
 const SUBJECTS = [
-    { key: 'math', name: '数学' },
-    { key: 'english', name: '英语' },
+    { key: 'math', name: '數學' },
     { key: 'physics', name: '物理' },
-    { key: 'chemistry', name: '化学' },
+    { key: 'chemistry', name: '化學' },
     { key: 'biology', name: '生物' },
-    { key: 'chinese', name: '语文' },
-    { key: 'history', name: '历史' },
+    { key: 'chinese', name: '國文' },
+    { key: 'english', name: '英語' },
+    { key: 'history', name: '歷史' },
     { key: 'geography', name: '地理' },
-    { key: 'politics', name: '政治' },
+    { key: 'politics', name: '公民' },
+    { key: 'others', name: '其他' },
 ] as const;
 
 type SubjectKey = typeof SUBJECTS[number]['key'];

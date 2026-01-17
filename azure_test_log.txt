@@ -1,0 +1,66 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.15 [39m[90mD:/MyApp/wrong-notebook[39m
+
+[90mstdout[2m | src/__tests__/unit/ai/azure-provider.test.ts[2m > [22m[2mAzure OpenAI Provider ??閫??[2m > [22m[2mparseResponse[2m > [22m[2m摨砲甇?＆閫????????倌??摨?[22m[39mTest Parse Result: {
+  "questionText": "瘙??f(x) = x^2 ??撠?,
+  "answerText": "?撠潛 0",
+  "analysis": "?銝??甈∪?????,???典?暺??迨?撠潛 0",
+  "subject": "?詨飛",
+  "knowledgePoints": [
+    "鈭活?賣",
+    "?賣???
+  ],
+  "requiresImage": true
+}
+
+ [31m??[39m src/__tests__/unit/ai/azure-provider.test.ts [2m([22m[2m30 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 11[2mms[22m[39m
+       [32m??[39m 蝻箏? API Key ?嗅?霂交???AI_AUTH_ERROR[32m 1[2mms[22m[39m
+       [32m??[39m API Key 銝箇征摮泵銝脫摨砲? AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m 蝻箏? endpoint ?嗅?霂交???AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m endpoint 銝箇征摮泵銝脫摨砲? AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m 蝻箏? deploymentName ?嗅?霂交???AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m deploymentName 銝箇征摮泵銝脫摨砲? AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m ???蔭?嗅?霂交???撱箏?靘?[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲雿輻暺恕 API ?[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲?舀??芸?銋?API ?[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲?舀??芸?銋?model ?曄內?妍[32m 0[2mms[22m[39m
+       [32m??[39m analyzeImage ?寞?摨砲摮撟嗡??臬??[32m 0[2mms[22m[39m
+       [32m??[39m generateSimilarQuestion ?寞?摨砲摮撟嗡??臬??[32m 0[2mms[22m[39m
+       [32m??[39m reanswerQuestion ?寞?摨砲摮撟嗡??臬??[32m 0[2mms[22m[39m
+[31m       [31m?[31m 摨砲甇?＆閫????????倌??摨?[39m[32m 5[2mms[22m[39m
+       [32m??[39m 摨砲甇?＆憭? requiresImage 銝?false[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲甇?＆憭???摮衣?餈?暺恕???嗡?"[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲甇?＆??亥??????)[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲甇?＆??亥???銝剜????)[32m 0[2mms[22m[39m
+       [32m??[39m 蝻箏?敹??倌?嗅?霂交??粹?霂?[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲甇?＆???倌?捆[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲?駁擐偏蝛箸[32m 0[2mms[22m[39m
+       [32m??[39m ?倌銝??冽摨砲餈? null[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲憭?憭??捆[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲撠?蝏?霂航蓮?Ｖ蛹 AI_CONNECTION_FAILED[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲撠??仿?霂航蓮?Ｖ蛹 AI_CONNECTION_FAILED[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲撠恕霂?霂航蓮?Ｖ蛹 AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲撠?401 ?秤頧祆銝?AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m 摨砲撠?JSON 閫???秤頧祆銝?AI_RESPONSE_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m ?芰?秤摨砲頧祆銝?AI_UNKNOWN_ERROR[32m 0[2mms[22m[39m
+       [32m??[39m ??Error 撖寡情摨砲頧祆銝?AI_UNKNOWN_ERROR[32m 0[2mms[22m[39m
+
+?胼?胼?胼??[39m Failed Tests 1 ?胼?胼?胼??[39m
+
+ FAIL  src/__tests__/unit/ai/azure-provider.test.ts > Azure OpenAI Provider ??閫?? > parseResponse > 摨砲甇?＆閫????????倌??摨?AssertionError: expected [ '鈭活?賣', '?賣??? ] to include '鈭活?賣'
+ ??[22m src/__tests__/unit/ai/azure-provider.test.ts:236:44
+    234|             expect(result.analysis).toContain('鈭活?賣');
+    235|             expect(result.subject).toBe('?詨飛');
+    236|             expect(result.knowledgePoints).toContain('鈭活?賣');
+       |                                            ^
+    237|             expect(result.knowledgePoints).toContain('?賣???);
+    238|             expect(result.requiresImage).toBe(true);
+
+?胼?胼?胼?胼?胼?胼?胼?胼?胼?胼?胼?胼[1/1]??[22m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m29 passed[39m[22m[90m (30)[39m
+[2m   Start at [22m 11:33:34
+[2m   Duration [22m 1.32s[2m (transform 116ms, setup 34ms, import 157ms, tests 11ms, environment 926ms)[22m
+

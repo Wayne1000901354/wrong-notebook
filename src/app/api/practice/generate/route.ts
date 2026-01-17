@@ -39,7 +39,7 @@ export async function POST(req: Request) {
         );
 
         // Inject the subject from the database with type safety
-        const validSubjects = ["数学", "物理", "化学", "生物", "英语", "语文", "历史", "地理", "政治", "其他"] as const;
+        const validSubjects = ["數學", "物理", "化學", "生物", "英語", "國文", "歷史", "地理", "公民", "其他"] as const;
         const subjectName = errorItemWithSubject.subject?.name || "其他";
         similarQuestion.subject = validSubjects.includes(subjectName as any) ? subjectName as typeof validSubjects[number] : "其他";
 

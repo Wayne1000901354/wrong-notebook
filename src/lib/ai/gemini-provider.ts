@@ -110,7 +110,7 @@ export class GeminiProvider implements AIService {
 
         // Process Subject
         let subject: ParsedQuestion['subject'] = '其他';
-        const validSubjects = ["数学", "物理", "化学", "生物", "英语", "语文", "历史", "地理", "政治", "其他"];
+        const validSubjects = ["數學", "物理", "化學", "生物", "英語", "國文", "歷史", "地理", "公民", "其他"];
         if (subjectRaw && validSubjects.includes(subjectRaw)) {
             subject = subjectRaw as ParsedQuestion['subject'];
         }

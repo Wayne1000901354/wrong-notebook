@@ -1,8 +1,8 @@
 /**
  * 知识点标签工具函数
  * 
- * 注意：课程数据已迁移到数据库，通过 seed scripts 导入。
- * 此文件仅保留通用工具函数。
+ * 注意：課程數據已遷移到數據庫，通過 seed scripts 導入。
+ * 此文件僅保留通用工具函數。
  */
 
 /**
@@ -36,13 +36,13 @@ export function calculateGradeNumber(
     }
 
     if (educationStage === 'junior_high') {
-        // 初中: 入学第1年=7年级, 第2年=8年级, 第3年=9年级
+        // 國中: 入學第1年=7年級, 第2年=8年級, 第3年=9年級
         const grade = 7 + yearsInSchool;
         if (grade >= 7 && grade <= 9) {
             return grade as 7 | 8 | 9;
         }
     } else if (educationStage === 'senior_high') {
-        // 高中: 入学第1年=10年级(高一), 第2年=11年级(高二), 第3年=12年级(高三)
+        // 高中: 入學第1年=10年級(高一), 第2年=11年級(高二), 第3年=12年級(高三)
         const grade = 10 + yearsInSchool;
         if (grade >= 10 && grade <= 12) {
             return grade as 10 | 11 | 12;
@@ -62,15 +62,15 @@ export function inferSubjectFromName(subjectName: string | null): 'math' | 'phys
 
     const lowerName = subjectName.toLowerCase();
 
-    if (lowerName.includes('math') || lowerName.includes('数学')) return 'math';
+    if (lowerName.includes('math') || lowerName.includes('數學') || lowerName.includes('数学')) return 'math';
     if (lowerName.includes('physics') || lowerName.includes('物理')) return 'physics';
-    if (lowerName.includes('chemistry') || lowerName.includes('化学')) return 'chemistry';
+    if (lowerName.includes('chemistry') || lowerName.includes('化學') || lowerName.includes('化学')) return 'chemistry';
     if (lowerName.includes('biology') || lowerName.includes('生物')) return 'biology';
-    if (lowerName.includes('english') || lowerName.includes('英语')) return 'english';
-    if (lowerName.includes('chinese') || lowerName.includes('语文')) return 'chinese';
-    if (lowerName.includes('history') || lowerName.includes('历史')) return 'history';
+    if (lowerName.includes('english') || lowerName.includes('英語') || lowerName.includes('英语')) return 'english';
+    if (lowerName.includes('chinese') || lowerName.includes('國文') || lowerName.includes('語文') || lowerName.includes('语文')) return 'chinese';
+    if (lowerName.includes('history') || lowerName.includes('歷史') || lowerName.includes('历史')) return 'history';
     if (lowerName.includes('geography') || lowerName.includes('地理')) return 'geography';
-    if (lowerName.includes('politics') || lowerName.includes('政治')) return 'politics';
+    if (lowerName.includes('politics') || lowerName.includes('公民') || lowerName.includes('政治')) return 'politics';
 
     return null;
 }

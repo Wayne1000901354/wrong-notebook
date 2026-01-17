@@ -22,12 +22,12 @@ export function calculateGrade(
     const isZh = language === 'zh';
 
     const semesterName = isZh
-        ? (semesterKey === "1st" ? "上期" : "下期")
+        ? (semesterKey === "1st" ? "上學期" : "下學期")
         : (semesterKey === "1st" ? "1st Semester" : "2nd Semester");
 
     const stageMapZh: Record<string, string[]> = {
-        primary: ["一年级", "二年级", "三年级", "四年级", "五年级", "六年级"],
-        junior_high: ["初一", "初二", "初三"],
+        primary: ["一年級", "二年級", "三年級", "四年級", "五年級", "六年級"],
+        junior_high: ["國一", "國二", "國三"],
         senior_high: ["高一", "高二", "高三"],
         university: ["大一", "大二", "大三", "大四"],
     };
@@ -48,13 +48,13 @@ export function calculateGrade(
     if (gradeLevel > 0 && gradeLevel <= grades.length) {
         gradeStr = grades[gradeLevel - 1];
     } else if (gradeLevel > grades.length) {
-        gradeStr = isZh ? "已毕业" : "Graduated";
+        gradeStr = isZh ? "已畢業" : "Graduated";
     } else {
-        gradeStr = isZh ? "学前" : "Pre-school";
+        gradeStr = isZh ? "學前" : "Pre-school";
     }
 
     if (isZh) {
-        // Match UI tag format: "高一上", "初一下" instead of "高一，上期"
+        // Match UI tag format: "高一上", "國一下" instead of "高一，上學期"
         // Semester suffix: "上" or "下"
         const suffix = semesterKey === "1st" ? "上" : "下";
         return `${gradeStr}${suffix}`;

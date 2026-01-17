@@ -62,8 +62,8 @@ describe('/api/practice', () => {
         const mockErrorItem = {
             id: 'error-item-1',
             questionText: '求解 x + 2 = 5',
-            knowledgePoints: '["一元一次方程", "移项"]',
-            subject: { id: 'math', name: '数学' },
+            knowledgePoints: '["一元一次方程式", "移項"]',
+            subject: { id: 'math', name: '數學' },
         };
 
         it('应该成功生成类似题目', async () => {
@@ -71,9 +71,9 @@ describe('/api/practice', () => {
             const aiResult = {
                 questionText: '求解 2x - 3 = 7',
                 answerText: 'x = 5',
-                analysis: '移项得 2x = 10, x = 5',
-                knowledgePoints: ['一元一次方程'],
-                subject: '数学',
+                analysis: '移項得 2x = 10, x = 5',
+                knowledgePoints: ['一元一次方程式'],
+                subject: '數學',
             };
             mocks.mockAIService.generateSimilarQuestion.mockResolvedValue(aiResult);
 
@@ -92,7 +92,7 @@ describe('/api/practice', () => {
 
             expect(response.status).toBe(200);
             expect(data.questionText).toBe('求解 2x - 3 = 7');
-            expect(data.subject).toBe('数学');
+            expect(data.subject).toBe('數學');
         });
 
         it('应该支持不同难度级别', async () => {
@@ -179,7 +179,7 @@ describe('/api/practice', () => {
                 questionText: '题目',
                 answerText: '答案',
                 analysis: '解析',
-                knowledgePoints: ['一元一次方程'],
+                knowledgePoints: ['一元一次方程式'],
             });
 
             const request = new Request('http://localhost/api/practice/generate', {
@@ -195,7 +195,7 @@ describe('/api/practice', () => {
 
             expect(mocks.mockAIService.generateSimilarQuestion).toHaveBeenCalledWith(
                 '求解 x + 2 = 5',
-                ['一元一次方程', '移项'], // 解析后的标签数组
+                ['一元一次方程式', '移項'], // 解析後的標籤數組
                 'zh',
                 'medium'
             );
@@ -269,7 +269,7 @@ describe('/api/practice', () => {
             };
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(errorItemWithPhysics);
             mocks.mockAIService.generateSimilarQuestion.mockResolvedValue({
-                questionText: '物理题目',
+                questionText: '物理題目',
                 answerText: '答案',
                 analysis: '解析',
                 knowledgePoints: [],
@@ -289,13 +289,13 @@ describe('/api/practice', () => {
             const data = await response.json();
 
             expect(response.status).toBe(200);
-            expect(data.subject).toBe('物理'); // 应该从数据库注入
+            expect(data.subject).toBe('物理'); // 應該從數據庫注入
         });
 
         it('应该处理未知学科为"其他"', async () => {
             const errorItemWithUnknownSubject = {
                 ...mockErrorItem,
-                subject: { id: 'unknown', name: '未知学科' },
+                subject: { id: 'unknown', name: '未知學科' },
             };
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(errorItemWithUnknownSubject);
             mocks.mockAIService.generateSimilarQuestion.mockResolvedValue({
@@ -378,7 +378,7 @@ describe('/api/practice', () => {
             const createdRecord = {
                 id: 'record-1',
                 userId: 'user-123',
-                subject: '数学',
+                subject: '數學',
                 difficulty: 'medium',
                 isCorrect: true,
                 createdAt: new Date(),
@@ -399,7 +399,7 @@ describe('/api/practice', () => {
             const data = await response.json();
 
             expect(response.status).toBe(200);
-            expect(data.subject).toBe('数学');
+            expect(data.subject).toBe('數學');
             expect(data.isCorrect).toBe(true);
         });
 
@@ -407,7 +407,7 @@ describe('/api/practice', () => {
             const createdRecord = {
                 id: 'record-2',
                 userId: 'user-123',
-                subject: '英语',
+                subject: '英語',
                 difficulty: 'hard',
                 isCorrect: false,
                 createdAt: new Date(),
@@ -417,7 +417,7 @@ describe('/api/practice', () => {
             const request = new Request('http://localhost/api/practice/record', {
                 method: 'POST',
                 body: JSON.stringify({
-                    subject: '英语',
+                    subject: '英語',
                     difficulty: 'hard',
                     isCorrect: false,
                 }),
@@ -431,8 +431,8 @@ describe('/api/practice', () => {
             expect(data.isCorrect).toBe(false);
         });
 
-        it('应该记录不同学科的练习结果', async () => {
-            const subjects = ['数学', '物理', '化学', '英语', '语文'];
+        it('應該記錄不同學科的練習結果', async () => {
+            const subjects = ['數學', '物理', '化學', '英語', '國文'];
 
             for (const subject of subjects) {
                 mocks.mockPrismaPracticeRecord.create.mockResolvedValue({
@@ -464,7 +464,7 @@ describe('/api/practice', () => {
             const request = new Request('http://localhost/api/practice/record', {
                 method: 'POST',
                 body: JSON.stringify({
-                    subject: '数学',
+                    subject: '數學',
                     difficulty: 'medium',
                     isCorrect: true,
                 }),
@@ -487,7 +487,7 @@ describe('/api/practice', () => {
             const request = new Request('http://localhost/api/practice/record', {
                 method: 'POST',
                 body: JSON.stringify({
-                    subject: '数学',
+                    subject: '數學',
                     difficulty: 'medium',
                     isCorrect: true,
                 }),
@@ -509,7 +509,7 @@ describe('/api/practice', () => {
             const request = new Request('http://localhost/api/practice/record', {
                 method: 'POST',
                 body: JSON.stringify({
-                    subject: '数学',
+                    subject: '數學',
                     difficulty: 'medium',
                     isCorrect: true,
                 }),

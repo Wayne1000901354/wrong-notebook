@@ -21,106 +21,106 @@ export interface PromptOptions {
   prefetchedEnglishTags?: string[];
 }
 
-export const DEFAULT_ANALYZE_TEMPLATE = `【角色与核心任务 (ROLE AND CORE TASK)】
-你是一位世界顶尖的、经验丰富的、专业的跨学科考试分析专家（Interdisciplinary Exam Analysis Expert）。你的核心任务是极致准确地分析用户提供的考试题目图片，全面理解所有文本、图表和隐含约束，并提供一个完整、高度结构化且专业的解决方案。
+export const DEFAULT_ANALYZE_TEMPLATE = `【角色與核心任務 (ROLE AND CORE TASK)】
+你是一位世界頂尖的、經驗豐富的、專業的跨學科考試分析專家（Interdisciplinary Exam Analysis Expert）。你的核心任務是極致準確地分析用戶提供的考試題目圖片，全面理解所有文本、圖表和隱含約束，並提供一個完整、高度結構化且專業的解決方案。
 
 {{language_instruction}}
 
-【核心输出要求 (OUTPUT REQUIREMENTS)】
-你的响应输出**必须严格遵循以下自定义标签格式**。**严禁**使用 JSON 或 Markdown 代码块。**严禁**对 LaTeX 公式中的反斜杠进行二次转义（如 "\\frac" 是错误的，必须是 "\frac"）。
+【核心輸出要求 (OUTPUT REQUIREMENTS)】
+你的響應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 代碼塊。**嚴禁**對 LaTeX 公式中的反斜線進行二次跳脫（如 "\\frac" 是錯誤的，必須是 "\frac"）。
 
-请严格按照以下结构输出内容：
+請嚴格按照以下結構輸出內容：
 
 <subject>
-在此处填写学科，必须是以下之一："数学", "物理", "化学", "生物", "英语", "语文", "历史", "地理", "政治", "其他"。
+在此處填寫學科，必須是以下之一："數學", "物理", "化學", "生物", "英語", "國文", "歷史", "地理", "公民", "其他"。
 </subject>
 
 <knowledge_points>
-在此处填写知识点，使用逗号分隔，例如：知识点1, 知识点2, 知识点3
+在此處填寫知識點，使用逗號分隔，例如：知識點1, 知識點2, 知識點3
 </knowledge_points>
 
 <requires_image>
-判断这道题是否需要依赖图片才能正确解答。如果题目包含几何图形、函数图像、实验装置图、电路图等必须看图才能理解的内容，填写 true；如果只需要文字描述即可理解（如英语题、纯文字数学题），填写 false。
+判斷這道題是否需要依賴圖片才能正確解答。如果題目包含幾何圖形、函數圖像、實驗裝置圖、電路圖等必須看圖才能理解的內容，填寫 true；如果只需要文字描述即可理解（如英語題、純文字數學題），填寫 false。
 </requires_image>
 
 <question_text>
-在此处填写题目的完整文本。使用 Markdown 格式。所有数学公式使用 LaTeX 符号（行内 $...$，块级 $$...$$）。
+在此處填寫題目的完整文本。使用 Markdown 格式。所有數學公式使用 LaTeX 符號（行內 $...$，塊級 $$...$$）。
 </question_text>
 
 <answer_text>
-在此处填写正确答案。使用 Markdown 和 LaTeX 符号。
+在此處填寫正確答案。使用 Markdown 和 LaTeX 符號。
 </answer_text>
 
 <analysis>
-在此处填写详细的步骤解析。
-* 必须使用简体中文。
-* **直接使用标准的 LaTeX 符号**（如 $\frac{1}{2}$），**不要**进行 JSON 转义（不要写成 \\frac）。
+在此處填寫詳細的步驟解析。
+* 必須使用繁體中文（台灣）。
+* **直接使用標準的 LaTeX 符號**（如 $\frac{1}{2}$），**不要**進行 JSON 跳脫（不要寫成 \\frac）。
 </analysis>
 
-【知识点标签列表（KNOWLEDGE POINT LIST）】
+【知識點標籤列表（KNOWLEDGE POINT LIST）】
 {{knowledge_points_list}}
 
-【标签使用规则 (TAG RULES)】
-- 标签必须与题目实际考查的知识点精准匹配。
-- 每题最多 5 个标签。
+【標籤使用規則 (TAG RULES)】
+- 標籤必須與題目實際考查的知識點精準匹配。
+- 每題最多 5 個標籤。
 
-【!!! 关键格式与内容约束 (CRITICAL RULES) !!!】
-1. **格式严格**：必须严格包含上述 6 个 XML 标签，除此之外不要输出任何其他“开场白”或“结束语”。
-2. **纯文本**：内容作为纯文本处理，**不要转义反斜杠**。
-3. **内容完整**：如果包含子问题，请在 question_text 中完整列出。
-4. **禁止图片**：严禁包含任何图片链接或 markdown 图片语法。
+【!!! 關鍵格式與內容約束 (CRITICAL RULES) !!!】
+1. **格式嚴格**：必須嚴格包含上述 6 個 XML 標籤，除此之外不要輸出任何其他“開場白”或“結束語”。
+2. **純文本**：內容作為純文本處理，**不要跳脫反斜線**。
+3. **內容完整**：如果包含子問題，請在 question_text 中完整列出。
+4. **禁止圖片**：嚴禁包含任何圖片連結或 markdown 圖片語法。
 
 {{provider_hints}}`;
 
-export const DEFAULT_SIMILAR_TEMPLATE = `你是一位资深的K12教育题目生成专家，具备跨学科的题目创作能力。你的核心任务是**根据以下原题和知识点，举一反三生成高质量教学题目**，帮助学生巩固知识并拓展解题思路。
-### 角色定义
-1. **学科全能专家**  
-   - 精通K12阶段所有学科（数学/语文/英语/物理/化学/生物/历史/地理/政治）
-   - 熟悉各年级课程标准与知识点分布
-   - 能准确识别题目考察的核心能力点（计算/推理/分析/应用/创新）
-2. **题目变异大师**  
-   - 掌握12种变式技法：条件替换/情境迁移/问题转化/数据重构/图形变形/角色反转/跨学科融合/难度阶梯/开放拓展/陷阱设计/逆向思维/生活应用
-   - 确保变式题目保持原题核心考点，改变题目表现形式
-3. **学情分析师**  
-   - 预判学生易错点（认知盲区/概念混淆/计算失误/审题偏差）
-   - 在变式题目中针对性强化易错点训练
-### 执行流程
-1. **接收任务**  
-	原题: "{{original_question}}"
+export const DEFAULT_SIMILAR_TEMPLATE = `你是一位資深的K12教育題目生成專家，具備跨學科的題目創作能力。你的核心任務是**根據以下原題和知識點，舉一反三生成高品質教學題目**，幫助學生鞏固知識並拓展解題思路。
+### 角色定義
+1. **學科全能專家**  
+   - 精通K12階段所有學科（數學/國文/英語/物理/化學/生物/歷史/地理/公民）
+   - 熟悉各年級課程標準與知識點分佈
+   - 能準確識別題目考察的核心能力點（計算/推理/分析/應用/創新）
+2. **題目變異大師**  
+   - 掌握12種變式技法：條件替換/情境遷移/問題轉化/數據重構/圖形變形/角色反轉/跨學科融合/難度階梯/開放拓展/陷阱設計/逆向思維/生活應用
+   - 確保變式題目保持原題核心考點，改變題目表現形式
+3. **學情分析師**  
+   - 預判學生易錯點（認知盲區/概念混淆/計算失誤/審題偏差）
+   - 在變式題目中針對性強化易錯點訓練
+### 執行流程
+1. **接收任務**  
+	原題: "{{original_question}}"
 	{{language_instruction}}
 	DIFFICULTY LEVEL: {{difficulty_level}}
 	{{difficulty_instruction}}
 	Knowledge Points: {{knowledge_points}}  
-2. **解构分析**  
-   - 提取核心考点与能力要求
-   - 分析题目陷阱与解题路径
-3.  **质量管控**  
-   - 确保每道题：  
-     ✓ 覆盖相同核心知识点  
-     ✓ 保持解题逻辑一致性  
-     ✓ 答案唯一且可验证  
-     ✓ 无知识性错误
-### 输出规范
-你的响应输出**必须严格遵循以下自定义标签格式**。**严禁**使用 JSON 或 Markdown 代码块。**严禁**返回 \`\`\`json ... \`\`\`。
+2. **解構分析**  
+   - 提取核心考點與能力要求
+   - 分析題目陷阱與解題路徑
+3.  **品質管控**  
+   - 確保每道題：  
+     ✓ 覆蓋相同核心知識點  
+     ✓ 保持解題邏輯一致性  
+     ✓ 答案唯一且可驗證  
+     ✓ 無知識性錯誤
+### 輸出規範
+你的響應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 代碼塊。**嚴禁**返回 \`\`\`json ... \`\`\`。
 
-请严格按照以下结构输出内容（不要包含任何其他文字）：
+請嚴格按照以下結構輸出內容（不要包含任何其他文字）：
 
 <question_text>
-在此处填写新生成的题目文本。包含选项（如果是选择题）。
+在此處填寫新生成的題目文本。包含選項（如果是選擇題）。
 </question_text>
 
 <answer_text>
-在此处填写新题目的正确答案。
+在此處填寫新題目的正確答案。
 </answer_text>
 
 <analysis>
-在此处填写新题目的详细解析。
-* 必须使用简体中文。
-* **直接使用标准的 LaTeX 符号**（如 $\frac{1}{2}$），**不要**进行 JSON 转义。
+在此處填寫新題目的詳細解析。
+* 必須使用繁體中文。
+* **直接使用標準的 LaTeX 符號**（如 $\frac{1}{2}$），**不要**進行 JSON 跳脫。
 </analysis>
 
-###关键格式与内容约束 (CRITICAL RULES) !!!
-1. **纯文本**：内容作为纯文本处理，**不要转义反斜杠**。
+###關鍵格式與內容約束 (CRITICAL RULES) !!!
+1. **純文本**：內容作為純文本處理，**不要跳脫反斜線**。
 
 {{provider_hints}}`;
 
@@ -134,13 +134,13 @@ function replaceVariables(template: string, variables: Record<string, string>): 
 }
 
 /**
- * 获取指定年级的累进数学标签
- * 初一(7)：只包含七年级标签
- * 初二(8)：包含七年级+八年级标签
- * 初三(9)：包含七年级+八年级+九年级标签
- * 高一(10)：只包含高一标签（不含初中）
- * 高二(11)：包含高一+高二标签
- * 高三(12)：包含高一+高二+高三标签
+ * 獲取指定年級的累進數學標籤
+ * 初一(7)：只包含七年級標籤
+ * 初二(8)：包含七年級+八年級標籤
+ * 初三(9)：包含七年級+八年級+九年級標籤
+ * 高一(10)：只包含高一標籤（不含國中）
+ * 高二(11)：包含高一+高二標籤
+ * 高三(12)：包含高一+高二+高三標籤
  * @param grade - 年级 (7-9:初中, 10-12:高中) 或 null
  * @returns 标签数组
  */
@@ -160,7 +160,7 @@ export function getMathTagsForGrade(
     return prefetchedTags;
   }
 
-  // 如果没有预获取标签，返回空数组（AI 将自由标注）
+  // 如果沒有預獲取標籤，返回空數組（AI 將自由標註）
   console.warn('[prompts] No prefetched tags provided, AI will tag freely');
   return [];
 }
@@ -178,83 +178,83 @@ export function generateAnalyzePrompt(
   options?: PromptOptions
 ): string {
   const langInstruction = language === 'zh'
-    ? "IMPORTANT: For the 'analysis' field, use Simplified Chinese. For 'questionText' and 'answerText', YOU MUST USE THE SAME LANGUAGE AS THE ORIGINAL QUESTION. If the original question is in Chinese, the new question MUST be in Chinese. If the original is in English, keep it in English. If the original question is in English, the new 'questionText' and 'answerText' MUST be in English, but the 'analysis' MUST be in Simplified Chinese (to help the student understand). "
+    ? "IMPORTANT: For the 'analysis' field, use Traditional Chinese (Taiwan). For 'questionText' and 'answerText', YOU MUST USE THE SAME LANGUAGE AS THE ORIGINAL QUESTION. If the original question is in Chinese, the new question MUST be in Traditional Chinese. If the original is in English, keep it in English. If the original question is in English, the new 'questionText' and 'answerText' MUST be in English, but the 'analysis' MUST be in Traditional Chinese (to help the student understand). "
     : "Please ensure all text fields are in English.";
 
   // 获取各学科标签（优先使用预获取的数据库标签）
   const mathTags = getMathTagsForGrade(grade || null, options?.prefetchedMathTags);
-  const mathTagsString = mathTags.length > 0 ? mathTags.map(tag => `"${tag}"`).join(", ") : '（无可用标签）';
+  const mathTagsString = mathTags.length > 0 ? mathTags.map(tag => `"${tag}"`).join(", ") : '（無可用標籤）';
 
   const physicsTags = options?.prefetchedPhysicsTags || [];
-  const physicsTagsString = physicsTags.length > 0 ? physicsTags.map(tag => `"${tag}"`).join(", ") : '（无可用标签）';
+  const physicsTagsString = physicsTags.length > 0 ? physicsTags.map(tag => `"${tag}"`).join(", ") : '（無可用標籤）';
 
   const chemistryTags = options?.prefetchedChemistryTags || [];
-  const chemistryTagsString = chemistryTags.length > 0 ? chemistryTags.map(tag => `"${tag}"`).join(", ") : '（无可用标签）';
+  const chemistryTagsString = chemistryTags.length > 0 ? chemistryTags.map(tag => `"${tag}"`).join(", ") : '（無可用標籤）';
 
   const biologyTags = options?.prefetchedBiologyTags || [];
-  const biologyTagsString = biologyTags.length > 0 ? biologyTags.map(tag => `"${tag}"`).join(", ") : '（无可用标签）';
+  const biologyTagsString = biologyTags.length > 0 ? biologyTags.map(tag => `"${tag}"`).join(", ") : '（無可用標籤）';
 
   const englishTags = options?.prefetchedEnglishTags || [];
-  const englishTagsString = englishTags.length > 0 ? englishTags.map(tag => `"${tag}"`).join(", ") : '（无可用标签）';
+  const englishTagsString = englishTags.length > 0 ? englishTags.map(tag => `"${tag}"`).join(", ") : '（無可用標籤）';
 
   // 根据科目决定显示哪些标签（节省 token，提高准确性）
   let tagsSection = "";
 
-  if (subject === '数学') {
-    tagsSection = `**数学标签 (Math Tags):**
-使用人教版课程大纲中的**精确标签名称**，可选标签如下：
+  if (subject === '數學') {
+    tagsSection = `**數學標籤 (Math Tags):**
+使用課程大綱中的**精確標籤名稱**，可選標籤如下：
 ${mathTagsString}
 
 **重要提示**：
-- 必须从上述列表中选择精确匹配的标签
-- 每题最多 5 个标签`;
+- 必須從上述列表中選擇精確匹配的標籤
+- 每題最多 5 個標籤`;
   } else if (subject === '物理') {
-    tagsSection = `**物理标签 (Physics Tags):**
-使用课程大纲中的**精确标签名称**，可选标签如下：
+    tagsSection = `**物理標籤 (Physics Tags):**
+使用課程大綱中的**精確標籤名稱**，可選標籤如下：
 ${physicsTagsString}
 
 **重要提示**：
-- 必须从上述列表中选择精确匹配的标签
-- 每题最多 5 个标签`;
-  } else if (subject === '化学') {
-    tagsSection = `**化学标签 (Chemistry Tags):**
-使用课程大纲中的**精确标签名称**，可选标签如下：
+- 必須從上述列表中選擇精確匹配的標籤
+- 每題最多 5 個標籤`;
+  } else if (subject === '化學') {
+    tagsSection = `**化學標籤 (Chemistry Tags):**
+使用課程大綱中的**精確標籤名稱**，可選標籤如下：
 ${chemistryTagsString}
 
 **重要提示**：
-- 必须从上述列表中选择精确匹配的标签
-- 每题最多 5 个标签`;
+- 必須從上述列表中選擇精確匹配的標籤
+- 每題最多 5 個標籤`;
   } else if (subject === '生物') {
-    tagsSection = `**生物标签 (Biology Tags):**
-使用课程大纲中的**精确标签名称**，可选标签如下：
+    tagsSection = `**生物標籤 (Biology Tags):**
+使用課程大綱中的**精確標籤名稱**，可選標籤如下：
 ${biologyTagsString}
 
 **重要提示**：
-- 必须从上述列表中选择精确匹配的标签
-- 每题最多 5 个标签`;
-  } else if (subject === '英语') {
-    tagsSection = `**英语标签 (English Tags):**
-使用课程大纲中的**精确标签名称**，可选标签如下：
+- 必須從上述列表中選擇精確匹配的標籤
+- 每題最多 5 個標籤`;
+  } else if (subject === '英語') {
+    tagsSection = `**英語標籤 (English Tags):**
+使用課程大綱中的**精確標籤名稱**，可選標籤如下：
 ${englishTagsString}
 
 **重要提示**：
-- 必须从上述列表中选择精确匹配的标签
-- 每题最多 5 个标签`;
+- 必須從上述列表中選擇精確匹配的標籤
+- 每題最多 5 個標籤`;
   } else {
-    // 未知科目：显示所有标签让 AI 判断
-    tagsSection = `**数学标签 (Math Tags):**
+    // 未知科目：顯示所有標籤讓 AI 判斷
+    tagsSection = `**數學標籤 (Math Tags):**
 ${mathTagsString}
 
-**物理标签 (Physics Tags):**
+**物理標籤 (Physics Tags):**
 ${physicsTagsString}
 
-**化学标签 (Chemistry Tags):**
+**化學標籤 (Chemistry Tags):**
 ${chemistryTagsString}
 
-**生物标签 (Biology Tags):**
+**生物標籤 (Biology Tags):**
 ${biologyTagsString}
 
-**英语标签 (English Tags):**
+**英語標籤 (English Tags):**
 ${englishTagsString}`;
   }
 
@@ -283,7 +283,7 @@ export function generateSimilarQuestionPrompt(
   options?: PromptOptions
 ): string {
   const langInstruction = language === 'zh'
-    ? "IMPORTANT: Provide the output based on the 'Original Question' language. If the original question is in English, the new 'questionText' and 'answerText' MUST be in English, but the 'analysis' MUST be in Simplified Chinese (to help the student understand). If the original is in Chinese, everything MUST be in Simplified Chinese."
+    ? "IMPORTANT: Provide the output based on the 'Original Question' language. If the original question is in English, the new 'questionText' and 'answerText' MUST be in English, but the 'analysis' MUST be in Traditional Chinese (Taiwan standard, to help the student understand). If the original is in Chinese, everything MUST be in Traditional Chinese."
     : "Please ensure the generated question is in English.";
 
   const difficultyInstruction = {
@@ -309,41 +309,41 @@ export function generateSimilarQuestionPrompt(
  * 重新解题提示词模板
  * 用于根据校正后的题目文本重新生成答案和解析
  */
-export const DEFAULT_REANSWER_TEMPLATE = `【角色与核心任务 (ROLE AND CORE TASK)】
-你是一位经验丰富的专业教师。用户已经提供了一道**校正后的题目文本**，请你为这道题目提供正确的答案和详细的解析。
+export const DEFAULT_REANSWER_TEMPLATE = `【角色與核心任務 (ROLE AND CORE TASK)】
+你是一位經驗豐富的專業教師。用戶已經提供了一道**校正後的題目文本**，請你為這道題目提供正確的答案和詳細的解析。
 
 {{language_instruction}}
 
-【题目内容 (QUESTION)】
+【題目內容 (QUESTION)】
 {{question_text}}
 
-【学科提示 (SUBJECT HINT)】
+【學科提示 (SUBJECT HINT)】
 {{subject_hint}}
 
-【核心输出要求 (OUTPUT REQUIREMENTS)】
-你的响应输出**必须严格遵循以下自定义标签格式**。**严禁**使用 JSON 或 Markdown 代码块。
+【核心輸出要求 (OUTPUT REQUIREMENTS)】
+你的響應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 代碼塊。
 
-请严格按照以下结构输出内容（不要包含任何其他文字）：
+請嚴格按照以下結構輸出內容（不要包含任何其他文字）：
 
 <answer_text>
-在此处填写正确答案。使用 Markdown 和 LaTeX 符号。
+在此處填寫正確答案。使用 Markdown 和 LaTeX 符號。
 </answer_text>
 
 <analysis>
-在此处填写详细的步骤解析。
-* 必须使用简体中文。
-* **直接使用标准的 LaTeX 符号**（如 $\\frac{1}{2}$），**不要**进行 JSON 转义。
-* 解析要清晰、完整，适合学生理解。
+在此處填寫詳細的步驟解析。
+* 必須使用繁體中文。
+* **直接使用標準的 LaTeX 符號**（如 $\\frac{1}{2}$），**不要**進行 JSON 跳脫。
+* 解析要清晰、完整，適合學生理解。
 </analysis>
 
 <knowledge_points>
-在此处填写知识点，使用逗号分隔，例如：知识点1, 知识点2, 知识点3
+在此處填寫知識點，使用逗號分隔，例如：知識點1, 知識點2, 知識點3
 </knowledge_points>
 
-【!!! 关键格式与内容约束 (CRITICAL RULES) !!!】
-1. **格式严格**：必须严格包含上述 3 个 XML 标签，不要输出其他内容。
-2. **纯文本**：内容作为纯文本处理，**不要转义反斜杠**。
-3. **题目不变**：不要修改或重复题目内容，只提供答案和解析。
+【!!! 關鍵格式與內容約束 (CRITICAL RULES) !!!】
+1. **格式嚴格**：必須嚴格包含上述 3 個 XML 標籤，不要輸出其他內容。
+2. **純文本**：內容作為純文本處理，**不要跳脫反斜線**。
+3. **題目不變**：不要修改或重複題目內容，只提供答案和解析。
 
 {{provider_hints}}`;
 
@@ -361,12 +361,12 @@ export function generateReanswerPrompt(
   options?: PromptOptions
 ): string {
   const langInstruction = language === 'zh'
-    ? "IMPORTANT: 解析必须使用简体中文。如果题目是英文，答案保持英文，但解析用中文。"
+    ? "IMPORTANT: 解析必須使用繁體中文。如果題目是英文，答案保持英文，但解析用中文。"
     : "Please ensure all text fields are in English.";
 
   const subjectHint = subject
-    ? `本题学科：${subject}`
-    : "请根据题目内容判断学科。";
+    ? `本題學科：${subject}`
+    : "請根據題目內容判斷學科。";
 
   const template = options?.customTemplate || DEFAULT_REANSWER_TEMPLATE;
 

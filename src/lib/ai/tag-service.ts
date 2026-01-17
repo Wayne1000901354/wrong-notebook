@@ -17,7 +17,7 @@ interface TagTreeNode {
 
 /**
  * 从数据库获取指定年级的数学标签
- * @param grade - 年级 (7-9:初中, 10-12:高中) 或 null
+ * @param grade - 年級 (7-9:國中, 10-12:高中) 或 null
  * @returns 标签名称数组
  */
 export async function getMathTagsFromDB(grade: 7 | 8 | 9 | 10 | 11 | 12 | null): Promise<string[]> {
@@ -37,7 +37,7 @@ export async function getMathTagsFromDB(grade: 7 | 8 | 9 | 10 | 11 | 12 | null):
         // 无年级信息，返回所有标签
         semesterNames = Object.values(gradeToSemesterMap).flat();
     } else if (grade >= 7 && grade <= 9) {
-        // 初中累进式：当前年级及之前
+        // 國中累進式：當前年級及之前
         for (let g = 7; g <= grade; g++) {
             semesterNames.push(...(gradeToSemesterMap[g] || []));
         }

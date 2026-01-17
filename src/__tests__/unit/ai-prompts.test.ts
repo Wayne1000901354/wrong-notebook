@@ -44,25 +44,25 @@ describe('AI Prompts', () => {
             expect(typeof prompt).toBe('string');
         });
 
-        it('应该包含学科提示（如果提供）', () => {
-            const prompt = generateAnalyzePrompt('zh', null, '数学');
-            expect(prompt).toContain('数学');
+        it('應該包含學科提示（如果提供）', () => {
+            const prompt = generateAnalyzePrompt('zh', null, '數學');
+            expect(prompt).toContain('數學');
         });
 
-        it('应该根据年级过滤数学标签（初一）', () => {
-            const prompt = generateAnalyzePrompt('zh', 7, '数学');
+        it('應該根據年級過濾數學標籤（初一）', () => {
+            const prompt = generateAnalyzePrompt('zh', 7, '數學');
             // 初一应该只包含七年级的标签
             expect(prompt).toBeDefined();
         });
 
-        it('应该根据年级过滤数学标签（初三）', () => {
-            const prompt = generateAnalyzePrompt('zh', 9, '数学');
+        it('應該根據年級過濾數學標籤（初三）', () => {
+            const prompt = generateAnalyzePrompt('zh', 9, '數學');
             // 初三应该包含七、八、九年级的累进标签
             expect(prompt).toBeDefined();
         });
 
-        it('应该根据年级过滤数学标签（高一）', () => {
-            const prompt = generateAnalyzePrompt('zh', 10, '数学');
+        it('應該根據年級過濾數學標籤（高一）', () => {
+            const prompt = generateAnalyzePrompt('zh', 10, '數學');
             expect(prompt).toBeDefined();
         });
 
@@ -83,8 +83,8 @@ describe('AI Prompts', () => {
             expect(prompt).toContain('Chinese');
         });
 
-        it('生成的提示词不应包含未替换的变量占位符', () => {
-            const prompt = generateAnalyzePrompt('zh', 8, '数学');
+        it('生成的提示詞不應包含未替換的變量佔位符', () => {
+            const prompt = generateAnalyzePrompt('zh', 8, '數學');
             // 检查常见的占位符是否已被替换
             expect(prompt).not.toContain('{{language_instruction}}');
             expect(prompt).not.toContain('{{tag_list}}');
@@ -94,9 +94,9 @@ describe('AI Prompts', () => {
 
     describe('generateSimilarQuestionPrompt', () => {
         const originalQuestion = '已知 x + y = 5，求 x² + y² 的最小值';
-        const knowledgePoints = ['一元二次方程', '最值问题'];
+        const knowledgePoints = ['一元二次方程式', '極值問題'];
 
-        it('应该生成中文类似题提示词', () => {
+        it('應該生成中文類似題提示詞', () => {
             const prompt = generateSimilarQuestionPrompt('zh', originalQuestion, knowledgePoints);
             expect(prompt).toContain(originalQuestion);
             expect(prompt).toContain('中文');
@@ -108,10 +108,10 @@ describe('AI Prompts', () => {
             expect(prompt).toContain('English');
         });
 
-        it('应该包含知识点列表', () => {
+        it('應該包含知識點列表', () => {
             const prompt = generateSimilarQuestionPrompt('zh', originalQuestion, knowledgePoints);
-            expect(prompt).toContain('一元二次方程');
-            expect(prompt).toContain('最值问题');
+            expect(prompt).toContain('一元二次方程式');
+            expect(prompt).toContain('極值問題');
         });
 
         it('应该根据难度级别调整提示词', () => {
@@ -153,9 +153,9 @@ describe('AI Prompts', () => {
             expect(prompt).toContain('English');
         });
 
-        it('应该包含学科提示（如果提供）', () => {
-            const prompt = generateReanswerPrompt('zh', questionText, '数学');
-            expect(prompt).toContain('数学');
+        it('應該包含學科提示（如果提供）', () => {
+            const prompt = generateReanswerPrompt('zh', questionText, '數學');
+            expect(prompt).toContain('數學');
         });
 
         it('应该支持自定义 provider hints', () => {
@@ -165,8 +165,8 @@ describe('AI Prompts', () => {
             expect(prompt).toContain('输出格式要求');
         });
 
-        it('生成的提示词不应包含未替换的变量占位符', () => {
-            const prompt = generateReanswerPrompt('zh', questionText, '数学');
+        it('生成的提示詞不應包含未替換的變量佔位符', () => {
+            const prompt = generateReanswerPrompt('zh', questionText, '數學');
             expect(prompt).not.toContain('{{question_text}}');
             expect(prompt).not.toContain('{{language_instruction}}');
             expect(prompt).not.toContain('{{provider_hints}}');

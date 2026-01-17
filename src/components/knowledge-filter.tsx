@@ -39,7 +39,7 @@ const EDUCATION_GRADE_MAP: Record<string, number[]> = {
 };
 
 // 年级编号到学期key的映射
-// 注意：小学目前数据库中只存储了"一年级"这种粒度，没有分上下册，后续如果有变化需要更新这里
+// 注意：國小目前數據庫中只存儲了"一年級"這種粒度，沒有分上下冊，後續如果有變化需要更新這裡
 const GRADE_TO_SEMESTERS: Record<number, string[]> = {
     1: ['一年级'],
     2: ['二年级'],
@@ -98,7 +98,7 @@ export function KnowledgeFilter({
         if (educationStage === 'primary') {
             return yearsInSchool;
         } else if (educationStage === 'junior_high') {
-            // 初中: 1年级=7, ...
+            // 國中: 1年級=7, ...
             return yearsInSchool + 6;
         } else if (educationStage === 'senior_high') {
             // 高中: 1年级=10, ...
@@ -115,10 +115,10 @@ export function KnowledgeFilter({
         if (!educationStage) {
             grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         } else if (educationStage === 'primary') {
-            // 小学生: 显示小学全部
+            // 國小生: 顯示國小全部
             grades = [1, 2, 3, 4, 5, 6];
         } else if (educationStage === 'junior_high') {
-            // 初中生: 默认显示初中全部 (7-9)
+            // 國中生: 預設顯示國中全部 (7-9)
             grades = [7, 8, 9];
 
             // 如果有入学年份，且推算年级已达到高中 (>=10)，则追加高中年级

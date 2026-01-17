@@ -217,23 +217,22 @@ describe('Azure OpenAI Provider 响应解析', () => {
     describe('parseResponse', () => {
         it('应该正确解析包含所有必需标签的响应', () => {
             const mockResponse = `
-<question_text>求函数 f(x) = x^2 的最小值</question_text>
-<answer_text>最小值为 0</answer_text>
-<analysis>这是一个二次函数,开口向上,顶点在原点,因此最小值为 0</analysis>
-<subject>数学</subject>
-<knowledge_points>二次函数, 函数最值</knowledge_points>
+<question_text>求函數 f(x) = x^2 的最小值</question_text>
+<answer_text>最小值為 0</answer_text>
+<analysis>這是一個二次函數,開口向上,頂點在原點,因此最小值為 0</analysis>
+<subject>數學</subject>
+<knowledge_points>二次函數, 函數最值</knowledge_points>
 <requires_image>true</requires_image>
             `.trim();
 
             // Access private method via type assertion
             const result = (provider as any).parseResponse(mockResponse);
-
-            expect(result.questionText).toBe('求函数 f(x) = x^2 的最小值');
-            expect(result.answerText).toBe('最小值为 0');
-            expect(result.analysis).toContain('二次函数');
-            expect(result.subject).toBe('数学');
-            expect(result.knowledgePoints).toContain('二次函数');
-            expect(result.knowledgePoints).toContain('函数最值');
+            expect(result.questionText).toBe('求函數 f(x) = x^2 的最小值');
+            expect(result.answerText).toBe('最小值為 0');
+            expect(result.analysis).toContain('二次函數');
+            expect(result.subject).toBe('數學');
+            expect(result.knowledgePoints).toContain('二次函數');
+            expect(result.knowledgePoints).toContain('函數最值');
             expect(result.requiresImage).toBe(true);
         });
 

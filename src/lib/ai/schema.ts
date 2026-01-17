@@ -9,10 +9,10 @@ export const ParsedQuestionSchema = z.object({
     answerText: z.string().min(1, "答案不能为空"),
     analysis: z.string().min(1, "解析不能为空"),
     subject: z.enum([
-        "数学", "物理", "化学", "生物",
-        "英语", "语文", "历史", "地理",
-        "政治", "其他"
-    ]),
+        "數學", "物理", "化學", "生物",
+        "英語", "國文", "歷史", "地理",
+        "公民", "其他"
+    ]).describe("题目所属学科"),
     knowledgePoints: z.array(z.string()).max(5, "知识点最多 5 个"),
     requiresImage: z.boolean().optional().default(false), // 题目是否依赖图片（如几何题）
 });

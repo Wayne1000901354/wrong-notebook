@@ -1,0 +1,1075 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.15 [39m[90mD:/MyApp/wrong-notebook[39m
+
+[90mstderr[2m | src/__tests__/unit/ai/gemini-retry.test.ts[2m > [22m[2mGeminiProvider Retry Logic[2m > [22m[2mshould retry on network error and eventually succeed
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+ [32m✓[39m src/__tests__/unit/logger.test.ts [2m([22m[2m18 tests[22m[2m)[22m[32m 68[2mms[22m[39m
+[90mstderr[2m | src/__tests__/unit/config.test.ts[2m > [22m[2mconfig module[2m > [22m[2mgetAppConfig[2m > [22m[2m应该在配置文件解析失败时返回默认值
+[22m[39m[2m[11:32:30.741][0m [31mERROR[0m [34m(config)[0m: Failed to read config file
+    [2merror:[0m [37mUnexpected token 'i', "invalid json{" is not valid JSON[0m
+
+[90mstderr[2m | src/__tests__/unit/config.test.ts[2m > [22m[2mconfig module[2m > [22m[2mupdateAppConfig[2m > [22m[2m应该在写入失败时抛出错误
+[22m[39m[2m[11:32:30.746][0m [31mERROR[0m [34m(config)[0m: Failed to write config file
+    [2merror:[0m [37mPermission denied[0m
+
+ [31m❯[39m src/__tests__/unit/ai/azure-provider.test.ts [2m([22m[2m30 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 17[2mms[22m[39m
+       [32m✓[39m 缺少 API Key 时应该抛出 AI_AUTH_ERROR[32m 2[2mms[22m[39m
+       [32m✓[39m API Key 为空字符串时应该抛出 AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m 缺少 endpoint 时应该抛出 AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m endpoint 为空字符串时应该抛出 AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m 缺少 deploymentName 时应该抛出 AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m deploymentName 为空字符串时应该抛出 AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m 有效配置时应该成功创建实例[32m 0[2mms[22m[39m
+       [32m✓[39m 应该使用默认 API 版本[32m 0[2mms[22m[39m
+       [32m✓[39m 应该支持自定义 API 版本[32m 0[2mms[22m[39m
+       [32m✓[39m 应该支持自定义 model 显示名称[32m 0[2mms[22m[39m
+       [32m✓[39m analyzeImage 方法应该存在并且是函数[32m 0[2mms[22m[39m
+       [32m✓[39m generateSimilarQuestion 方法应该存在并且是函数[32m 0[2mms[22m[39m
+       [32m✓[39m reanswerQuestion 方法应该存在并且是函数[32m 0[2mms[22m[39m
+[31m       [31m×[31m 应该正确解析包含所有必需标签的响应[39m[32m 6[2mms[22m[39m
+       [32m✓[39m 应该正确处理 requiresImage 为 false[32m 0[2mms[22m[39m
+       [32m✓[39m 应该正确处理无效学科返回默认值"其他"[32m 0[2mms[22m[39m
+       [32m✓[39m 应该正确分割知识点(逗号分隔)[32m 1[2mms[22m[39m
+       [32m✓[39m 应该正确分割知识点(中文逗号分隔)[32m 0[2mms[22m[39m
+       [32m✓[39m 缺少必需标签时应该抛出错误[32m 0[2mms[22m[39m
+       [32m✓[39m 应该正确提取标签内容[32m 0[2mms[22m[39m
+       [32m✓[39m 应该去除首尾空格[32m 0[2mms[22m[39m
+       [32m✓[39m 标签不存在时应该返回 null[32m 0[2mms[22m[39m
+       [32m✓[39m 应该处理多行内容[32m 0[2mms[22m[39m
+       [32m✓[39m 应该将网络错误转换为 AI_CONNECTION_FAILED[32m 0[2mms[22m[39m
+       [32m✓[39m 应该将连接错误转换为 AI_CONNECTION_FAILED[32m 0[2mms[22m[39m
+       [32m✓[39m 应该将认证错误转换为 AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m 应该将 401 错误转换为 AI_AUTH_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m 应该将 JSON 解析错误转换为 AI_RESPONSE_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m 未知错误应该转换为 AI_UNKNOWN_ERROR[32m 0[2mms[22m[39m
+       [32m✓[39m 非 Error 对象应该转换为 AI_UNKNOWN_ERROR[32m 0[2mms[22m[39m
+ [32m✓[39m src/__tests__/unit/config.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 22[2mms[22m[39m
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m应该生成中文提示词
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m应该生成英文提示词
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m應該包含學科提示（如果提供）
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m應該根據年級過濾數學標籤（初一）
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m應該根據年級過濾數學標籤（初三）
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m應該根據年級過濾數學標籤（高一）
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m应该支持自定义选项 (providerHints)
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m应该支持自定义模板
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai-prompts.test.ts[2m > [22m[2mAI Prompts[2m > [22m[2mgenerateAnalyzePrompt[2m > [22m[2m生成的提示詞不應包含未替換的變量佔位符
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+ [32m✓[39m src/__tests__/unit/ai-prompts.test.ts [2m([22m[2m25 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m src/__tests__/unit/middleware.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/__tests__/unit/auth-utils.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m src/__tests__/unit/ai/providers.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 335[2mms[22m[39m
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该成功重新回答问题
+[22m[39m[2m[11:32:30.994][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该成功重新回答问题
+[22m[39m[2m[11:32:30.996][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m12[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该成功重新回答问题
+[22m[39m[2m[11:32:30.997][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer successful
+
+ [32m✓[39m src/__tests__/unit/utils.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m src/__tests__/unit/grade-calculator.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持指定学科
+[22m[39m[2m[11:32:30.999][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持指定学科
+[22m[39m[2m[11:32:31.000][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m54[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37m英语[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持指定学科
+[22m[39m[2m[11:32:31.000][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer successful
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持附带图片
+[22m[39m[2m[11:32:31.003][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持附带图片
+[22m[39m[2m[11:32:31.003][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m10[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37m数学[0m
+    [2mhasImage:[0m [37mtrue[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持附带图片
+[22m[39m[2m[11:32:31.003][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer successful
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持英文语言
+[22m[39m[2m[11:32:31.004][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持英文语言
+[22m[39m[2m[11:32:31.005][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m16[0m
+    [2mlanguage:[0m [37men[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该支持英文语言
+[22m[39m[2m[11:32:31.005][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer successful
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该默认使用中文语言
+[22m[39m[2m[11:32:31.006][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该默认使用中文语言
+[22m[39m[2m[11:32:31.006][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m4[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该默认使用中文语言
+[22m[39m[2m[11:32:31.006][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer successful
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝空的题目文本
+[22m[39m[2m[11:32:31.007][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝空的题目文本
+[22m[39m[2m[11:32:31.007][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m0[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstderr[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝空的题目文本
+[22m[39m[2m[11:32:31.007][0m [33mWARN [0m [34m(api:reanswer)[0m: Missing question text
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝只有空格的题目文本
+[22m[39m[2m[11:32:31.008][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝只有空格的题目文本
+[22m[39m[2m[11:32:31.008][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m3[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstderr[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝只有空格的题目文本
+[22m[39m[2m[11:32:31.008][0m [33mWARN [0m [34m(api:reanswer)[0m: Missing question text
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝缺少题目文本的请求
+[22m[39m[2m[11:32:31.009][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝缺少题目文本的请求
+[22m[39m[2m[11:32:31.009][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstderr[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2mPOST /api/reanswer (重新回答问题)[2m > [22m[2m应该拒绝缺少题目文本的请求
+[22m[39m[2m[11:32:31.009][0m [33mWARN [0m [34m(api:reanswer)[0m: Missing question text
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 认证错误
+[22m[39m[2m[11:32:31.010][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 认证错误
+[22m[39m[2m[11:32:31.010][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m4[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstderr[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 认证错误
+[22m[39m[2m[11:32:31.013][0m [31mERROR[0m [34m(api:reanswer)[0m: Reanswer error occurred
+    [2merror:[0m [37mAI_AUTH_ERROR: Invalid API key[0m
+    [2mstack:[0m [37mError: AI_AUTH_ERROR: Invalid API key
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/reanswer.test.ts:239:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 连接错误
+[22m[39m[2m[11:32:31.014][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 连接错误
+[22m[39m[2m[11:32:31.014][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m4[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstderr[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 连接错误
+[22m[39m[2m[11:32:31.014][0m [31mERROR[0m [34m(api:reanswer)[0m: Reanswer error occurred
+    [2merror:[0m [37mAI_CONNECTION_FAILED[0m
+    [2mstack:[0m [37mError: AI_CONNECTION_FAILED
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/reanswer.test.ts:260:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 响应错误
+[22m[39m[2m[11:32:31.015][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 响应错误
+[22m[39m[2m[11:32:31.015][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m4[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstderr[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理 AI 响应错误
+[22m[39m[2m[11:32:31.015][0m [31mERROR[0m [34m(api:reanswer)[0m: Reanswer error occurred
+    [2merror:[0m [37mAI_RESPONSE_ERROR[0m
+    [2mstack:[0m [37mError: AI_RESPONSE_ERROR
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/reanswer.test.ts:281:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理其他未知错误
+[22m[39m[2m[11:32:31.016][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该成功分析图像
+[22m[39m[2m[11:32:31.018][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理其他未知错误
+[22m[39m[2m[11:32:31.016][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m4[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstderr[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理其他未知错误
+[22m[39m[2m[11:32:31.016][0m [31mERROR[0m [34m(api:reanswer)[0m: Reanswer error occurred
+    [2merror:[0m [37mUnknown error occurred[0m
+    [2mstack:[0m [37mError: Unknown error occurred
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/reanswer.test.ts:302:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该成功分析图像
+[22m[39m[2m[11:32:31.020][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m47[0m
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.020][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m25[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理没有错误消息的异常
+[22m[39m[2m[11:32:31.017][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该成功分析图像
+[22m[39m[2m[11:32:31.020][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.020][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理没有错误消息的异常
+[22m[39m[2m[11:32:31.017][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m4[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该成功分析图像
+[22m[39m[2m[11:32:31.020][0m [36mDEBUG[0m [34m(api:analyze)[0m: AI returned knowledge points
+    [2mknowledgePointsCount:[0m [37m2[0m
+    [2mknowledgePointsType:[0m [37mobject[0m
+    [2misArray:[0m [37mtrue[0m
+[2m[11:32:31.020][0m [32mINFO [0m [34m(api:analyze)[0m: AI analysis successful
+
+[90mstderr[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m错误处理[2m > [22m[2m应该处理没有错误消息的异常
+[22m[39m[2m[11:32:31.017][0m [31mERROR[0m [34m(api:reanswer)[0m: Reanswer error occurred
+    [2merror:[0m [37m[0m
+    [2mstack:[0m [37mError: 
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/reanswer.test.ts:322:68
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理长文本题目
+[22m[39m[2m[11:32:31.018][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理长文本题目
+[22m[39m[2m[11:32:31.018][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m169[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37m数学[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理长文本题目
+[22m[39m[2m[11:32:31.018][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer successful
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理包含特殊字符的题目
+[22m[39m[2m[11:32:31.018][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理包含特殊字符的题目
+[22m[39m[2m[11:32:31.018][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m24[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37mundefined[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理包含特殊字符的题目
+[22m[39m[2m[11:32:31.018][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer successful
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理包含 LaTeX 的题目
+[22m[39m[2m[11:32:31.019][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer API called
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理包含 LaTeX 的题目
+[22m[39m[2m[11:32:31.019][0m [36mDEBUG[0m [34m(api:reanswer)[0m: Reanswer request received
+    [2mquestionLength:[0m [37m22[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubject:[0m [37m数学[0m
+    [2mhasImage:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/reanswer.test.ts[2m > [22m[2m/api/reanswer[2m > [22m[2m复杂场景[2m > [22m[2m应该正确处理包含 LaTeX 的题目
+[22m[39m[2m[11:32:31.019][0m [32mINFO [0m [34m(api:reanswer)[0m: Reanswer successful
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持 Data URL 格式的图像
+[22m[39m[2m[11:32:31.022][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+ [32m✓[39m src/__tests__/integration/reanswer.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持 Data URL 格式的图像
+[22m[39m[2m[11:32:31.022][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m44[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.022][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/jpeg[0m
+    [2mbase64Length:[0m [37m21[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持 Data URL 格式的图像
+[22m[39m[2m[11:32:31.023][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.023][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstderr[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持 Data URL 格式的图像
+[22m[39m[2m[11:32:31.023][0m [33mWARN [0m [34m(api:analyze)[0m: Knowledge points is empty or null
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持 Data URL 格式的图像
+[22m[39m[2m[11:32:31.023][0m [36mDEBUG[0m [34m(api:analyze)[0m: AI returned knowledge points
+    [2mknowledgePointsCount:[0m [37m0[0m
+    [2mknowledgePointsType:[0m [37mobject[0m
+    [2misArray:[0m [37mtrue[0m
+[2m[11:32:31.023][0m [32mINFO [0m [34m(api:analyze)[0m: AI analysis successful
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该拒绝缺少图像数据的请求
+[22m[39m[2m[11:32:31.024][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该拒绝缺少图像数据的请求
+[22m[39m[2m[11:32:31.024][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37mundefined[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+
+[90mstderr[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该拒绝缺少图像数据的请求
+[22m[39m[2m[11:32:31.024][0m [33mWARN [0m [34m(api:analyze)[0m: Missing image data
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该关联到指定的科目
+[22m[39m[2m[11:32:31.025][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该关联到指定的科目
+[22m[39m[2m[11:32:31.025][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m29[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37msubject-physics-id[0m
+[2m[11:32:31.025][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该关联到指定的科目
+[22m[39m[2m[11:32:31.025][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该关联到指定的科目
+[22m[39m[2m[11:32:31.025][0m [36mDEBUG[0m [34m(api:analyze)[0m: Inferred subject
+    [2msubjectName:[0m [37mmath[0m
+    [2msubjectDisplayName:[0m [37m物理[0m
+[2m[11:32:31.025][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37m數學[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该关联到指定的科目
+[22m[39m[2m[11:32:31.025][0m [36mDEBUG[0m [34m(api:analyze)[0m: AI returned knowledge points
+    [2mknowledgePointsCount:[0m [37m1[0m
+    [2mknowledgePointsType:[0m [37mobject[0m
+    [2misArray:[0m [37mtrue[0m
+[2m[11:32:31.025][0m [32mINFO [0m [34m(api:analyze)[0m: AI analysis successful
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持英文语言
+[22m[39m[2m[11:32:31.026][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持英文语言
+[22m[39m[2m[11:32:31.026][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m29[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37men[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.026][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持英文语言
+[22m[39m[2m[11:32:31.026][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.026][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该支持英文语言
+[22m[39m[2m[11:32:31.026][0m [36mDEBUG[0m [34m(api:analyze)[0m: AI returned knowledge points
+    [2mknowledgePointsCount:[0m [37m1[0m
+    [2mknowledgePointsType:[0m [37mobject[0m
+    [2misArray:[0m [37mtrue[0m
+[2m[11:32:31.026][0m [32mINFO [0m [34m(api:analyze)[0m: AI analysis successful
+
+[90mstderr[2m | src/__tests__/integration/practice.test.ts[2m > [22m[2m/api/practice[2m > [22m[2mPOST /api/practice/generate (生成类似题目)[2m > [22m[2m应该处理 AI 服务错误
+[22m[39m[2m[11:32:31.026][0m [31mERROR[0m [34m(api:practice:generate)[0m: Error generating practice
+    [2merror:[0m [37mAI service unavailable[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 认证错误
+[22m[39m[2m[11:32:31.027][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 认证错误
+[22m[39m[2m[11:32:31.027][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m29[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.027][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 认证错误
+[22m[39m[2m[11:32:31.027][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.027][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstderr[2m | src/__tests__/integration/practice.test.ts[2m > [22m[2m/api/practice[2m > [22m[2mPOST /api/practice/record (记录练习结果)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.029][0m [31mERROR[0m [34m(api:practice:record)[0m: Error saving practice record
+    [2merror:[0m [37mDatabase connection failed[0m
+
+[90mstderr[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 认证错误
+[22m[39m[2m[11:32:31.029][0m [31mERROR[0m [34m(api:analyze)[0m: Analysis error occurred
+    [2merror:[0m [37mAI_AUTH_ERROR: Invalid API key[0m
+    [2mstack:[0m [37mError: AI_AUTH_ERROR: Invalid API key
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/analyze.test.ts:200:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+ [32m✓[39m src/__tests__/integration/practice.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 连接错误
+[22m[39m[2m[11:32:31.030][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 连接错误
+[22m[39m[2m[11:32:31.030][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m29[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.030][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 连接错误
+[22m[39m[2m[11:32:31.030][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.030][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstderr[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 连接错误
+[22m[39m[2m[11:32:31.030][0m [31mERROR[0m [34m(api:analyze)[0m: Analysis error occurred
+    [2merror:[0m [37mAI_CONNECTION_FAILED[0m
+    [2mstack:[0m [37mError: AI_CONNECTION_FAILED
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/analyze.test.ts:221:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 响应错误
+[22m[39m[2m[11:32:31.031][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 响应错误
+[22m[39m[2m[11:32:31.031][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m29[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.031][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 响应错误
+[22m[39m[2m[11:32:31.031][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.031][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstderr[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 AI 响应错误
+[22m[39m[2m[11:32:31.031][0m [31mERROR[0m [34m(api:analyze)[0m: Analysis error occurred
+    [2merror:[0m [37mAI_RESPONSE_ERROR[0m
+    [2mstack:[0m [37mError: AI_RESPONSE_ERROR
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/analyze.test.ts:242:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 Zod 验证错误
+[22m[39m[2m[11:32:31.032][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 Zod 验证错误
+[22m[39m[2m[11:32:31.032][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m29[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.032][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 Zod 验证错误
+[22m[39m[2m[11:32:31.032][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.032][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstderr[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理 Zod 验证错误
+[22m[39m[2m[11:32:31.032][0m [31mERROR[0m [34m(api:analyze)[0m: Analysis error occurred
+    [2merror:[0m [37mZod validation failed[0m
+    [2mstack:[0m [37mError: Zod validation failed
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/analyze.test.ts:263:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理未知错误
+[22m[39m[2m[11:32:31.033][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理未知错误
+[22m[39m[2m[11:32:31.033][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m29[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.033][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理未知错误
+[22m[39m[2m[11:32:31.033][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.033][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstderr[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该处理未知错误
+[22m[39m[2m[11:32:31.033][0m [31mERROR[0m [34m(api:analyze)[0m: Analysis error occurred
+    [2merror:[0m [37mUnknown error[0m
+    [2mstack:[0m [37mError: Unknown error
+    at D:/MyApp/wrong-notebook/src/__tests__/integration/analyze.test.ts:284:17
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:145:11
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:915:26
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1240:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1206:10)
+    at file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:37
+    at Traces.$ (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)
+    at trace (file:///D:/MyApp/wrong-notebook/node_modules/vitest/dist/chunks/test.BT8LKgU9.js:239:21)
+    at runTest (file:///D:/MyApp/wrong-notebook/node_modules/@vitest/runner/dist/index.js:1650:12)[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该标准化知识点标签
+[22m[39m[2m[11:32:31.034][0m [32mINFO [0m [34m(api:analyze)[0m: Analyze API called
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该标准化知识点标签
+[22m[39m[2m[11:32:31.034][0m [36mDEBUG[0m [34m(api:analyze)[0m: Request received
+    [2mimageLength:[0m [37m29[0m
+    [2mmimeType:[0m [37mundefined[0m
+    [2mlanguage:[0m [37mzh[0m
+    [2msubjectId:[0m [37mundefined[0m
+[2m[11:32:31.034][0m [36mDEBUG[0m [34m(api:analyze)[0m: Parsed Data URL
+    [2mmimeType:[0m [37mimage/png[0m
+    [2mbase64Length:[0m [37m7[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该标准化知识点标签
+[22m[39m[2m[11:32:31.034][0m [36mDEBUG[0m [34m(api:analyze)[0m: Calculated user grade
+    [2muserGrade:[0m [37m7[0m
+[2m[11:32:31.034][0m [32mINFO [0m [34m(api:analyze)[0m: Calling AI service for image analysis
+    [2muserGrade:[0m [37m7[0m
+    [2msubject:[0m [37mnull[0m
+
+[90mstdout[2m | src/__tests__/integration/analyze.test.ts[2m > [22m[2m/api/analyze[2m > [22m[2mPOST /api/analyze (图像分析)[2m > [22m[2m应该标准化知识点标签
+[22m[39m[2m[11:32:31.034][0m [36mDEBUG[0m [34m(api:analyze)[0m: AI returned knowledge points
+    [2mknowledgePointsCount:[0m [37m2[0m
+    [2mknowledgePointsType:[0m [37mobject[0m
+    [2misArray:[0m [37mtrue[0m
+[2m[11:32:31.034][0m [32mINFO [0m [34m(api:analyze)[0m: AI analysis successful
+
+ [32m✓[39m src/__tests__/integration/analyze.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m src/__tests__/integration/notebooks.test.ts [2m([22m[2m18 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+[90mstderr[2m | src/__tests__/integration/tags.test.ts[2m > [22m[2m/api/tags[2m > [22m[2mGET /api/tags/stats (标签统计)[2m > [22m[2m应该处理无效的 JSON 知识点
+[22m[39m[2m[11:32:31.084][0m [33mWARN [0m [34m(api:tags:stats)[0m: Failed to parse knowledgePoints for item
+    [2mknowledgePoints:[0m [37minvalid json{[0m
+
+[90mstderr[2m | src/__tests__/integration/tags.test.ts[2m > [22m[2m/api/tags[2m > [22m[2mGET /api/tags/stats (标签统计)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.086][0m [31mERROR[0m [34m(api:tags:stats)[0m: Error getting tag stats
+    [2merror:[0m [37mDatabase connection failed[0m
+
+[90mstderr[2m | src/__tests__/integration/tags.test.ts[2m > [22m[2m/api/tags[2m > [22m[2mGET /api/tags/suggestions (标签建议)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.090][0m [31mERROR[0m [34m(api:tags:suggestions)[0m: Error getting tag suggestions
+    [2merror:[0m [37mDatabase connection failed[0m
+
+[90mstderr[2m | src/__tests__/integration/settings.test.ts[2m > [22m[2m/api/settings[2m > [22m[2mPOST /api/settings[2m > [22m[2m应该处理更新失败的情况
+[22m[39m[2m[11:32:31.090][0m [31mERROR[0m [34m(api:settings)[0m: Failed to update settings
+    [2merror:[0m [37mWrite failed[0m
+
+ [32m✓[39m src/__tests__/integration/tags.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/__tests__/integration/settings.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m src/__tests__/unit/api-errors.test.ts [2m([22m[2m30 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题
+[22m[39m[2m[11:32:31.104][0m [32mINFO [0m [34m(api:error-items)[0m: POST /api/error-items called
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题
+[22m[39m[2m[11:32:31.106][0m [36mDEBUG[0m [34m(api:error-items)[0m: Request parameters received
+    [2mhasQuestionText:[0m [37mtrue[0m
+    [2mquestionTextLength:[0m [37m12[0m
+    [2mhasAnswerText:[0m [37mtrue[0m
+    [2mhasAnalysis:[0m [37mtrue[0m
+    [2mknowledgePointsCount:[0m [37m2[0m
+    [2mhasImage:[0m [37mtrue[0m
+    [2mimageSize:[0m [37m29[0m
+    [2msubjectId:[0m [37mundefined[0m
+    [2mgradeSemester:[0m [37mundefined[0m
+    [2mpaperLevel:[0m [37mundefined[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题
+[22m[39m[2m[11:32:31.106][0m [36mDEBUG[0m [34m(api:error-items)[0m: User lookup result
+    [2muserId:[0m [37muser-123[0m
+    [2memail:[0m [37muser@example.com[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题
+[22m[39m[2m[11:32:31.107][0m [36mDEBUG[0m [34m(api:error-items)[0m: Grade calculated
+    [2mfinalGradeSemester:[0m [37m初一，上期[0m
+    [2meducationStage:[0m [37mjunior_high[0m
+    [2menrollmentYear:[0m [37m2024[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题
+[22m[39m[2m[11:32:31.107][0m [36mDEBUG[0m [34m(api:error-items)[0m: Subject inferred
+    [2msubjectId:[0m [37mundefined[0m
+    [2msubjectName:[0m [37mundefined[0m
+    [2msubjectKey:[0m [37mother[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题
+[22m[39m[2m[11:32:31.107][0m [36mDEBUG[0m [34m(api:error-items)[0m: Existing tag found
+    [2mtagId:[0m [37mtag-一元一次方程[0m
+    [2mtagName:[0m [37m一元一次方程[0m
+    [2misSystem:[0m [37mfalse[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题
+[22m[39m[2m[11:32:31.107][0m [36mDEBUG[0m [34m(api:error-items)[0m: Existing tag found
+    [2mtagId:[0m [37mtag-移项[0m
+    [2mtagName:[0m [37m移项[0m
+    [2misSystem:[0m [37mfalse[0m
+[2m[11:32:31.107][0m [32mINFO [0m [34m(api:error-items)[0m: Creating ErrorItem with tags
+    [2mtagNames:[0m [37m[
+  "一元一次方程",
+  "移项"
+][0m
+    [2mtagConnectionsCount:[0m [37m2[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题
+[22m[39m[2m[11:32:31.107][0m [32mINFO [0m [34m(api:error-items)[0m: ErrorItem created successfully
+    [2merrorItemId:[0m [37merror-item-1[0m
+    [2mtagsCount:[0m [37m0[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并关联到科目
+[22m[39m[2m[11:32:31.110][0m [32mINFO [0m [34m(api:error-items)[0m: POST /api/error-items called
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并关联到科目
+[22m[39m[2m[11:32:31.110][0m [36mDEBUG[0m [34m(api:error-items)[0m: Request parameters received
+    [2mhasQuestionText:[0m [37mtrue[0m
+    [2mquestionTextLength:[0m [37m8[0m
+    [2mhasAnswerText:[0m [37mtrue[0m
+    [2mhasAnalysis:[0m [37mtrue[0m
+    [2mknowledgePointsCount:[0m [37m1[0m
+    [2mhasImage:[0m [37mtrue[0m
+    [2mimageSize:[0m [37m29[0m
+    [2msubjectId:[0m [37msubject-math-id[0m
+    [2mgradeSemester:[0m [37mundefined[0m
+    [2mpaperLevel:[0m [37mundefined[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并关联到科目
+[22m[39m[2m[11:32:31.110][0m [36mDEBUG[0m [34m(api:error-items)[0m: User lookup result
+    [2muserId:[0m [37muser-123[0m
+    [2memail:[0m [37muser@example.com[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并关联到科目
+[22m[39m[2m[11:32:31.110][0m [36mDEBUG[0m [34m(api:error-items)[0m: Grade calculated
+    [2mfinalGradeSemester:[0m [37m初一，上期[0m
+    [2meducationStage:[0m [37mjunior_high[0m
+    [2menrollmentYear:[0m [37m2024[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并关联到科目
+[22m[39m[2m[11:32:31.110][0m [36mDEBUG[0m [34m(api:error-items)[0m: Subject inferred
+    [2msubjectId:[0m [37msubject-math-id[0m
+    [2msubjectName:[0m [37mundefined[0m
+    [2msubjectKey:[0m [37mother[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并关联到科目
+[22m[39m[2m[11:32:31.110][0m [36mDEBUG[0m [34m(api:error-items)[0m: Existing tag found
+    [2mtagId:[0m [37mtag-加法[0m
+    [2mtagName:[0m [37m加法[0m
+    [2misSystem:[0m [37mfalse[0m
+[2m[11:32:31.110][0m [32mINFO [0m [34m(api:error-items)[0m: Creating ErrorItem with tags
+    [2mtagNames:[0m [37m[
+  "加法"
+][0m
+    [2mtagConnectionsCount:[0m [37m1[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并关联到科目
+[22m[39m[2m[11:32:31.110][0m [32mINFO [0m [34m(api:error-items)[0m: ErrorItem created successfully
+    [2merrorItemId:[0m [37merror-item-2[0m
+    [2mtagsCount:[0m [37m0[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并设置年级学期
+[22m[39m[2m[11:32:31.111][0m [32mINFO [0m [34m(api:error-items)[0m: POST /api/error-items called
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并设置年级学期
+[22m[39m[2m[11:32:31.111][0m [36mDEBUG[0m [34m(api:error-items)[0m: Request parameters received
+    [2mhasQuestionText:[0m [37mtrue[0m
+    [2mquestionTextLength:[0m [37m4[0m
+    [2mhasAnswerText:[0m [37mtrue[0m
+    [2mhasAnalysis:[0m [37mtrue[0m
+    [2mknowledgePointsCount:[0m [37m1[0m
+    [2mhasImage:[0m [37mtrue[0m
+    [2mimageSize:[0m [37m29[0m
+    [2msubjectId:[0m [37mundefined[0m
+    [2mgradeSemester:[0m [37m初一上期[0m
+    [2mpaperLevel:[0m [37mA[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并设置年级学期
+[22m[39m[2m[11:32:31.111][0m [36mDEBUG[0m [34m(api:error-items)[0m: User lookup result
+    [2muserId:[0m [37muser-123[0m
+    [2memail:[0m [37muser@example.com[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并设置年级学期
+[22m[39m[2m[11:32:31.111][0m [36mDEBUG[0m [34m(api:error-items)[0m: Subject inferred
+    [2msubjectId:[0m [37mundefined[0m
+    [2msubjectName:[0m [37mundefined[0m
+    [2msubjectKey:[0m [37mother[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并设置年级学期
+[22m[39m[2m[11:32:31.111][0m [36mDEBUG[0m [34m(api:error-items)[0m: Existing tag found
+    [2mtagId:[0m [37mtag-方程[0m
+    [2mtagName:[0m [37m方程[0m
+    [2misSystem:[0m [37mfalse[0m
+[2m[11:32:31.111][0m [32mINFO [0m [34m(api:error-items)[0m: Creating ErrorItem with tags
+    [2mtagNames:[0m [37m[
+  "方程"
+][0m
+    [2mtagConnectionsCount:[0m [37m1[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该成功创建错题并设置年级学期
+[22m[39m[2m[11:32:31.111][0m [32mINFO [0m [34m(api:error-items)[0m: ErrorItem created successfully
+    [2merrorItemId:[0m [37merror-item-3[0m
+    [2mtagsCount:[0m [37m0[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该拒绝未登录用户创建错题
+[22m[39m[2m[11:32:31.112][0m [32mINFO [0m [34m(api:error-items)[0m: POST /api/error-items called
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该拒绝未登录用户创建错题
+[22m[39m[2m[11:32:31.112][0m [36mDEBUG[0m [34m(api:error-items)[0m: Request parameters received
+    [2mhasQuestionText:[0m [37mtrue[0m
+    [2mquestionTextLength:[0m [37m4[0m
+    [2mhasAnswerText:[0m [37mfalse[0m
+    [2mhasAnalysis:[0m [37mfalse[0m
+    [2mknowledgePointsCount:[0m [37m0[0m
+    [2mhasImage:[0m [37mtrue[0m
+    [2mimageSize:[0m [37m4[0m
+    [2msubjectId:[0m [37mundefined[0m
+    [2mgradeSemester:[0m [37mundefined[0m
+    [2mpaperLevel:[0m [37mundefined[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该拒绝未登录用户创建错题
+[22m[39m[2m[11:32:31.112][0m [36mDEBUG[0m [34m(api:error-items)[0m: User lookup result
+    [2muserId:[0m [37mundefined[0m
+    [2memail:[0m [37muser@example.com[0m
+
+[90mstderr[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该拒绝未登录用户创建错题
+[22m[39m[2m[11:32:31.112][0m [33mWARN [0m [34m(api:error-items)[0m: User not found in DB
+    [2msessionEmail:[0m [37muser@example.com[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该自动计算年级学期（如果未提供）
+[22m[39m[2m[11:32:31.113][0m [32mINFO [0m [34m(api:error-items)[0m: POST /api/error-items called
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该自动计算年级学期（如果未提供）
+[22m[39m[2m[11:32:31.113][0m [36mDEBUG[0m [34m(api:error-items)[0m: Request parameters received
+    [2mhasQuestionText:[0m [37mtrue[0m
+    [2mquestionTextLength:[0m [37m2[0m
+    [2mhasAnswerText:[0m [37mtrue[0m
+    [2mhasAnalysis:[0m [37mtrue[0m
+    [2mknowledgePointsCount:[0m [37m1[0m
+    [2mhasImage:[0m [37mtrue[0m
+    [2mimageSize:[0m [37m29[0m
+    [2msubjectId:[0m [37mundefined[0m
+    [2mgradeSemester:[0m [37mundefined[0m
+    [2mpaperLevel:[0m [37mundefined[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该自动计算年级学期（如果未提供）
+[22m[39m[2m[11:32:31.113][0m [36mDEBUG[0m [34m(api:error-items)[0m: User lookup result
+    [2muserId:[0m [37muser-123[0m
+    [2memail:[0m [37muser@example.com[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该自动计算年级学期（如果未提供）
+[22m[39m[2m[11:32:31.113][0m [36mDEBUG[0m [34m(api:error-items)[0m: Grade calculated
+    [2mfinalGradeSemester:[0m [37m初一，上期[0m
+    [2meducationStage:[0m [37mjunior_high[0m
+    [2menrollmentYear:[0m [37m2024[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该自动计算年级学期（如果未提供）
+[22m[39m[2m[11:32:31.113][0m [36mDEBUG[0m [34m(api:error-items)[0m: Subject inferred
+    [2msubjectId:[0m [37mundefined[0m
+    [2msubjectName:[0m [37mundefined[0m
+    [2msubjectKey:[0m [37mother[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该自动计算年级学期（如果未提供）
+[22m[39m[2m[11:32:31.113][0m [36mDEBUG[0m [34m(api:error-items)[0m: Existing tag found
+    [2mtagId:[0m [37mtag-知识点[0m
+    [2mtagName:[0m [37m知识点[0m
+    [2misSystem:[0m [37mfalse[0m
+[2m[11:32:31.113][0m [32mINFO [0m [34m(api:error-items)[0m: Creating ErrorItem with tags
+    [2mtagNames:[0m [37m[
+  "知识点"
+][0m
+    [2mtagConnectionsCount:[0m [37m1[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该自动计算年级学期（如果未提供）
+[22m[39m[2m[11:32:31.113][0m [32mINFO [0m [34m(api:error-items)[0m: ErrorItem created successfully
+    [2merrorItemId:[0m [37merror-item-4[0m
+    [2mtagsCount:[0m [37m0[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该正确处理字符串格式的知识点
+[22m[39m[2m[11:32:31.114][0m [32mINFO [0m [34m(api:error-items)[0m: POST /api/error-items called
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该正确处理字符串格式的知识点
+[22m[39m[2m[11:32:31.114][0m [36mDEBUG[0m [34m(api:error-items)[0m: Request parameters received
+    [2mhasQuestionText:[0m [37mtrue[0m
+    [2mquestionTextLength:[0m [37m2[0m
+    [2mhasAnswerText:[0m [37mtrue[0m
+    [2mhasAnalysis:[0m [37mtrue[0m
+    [2mknowledgePointsCount:[0m [37m0[0m
+    [2mhasImage:[0m [37mtrue[0m
+    [2mimageSize:[0m [37m29[0m
+    [2msubjectId:[0m [37mundefined[0m
+    [2mgradeSemester:[0m [37mundefined[0m
+    [2mpaperLevel:[0m [37mundefined[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该正确处理字符串格式的知识点
+[22m[39m[2m[11:32:31.114][0m [36mDEBUG[0m [34m(api:error-items)[0m: User lookup result
+    [2muserId:[0m [37muser-123[0m
+    [2memail:[0m [37muser@example.com[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该正确处理字符串格式的知识点
+[22m[39m[2m[11:32:31.114][0m [36mDEBUG[0m [34m(api:error-items)[0m: Grade calculated
+    [2mfinalGradeSemester:[0m [37m初一，上期[0m
+    [2meducationStage:[0m [37mjunior_high[0m
+    [2menrollmentYear:[0m [37m2024[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该正确处理字符串格式的知识点
+[22m[39m[2m[11:32:31.114][0m [36mDEBUG[0m [34m(api:error-items)[0m: Subject inferred
+    [2msubjectId:[0m [37mundefined[0m
+    [2msubjectName:[0m [37mundefined[0m
+    [2msubjectKey:[0m [37mother[0m
+[2m[11:32:31.114][0m [32mINFO [0m [34m(api:error-items)[0m: Creating ErrorItem with tags
+    [2mtagNames:[0m [37m[][0m
+    [2mtagConnectionsCount:[0m [37m0[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPOST /api/error-items (创建错题)[2m > [22m[2m应该正确处理字符串格式的知识点
+[22m[39m[2m[11:32:31.114][0m [32mINFO [0m [34m(api:error-items)[0m: ErrorItem created successfully
+    [2merrorItemId:[0m [37merror-item-5[0m
+    [2mtagsCount:[0m [37m0[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPUT /api/error-items/[id] (更新错题)[2m > [22m[2m应该成功更新知识点
+[22m[39m[2m[11:32:31.116][0m [32mINFO [0m [34m(api:error-items:id)[0m: Updating error item
+    [2mid:[0m [37merror-item-1[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPUT /api/error-items/[id] (更新错题)[2m > [22m[2m应该成功更新年级学期
+[22m[39m[2m[11:32:31.116][0m [32mINFO [0m [34m(api:error-items:id)[0m: Updating error item
+    [2mid:[0m [37merror-item-1[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPUT /api/error-items/[id] (更新错题)[2m > [22m[2m应该成功更新试卷等级
+[22m[39m[2m[11:32:31.117][0m [32mINFO [0m [34m(api:error-items:id)[0m: Updating error item
+    [2mid:[0m [37merror-item-1[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPATCH /api/error-items/[id]/notes (更新笔记)[2m > [22m[2m应该拒绝未登录用户
+[22m[39m[2m[11:32:31.123][0m [36mDEBUG[0m [34m(api:error-items:notes)[0m: No session or user found, attempting fallback to first user
+
+[90mstderr[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPATCH /api/error-items/[id]/notes (更新笔记)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.123][0m [31mERROR[0m [34m(api:error-items:notes)[0m: Error updating notes
+    [2merror:[0m [37mDatabase error[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPATCH /api/error-items/[id]/mastery (更新掌握程度)[2m > [22m[2m应该拒绝未登录用户
+[22m[39m[2m[11:32:31.124][0m [36mDEBUG[0m [34m(api:error-items:mastery)[0m: No session or user found, attempting fallback to first user
+
+ [32m✓[39m src/__tests__/integration/admin-users.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+[90mstderr[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mPATCH /api/error-items/[id]/mastery (更新掌握程度)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.125][0m [31mERROR[0m [34m(api:error-items:mastery)[0m: Error updating item
+    [2merror:[0m [37mDatabase error[0m
+
+[90mstdout[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mDELETE /api/error-items/[id]/delete (删除错题)[2m > [22m[2m应该拒绝未登录用户
+[22m[39m[2m[11:32:31.126][0m [36mDEBUG[0m [34m(api:error-items:delete)[0m: No session or user found, attempting fallback to first user
+
+[90mstderr[2m | src/__tests__/integration/error-items.test.ts[2m > [22m[2m/api/error-items[2m > [22m[2mDELETE /api/error-items/[id]/delete (删除错题)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.126][0m [31mERROR[0m [34m(api:error-items:delete)[0m: Error deleting item
+    [2merror:[0m [37mDatabase error[0m
+
+ [32m✓[39m src/__tests__/integration/error-items.test.ts [2m([22m[2m36 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+[90mstdout[2m | src/__tests__/integration/user.test.ts[2m > [22m[2m/api/user[2m > [22m[2mGET /api/user[2m > [22m[2m应该返回用户信息
+[22m[39m[2m[11:32:31.144][0m [36mDEBUG[0m [34m(api:user)[0m: Returning user profile
+    [2muser:[0m [37m{
+  "name": "Test User",
+  "email": "test@example.com",
+  "educationStage": "junior_high",
+  "enrollmentYear": 2024
+}[0m
+
+ [32m✓[39m src/__tests__/integration/user.test.ts [2m([22m[2m20 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m src/__tests__/integration/register.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+[90mstderr[2m | src/__tests__/integration/stats.test.ts[2m > [22m[2m/api/stats[2m > [22m[2mGET /api/stats/practice (获取练习统计)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.738][0m [31mERROR[0m [34m(api:stats:practice)[0m: Error fetching practice stats
+    [2merror:[0m [37mDatabase connection failed[0m
+
+[90mstderr[2m | src/__tests__/integration/stats.test.ts[2m > [22m[2m/api/stats[2m > [22m[2mDELETE /api/stats/practice/clear (清除练习记录)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.740][0m [31mERROR[0m [34m(api:stats:practice:clear)[0m: Error clearing practice stats
+    [2merror:[0m [37mDatabase error[0m
+
+[90mstderr[2m | src/__tests__/integration/stats.test.ts[2m > [22m[2m/api/stats[2m > [22m[2mDELETE /api/error-items/clear (清除所有错题)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.742][0m [31mERROR[0m [34m(api:error-items:clear)[0m: Error clearing error data
+    [2merror:[0m [37mDatabase error[0m
+
+ [32m✓[39m src/__tests__/integration/stats.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+[90mstderr[2m | src/__tests__/integration/analytics.test.ts[2m > [22m[2m/api/analytics[2m > [22m[2mGET /api/analytics (获取分析统计)[2m > [22m[2m应该处理数据库错误
+[22m[39m[2m[11:32:31.792][0m [31mERROR[0m [34m(api:analytics)[0m: Error fetching analytics
+    [2merror:[0m [37mDatabase connection failed[0m
+
+ [32m✓[39m src/__tests__/integration/analytics.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+[90mstderr[2m | src/__tests__/unit/ai/gemini-retry.test.ts[2m > [22m[2mGeminiProvider Retry Logic[2m > [22m[2mshould throw immediately on non-retryable error
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai/gemini-retry.test.ts[2m > [22m[2mGeminiProvider Retry Logic[2m > [22m[2mshould give up after max retries
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai/gemini-retry.test.ts[2m > [22m[2mGeminiProvider Retry Logic[2m > [22m[2mshould retry on 503 service unavailable
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+[90mstderr[2m | src/__tests__/unit/ai/gemini-retry.test.ts[2m > [22m[2mGeminiProvider Retry Logic[2m > [22m[2mshould retry on connection reset
+[22m[39m[prompts] No prefetched tags provided, AI will tag freely
+
+ [32m✓[39m src/__tests__/unit/ai/gemini-retry.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 12422[2mms[22m[39m
+     [33m[2m✓[22m[39m should retry on network error and eventually succeed [33m 4674[2mms[22m[39m
+     [33m[2m✓[22m[39m should give up after max retries [33m 4648[2mms[22m[39m
+     [33m[2m✓[22m[39m should retry on 503 service unavailable [33m 1551[2mms[22m[39m
+     [33m[2m✓[22m[39m should retry on connection reset [33m 1545[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/__tests__/unit/ai/azure-provider.test.ts[2m > [22mAzure OpenAI Provider 响应解析[2m > [22mparseResponse[2m > [22m应该正确解析包含所有必需标签的响应
+[31m[1mAssertionError[22m: expected [ '二次函數', '函數最值' ] to include '二次函数'[39m
+[36m [2m❯[22m src/__tests__/unit/ai/azure-provider.test.ts:[2m235:44[22m[39m
+    [90m233| [39m            [34mexpect[39m(result[33m.[39manalysis)[33m.[39m[34mtoContain[39m([32m'二次函數'[39m)[33m;[39m
+    [90m234| [39m            [34mexpect[39m(result[33m.[39msubject)[33m.[39m[34mtoBe[39m([32m'數學'[39m)[33m;[39m
+    [90m235| [39m            [34mexpect[39m(result[33m.[39mknowledgePoints)[33m.[39m[34mtoContain[39m([32m'二次函数'[39m)[33m;[39m
+    [90m   | [39m                                           [31m^[39m
+    [90m236| [39m            [34mexpect[39m(result[33m.[39mknowledgePoints)[33m.[39m[34mtoContain[39m([32m'函数最值'[39m)[33m;[39m
+    [90m237| [39m            [34mexpect[39m(result[33m.[39mrequiresImage)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m22 passed[39m[22m[90m (23)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m386 passed[39m[22m[90m (387)[39m
+[2m   Start at [22m 11:32:27
+[2m   Duration [22m 15.97s[2m (transform 2.78s, setup 785ms, import 6.29s, tests 13.10s, environment 71.07s)[22m
+

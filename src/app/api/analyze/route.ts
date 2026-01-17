@@ -84,15 +84,16 @@ export async function POST(req: Request) {
 
         // 将内部科目名称转换为中文科目名称
         const subjectNameMapping: Record<string, string> = {
-            'math': '数学',
+            'math': '數學',
             'physics': '物理',
-            'chemistry': '化学',
+            'chemistry': '化學',
             'biology': '生物',
-            'english': '英语',
-            'chinese': '语文',
-            'history': '历史',
+            'chinese': '國文',
+            'english': '英語',
+            'history': '歷史',
             'geography': '地理',
-            'politics': '政治',
+            'politics': '公民',
+            'others': '其他'
         };
         const subjectChinese = subjectName ? subjectNameMapping[subjectName] : null;
 
