@@ -55,6 +55,7 @@ export default function TagsPage() {
         history: null,
         geography: null,
         politics: null,
+        others: null,
     });
 
     // 自定义标签 (扁平列表，仅用于显示)
