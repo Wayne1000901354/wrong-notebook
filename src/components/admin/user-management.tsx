@@ -101,7 +101,7 @@ export function UserManagement() {
 
     return (
         <div className="space-y-4">
-            {/* 注册开关 */}
+            {/* 註冊開關 */}
             <div className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
                 <div className="space-y-0.5">
                     <Label className="text-base">
@@ -121,7 +121,7 @@ export function UserManagement() {
                 </div>
             </div>
 
-            {/* 移动端卡片视图 */}
+            {/* 行動端卡片視圖 */}
             <div className="sm:hidden space-y-3">
                 {users.map((user) => (
                     <div key={user.id} className="border rounded-lg p-4 bg-card space-y-3">
@@ -173,7 +173,7 @@ export function UserManagement() {
                 ))}
             </div>
 
-            {/* 桌面端表格视图 */}
+            {/* 桌面端表格視圖 */}
             <div className="hidden sm:block border rounded-lg overflow-hidden">
                 <Table>
                     <TableHeader>

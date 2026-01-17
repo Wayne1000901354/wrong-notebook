@@ -27,26 +27,26 @@ export function Pagination({
     const canGoPrev = page > 1;
     const canGoNext = page < totalPages;
 
-    // 生成页码按钮（最多显示 MAX_VISIBLE_PAGES 个）
+    // 生成頁碼按鈕（最多顯示 MAX_VISIBLE_PAGES 個）
     const getPageNumbers = () => {
         const pages: (number | "ellipsis")[] = [];
 
         if (totalPages <= MAX_VISIBLE_PAGES) {
             for (let i = 1; i <= totalPages; i++) pages.push(i);
         } else {
-            // 始终显示第一页
+            // 始終顯示第一頁
             pages.push(1);
 
             if (page > 3) pages.push("ellipsis");
 
-            // 中间页码
+            // 中間頁碼
             const start = Math.max(2, page - 1);
             const end = Math.min(totalPages - 1, page + 1);
             for (let i = start; i <= end; i++) pages.push(i);
 
             if (page < totalPages - 2) pages.push("ellipsis");
 
-            // 始终显示最后一页
+            // 始終顯示最後一頁
             pages.push(totalPages);
         }
 
@@ -66,7 +66,7 @@ export function Pagination({
                 </div>
             )}
             <div className="flex items-center gap-1 order-1 sm:order-2">
-                {/* 首页 */}
+                {/* 首頁 */}
                 <Button
                     variant="outline"
                     size="icon"
@@ -78,7 +78,7 @@ export function Pagination({
                     <ChevronsLeft className="h-4 w-4" />
                 </Button>
 
-                {/* 上一页 */}
+                {/* 上一頁 */}
                 <Button
                     variant="outline"
                     size="icon"
@@ -90,7 +90,7 @@ export function Pagination({
                     <ChevronLeft className="h-4 w-4" />
                 </Button>
 
-                {/* 页码 */}
+                {/* 頁碼 */}
                 <div className="hidden sm:flex items-center gap-1">
                     {pageNumbers.map((pageNum, idx) =>
                         pageNum === "ellipsis" ? (
@@ -111,12 +111,12 @@ export function Pagination({
                     )}
                 </div>
 
-                {/* 移动端显示当前页/总页数 */}
+                {/* 行動端顯示當前頁/總頁數 */}
                 <span className="sm:hidden text-sm px-2">
                     {page} / {totalPages}
                 </span>
 
-                {/* 下一页 */}
+                {/* 下一頁 */}
                 <Button
                     variant="outline"
                     size="icon"
@@ -128,7 +128,7 @@ export function Pagination({
                     <ChevronRight className="h-4 w-4" />
                 </Button>
 
-                {/* 末页 */}
+                {/* 末頁 */}
                 <Button
                     variant="outline"
                     size="icon"

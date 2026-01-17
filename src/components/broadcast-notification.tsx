@@ -17,7 +17,7 @@ export function BroadcastNotification() {
     const [hasUnread, setHasUnread] = useState(true);
 
     const handleOpen = () => {
-        // 打开后标记为已读
+        // 打開後標記為已讀
         setHasUnread(false);
     };
 
@@ -31,7 +31,7 @@ export function BroadcastNotification() {
                     title={t.broadcast?.title || "Announcements"}
                 >
                     <Bell className="h-5 w-5" />
-                    {/* 未读角标 */}
+                    {/* 未讀角標 */}
                     {hasUnread && (
                         <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-red-500 animate-pulse" />
                     )}
@@ -48,7 +48,7 @@ export function BroadcastNotification() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="m-0" />
                 <div className="p-4 space-y-3">
-                    {/* 广播消息 1：教育阶段提醒 */}
+                    {/* 廣播消息 1：教育階段提醒 */}
                     <div className="flex gap-3 items-start p-3 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
                         <div className="shrink-0 mt-0.5">
                             <span className="text-amber-500 text-lg">📢</span>
@@ -63,7 +63,7 @@ export function BroadcastNotification() {
                         </div>
                     </div>
 
-                    {/* 广播消息 2：标签库迁移提醒 */}
+                    {/* 廣播消息 2：標籤庫遷移提醒 */}
                     <div className="flex gap-3 items-start p-3 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
                         <div className="shrink-0 mt-0.5">
                             <span className="text-blue-500 text-lg">🔧</span>

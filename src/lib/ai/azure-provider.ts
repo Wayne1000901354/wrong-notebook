@@ -9,7 +9,7 @@ import { createLogger } from '../logger';
 
 const logger = createLogger('ai:azure');
 
-// Azure 配置接口
+// Azure 配置介面
 export interface AzureConfig {
     apiKey?: string;
     endpoint?: string;       // Azure 資源端點 (https://xxx.openai.azure.com)

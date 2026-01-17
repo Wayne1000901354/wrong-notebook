@@ -18,14 +18,14 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export function ProgressFeedback({ status, progress, message, className }: ProgressFeedbackProps) {
     const { t } = useLanguage();
-    // 确保只在客户端挂载完成后才渲染遮罩层，防止 SSR/Hydration 问题
+    // 確保只在客戶端掛載完成後才渲染遮罩層，防止 SSR/Hydration 問題
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
-    // 只有在客户端挂载完成且 status 不为 idle 时才渲染
+    // 只有在客戶端掛載完成且 status 不為 idle 時才渲染
     if (!isMounted || status === 'idle') return null;
 
     return (

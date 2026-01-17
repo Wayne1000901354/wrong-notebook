@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { UploadCloud, Loader2, Monitor } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// 添加 CaptureController 类型声明
+// 添加 CaptureController 類型聲明
 declare global {
     interface Window {
         CaptureController: {
@@ -19,7 +19,7 @@ declare global {
 }
 
 interface UploadZoneProps {
-    onImageSelect: (file: File) => void;  // 改为传递 File 对象
+    onImageSelect: (file: File) => void;  // 改為傳遞 File 對象
     isAnalyzing: boolean;
 }
 

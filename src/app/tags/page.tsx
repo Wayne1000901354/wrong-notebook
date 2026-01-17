@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { apiClient } from "@/lib/api-client";
 import { TagStats, TagStatsResponse } from "@/types/api";
 
-// 标签树节点类型
+// 標籤樹節點類型
 interface TagTreeNode {
     id: string;
     name: string;
@@ -23,7 +23,7 @@ interface TagTreeNode {
     children: TagTreeNode[];
 }
 
-// 学科配置
+// 學科配置
 const SUBJECTS = [
     { key: 'math', name: '數學' },
     { key: 'physics', name: '物理' },
@@ -44,7 +44,7 @@ export default function TagsPage() {
     const [stats, setStats] = useState<TagStats[]>([]);
     const [loading, setLoading] = useState(true);
 
-    // 标签数据 (按学科) - null 表示未加载，[] 表示已加载但无数据
+    // 標籤數據 (按學科) - null 表示未加載，[] 表示已加載但無數據
     const [tagsBySubject, setTagsBySubject] = useState<Record<SubjectKey, TagTreeNode[] | null>>({
         math: null,
         english: null,
@@ -58,20 +58,20 @@ export default function TagsPage() {
         others: null,
     });
 
-    // 自定义标签 (扁平列表，仅用于显示)
+    // 自訂標籤 (扁平列表，僅用於顯示)
     const [customTags, setCustomTags] = useState<Array<{ id: string; name: string; subject: string; parentName?: string }>>([]);
 
-    // 新建标签表单
+    // 新建標籤表單
     const [newTagSubject, setNewTagSubject] = useState<SubjectKey>("math");
-    const [newTagGrade, setNewTagGrade] = useState<string>(""); // 年级ID
+    const [newTagGrade, setNewTagGrade] = useState<string>(""); // 年級ID
     const [gradeOptions, setGradeOptions] = useState<Array<{ id: string; name: string }>>([]);
     const [newTagName, setNewTagName] = useState("");
     const [submitting, setSubmitting] = useState(false);
 
-    // 展开状态
+    // 展開狀態
     const [expandedNodes, setExpandedNodes] = useState<Record<string, boolean>>({});
 
-    // 获取标签树
+    // 獲取標籤樹
     const fetchTags = useCallback(async (subject: SubjectKey) => {
         try {
             const data = await apiClient.get<{ tags: TagTreeNode[] }>(`/api/tags?subject=${subject}`);
@@ -81,10 +81,10 @@ export default function TagsPage() {
         }
     }, []);
 
-    // 获取自定义标签
+    // 獲取自訂標籤
     const fetchCustomTags = useCallback(async () => {
         try {
-            // 获取所有学科的扁平标签，过滤非系统标签
+            // 獲取所有學科的扁平標籤，過濾非系統標籤
             const allCustom: Array<{ id: string; name: string; subject: string; parentName?: string }> = [];
             for (const { key } of SUBJECTS) {
                 const data = await apiClient.get<{ tags: Array<{ id: string; name: string; isSystem: boolean; parentName?: string }> }>(
@@ -99,7 +99,7 @@ export default function TagsPage() {
         }
     }, []);
 
-    // 获取统计
+    // 獲取統計
     const fetchStats = async () => {
         try {
             const data = await apiClient.get<TagStatsResponse>("/api/tags/stats");
@@ -119,12 +119,12 @@ export default function TagsPage() {
         fetchTags('math');
     }, [fetchTags, fetchCustomTags]);
 
-    // 当学科变化时，获取对应的年级列表
+    // 當學科變化時，獲取對應的年級列表
     useEffect(() => {
         const fetchGrades = async () => {
             try {
                 const data = await apiClient.get<{ tags: TagTreeNode[] }>(`/api/tags?subject=${newTagSubject}`);
-                // 顶级节点就是年级，只取系统标签
+                // 頂級節點就是年級，只取系統標籤
                 const grades = data.tags
                     .filter(t => t.isSystem)
                     .map(t => ({ id: t.id, name: t.name }));
@@ -138,7 +138,7 @@ export default function TagsPage() {
         fetchGrades();
     }, [newTagSubject]);
 
-    // 添加自定义标签
+    // 添加自訂標籤
     const handleAddCustomTag = async () => {
         if (!newTagName.trim()) {
             alert(t.tags?.custom?.enterName || "Please enter tag name");
@@ -168,7 +168,7 @@ export default function TagsPage() {
         }
     };
 
-    // 刪除自定義標籤
+    // 刪除自訂標籤
     const handleRemoveCustomTag = async (tagId: string, tagName: string, subject: SubjectKey) => {
         if (!confirm((t.tags?.custom?.deleteConfirm || "Are you sure you want to delete tag \"{tag}\"?").replace("{tag}", tagName))) {
             return;
@@ -184,19 +184,19 @@ export default function TagsPage() {
         }
     };
 
-    // 切换节点展开
+    // 切換節點展開
     const toggleNode = (nodeId: string) => {
         setExpandedNodes(prev => ({ ...prev, [nodeId]: !prev[nodeId] }));
     };
 
-    // 渲染标签树节点
+    // 渲染標籤樹節點
     const renderTreeNode = (node: TagTreeNode, depth: number = 0, isLeafContext: boolean = false): React.ReactNode => {
         const hasChildren = node.children.length > 0;
         const isExpanded = expandedNodes[node.id];
         const paddingLeft = depth * 16;
 
         if (!hasChildren) {
-            // 叶子节点 - 显示为 Badge
+            // 葉子節點 - 顯示為 Badge
             return (
                 <Badge key={node.id} variant="outline" className="cursor-default hover:bg-accent" style={{ marginLeft: isLeafContext ? 0 : paddingLeft }}>
                     {node.name}

@@ -21,7 +21,7 @@ export class GeminiProvider implements AIService {
             throw new Error("AI_AUTH_ERROR: GOOGLE_API_KEY is required for Gemini provider");
         }
 
-        // 使用 httpOptions.baseUrl 來配置自定義 API 地址，避免全局 setDefaultBaseUrls 的競態條件
+        // 使用 httpOptions.baseUrl 來配置自訂 API 位址，避免全局 setDefaultBaseUrls 的競態條件
         // 參考：@google/genai 的 GoogleGenAIOptions.httpOptions.baseUrl
         this.ai = new GoogleGenAI({
             apiKey,

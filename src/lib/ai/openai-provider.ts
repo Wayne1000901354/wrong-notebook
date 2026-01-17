@@ -46,7 +46,7 @@ export class OpenAIProvider implements AIService {
         const endTag = `</${tagName}>`;
         const startIndex = text.indexOf(startTag);
 
-        // 如果找不到开始标签，返回 null
+        // 如果找不到開始標籤，返回 null
         if (startIndex === -1) {
             return null;
         }
@@ -54,8 +54,8 @@ export class OpenAIProvider implements AIService {
         const contentStartIndex = startIndex + startTag.length;
         let endIndex = text.lastIndexOf(endTag);
 
-        // 特殊处理：如果闭合标签丢失（通常主要发生在最后的 analysis 标签被截断时）
-        // 我们尝试读取到字符串末尾
+        // 特殊處理：如果閉合標籤丟失（通常主要發生在最後的 analysis 標籤被截斷時）
+        // 我們嘗試讀取到字串末尾
         if (endIndex === -1 && tagName === 'analysis') {
             logger.warn({ tagName }, 'Tag was verified unclosed, treating as truncated and reading to end');
             return text.substring(contentStartIndex).trim();
@@ -371,7 +371,7 @@ export class OpenAIProvider implements AIService {
             if (msg.includes('fetch failed') || msg.includes('network') || msg.includes('connect')) {
                 throw new Error("AI_CONNECTION_FAILED");
             }
-            // 超時錯誤 (包括 408 Request Timeout)
+            // 逾時錯誤 (包括 408 Request Timeout)
             if (msg.includes('timeout') || msg.includes('timed out') || msg.includes('aborted') || msg.includes('408')) {
                 throw new Error("AI_TIMEOUT_ERROR");
             }

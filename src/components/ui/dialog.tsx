@@ -38,7 +38,7 @@ const DialogContent = React.forwardRef<
         <DialogPrimitive.Content
             ref={ref}
             onPointerDownOutside={(e) => {
-                // 防止在关闭动画期间重新打开
+                // 防止在關閉動畫期間重新打開
                 e.preventDefault();
             }}
             className={cn(
