@@ -7,9 +7,9 @@
 
 /**
  * 根據教育階段和入學年份計算當前年級數字
- * @param educationStage 教育阶段 ('junior_high' | 'senior_high')
+ * @param educationStage 教育階段 ('junior_high' | 'senior_high')
  * @param enrollmentYear 入學年份
- * @returns 年级 (7-12) 或 null
+ * @returns 年級 (7-12) 或 null
  */
 export function calculateGradeNumber(
     educationStage: string | null,
@@ -19,7 +19,7 @@ export function calculateGradeNumber(
         return null;
     }
 
-    // 只处理初中和高中
+    // 只處理國中和高中
     if (educationStage !== 'junior_high' && educationStage !== 'senior_high') {
         return null;
     }

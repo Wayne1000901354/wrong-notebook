@@ -27,7 +27,7 @@ export const DEFAULT_ANALYZE_TEMPLATE = `【角色與核心任務 (ROLE AND CORE
 {{language_instruction}}
 
 【核心輸出要求 (OUTPUT REQUIREMENTS)】
-你的響應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 代碼塊。**嚴禁**對 LaTeX 公式中的反斜線進行二次跳脫（如 "\\frac" 是錯誤的，必須是 "\frac"）。
+你的回應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 程式碼區塊。**嚴禁**對 LaTeX 公式中的反斜線進行二次跳脫（如 "\\frac" 是錯誤的，必須是 "\frac"）。
 
 請嚴格按照以下結構輸出內容：
 
@@ -66,7 +66,7 @@ export const DEFAULT_ANALYZE_TEMPLATE = `【角色與核心任務 (ROLE AND CORE
 
 【!!! 關鍵格式與內容約束 (CRITICAL RULES) !!!】
 1. **格式嚴格**：必須嚴格包含上述 6 個 XML 標籤，除此之外不要輸出任何其他“開場白”或“結束語”。
-2. **純文本**：內容作為純文本處理，**不要跳脫反斜線**。
+2. **純文字**：內容作為純文字處理，**不要跳脫反斜線**。
 3. **內容完整**：如果包含子問題，請在 question_text 中完整列出。
 4. **禁止圖片**：嚴禁包含任何圖片連結或 markdown 圖片語法。
 
@@ -101,7 +101,7 @@ export const DEFAULT_SIMILAR_TEMPLATE = `你是一位資深的K12教育題目生
      ✓ 答案唯一且可驗證  
      ✓ 無知識性錯誤
 ### 輸出規範
-你的響應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 代碼塊。**嚴禁**返回 \`\`\`json ... \`\`\`。
+你的回應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 程式碼區塊。**嚴禁**返回 \`\`\`json ... \`\`\`。
 
 請嚴格按照以下結構輸出內容（不要包含任何其他文字）：
 
@@ -120,7 +120,7 @@ export const DEFAULT_SIMILAR_TEMPLATE = `你是一位資深的K12教育題目生
 </analysis>
 
 ###關鍵格式與內容約束 (CRITICAL RULES) !!!
-1. **純文本**：內容作為純文本處理，**不要跳脫反斜線**。
+1. **純文字**：內容作為純文字處理，**不要跳脫反斜線**。
 
 {{provider_hints}}`;
 
@@ -141,15 +141,15 @@ function replaceVariables(template: string, variables: Record<string, string>): 
  * 高一(10)：只包含高一標籤（不含國中）
  * 高二(11)：包含高一+高二標籤
  * 高三(12)：包含高一+高二+高三標籤
- * @param grade - 年级 (7-9:初中, 10-12:高中) 或 null
- * @returns 标签数组
+ * @param grade - 年級 (7-9:國中, 10-12:高中) 或 null
+ * @returns 標籤陣列
  */
 /**
- * 获取指定年级的数学标签
- * 必须由调用方预先从数据库获取标签并通过 prefetchedTags 传入
- * @param grade - 年级（已弃用，保留接口兼容）
- * @param prefetchedTags - 从数据库预获取的标签数组
- * @returns 标签数组
+ * 獲取指定年級的數學標籤
+ * 必須由調用方預先從資料庫獲取標籤並通過 prefetchedTags 傳入
+ * @param grade - 年級（已棄用，保留介面兼容）
+ * @param prefetchedTags - 從資料庫預獲取的標籤陣列
+ * @returns 標籤陣列
  */
 export function getMathTagsForGrade(
   grade: 7 | 8 | 9 | 10 | 11 | 12 | null,
@@ -160,7 +160,7 @@ export function getMathTagsForGrade(
     return prefetchedTags;
   }
 
-  // 如果沒有預獲取標籤，返回空數組（AI 將自由標註）
+  // 如果沒有預獲取標籤，返回空陣列（AI 將自由標註）
   console.warn('[prompts] No prefetched tags provided, AI will tag freely');
   return [];
 }
@@ -168,7 +168,7 @@ export function getMathTagsForGrade(
 /**
  * Generates the analyze image prompt
  * @param language - Target language for analysis ('zh' or 'en')
- * @param grade - Optional grade level (7-9:初中, 10-12:高中) for cumulative tag filtering
+ * @param grade - Optional grade level (7-9:國中, 10-12:高中) for cumulative tag filtering
  * @param options - Optional customizations
  */
 export function generateAnalyzePrompt(
@@ -181,7 +181,7 @@ export function generateAnalyzePrompt(
     ? "IMPORTANT: For the 'analysis' field, use Traditional Chinese (Taiwan). For 'questionText' and 'answerText', YOU MUST USE THE SAME LANGUAGE AS THE ORIGINAL QUESTION. If the original question is in Chinese, the new question MUST be in Traditional Chinese. If the original is in English, keep it in English. If the original question is in English, the new 'questionText' and 'answerText' MUST be in English, but the 'analysis' MUST be in Traditional Chinese (to help the student understand). "
     : "Please ensure all text fields are in English.";
 
-  // 获取各学科标签（优先使用预获取的数据库标签）
+  // 獲取各學科標籤（優先使用預獲取的資料庫標籤）
   const mathTags = getMathTagsForGrade(grade || null, options?.prefetchedMathTags);
   const mathTagsString = mathTags.length > 0 ? mathTags.map(tag => `"${tag}"`).join(", ") : '（無可用標籤）';
 
@@ -197,7 +197,7 @@ export function generateAnalyzePrompt(
   const englishTags = options?.prefetchedEnglishTags || [];
   const englishTagsString = englishTags.length > 0 ? englishTags.map(tag => `"${tag}"`).join(", ") : '（無可用標籤）';
 
-  // 根据科目决定显示哪些标签（节省 token，提高准确性）
+  // 根據科目決定顯示哪些標籤（節省 token，提高準確性）
   let tagsSection = "";
 
   if (subject === '數學') {
@@ -306,8 +306,8 @@ export function generateSimilarQuestionPrompt(
 }
 
 /**
- * 重新解题提示词模板
- * 用于根据校正后的题目文本重新生成答案和解析
+ * 重新解題提示詞模板
+ * 用於根據校正後的題目文本重新生成答案和解析
  */
 export const DEFAULT_REANSWER_TEMPLATE = `【角色與核心任務 (ROLE AND CORE TASK)】
 你是一位經驗豐富的專業教師。用戶已經提供了一道**校正後的題目文本**，請你為這道題目提供正確的答案和詳細的解析。
@@ -321,7 +321,7 @@ export const DEFAULT_REANSWER_TEMPLATE = `【角色與核心任務 (ROLE AND COR
 {{subject_hint}}
 
 【核心輸出要求 (OUTPUT REQUIREMENTS)】
-你的響應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 代碼塊。
+你的回應輸出**必須嚴格遵循以下自定義標籤格式**。**嚴禁**使用 JSON 或 Markdown 程式碼區塊。
 
 請嚴格按照以下結構輸出內容（不要包含任何其他文字）：
 
@@ -342,17 +342,17 @@ export const DEFAULT_REANSWER_TEMPLATE = `【角色與核心任務 (ROLE AND COR
 
 【!!! 關鍵格式與內容約束 (CRITICAL RULES) !!!】
 1. **格式嚴格**：必須嚴格包含上述 3 個 XML 標籤，不要輸出其他內容。
-2. **純文本**：內容作為純文本處理，**不要跳脫反斜線**。
+2. **純文字**：內容作為純文字處理，**不要跳脫反斜線**。
 3. **題目不變**：不要修改或重複題目內容，只提供答案和解析。
 
 {{provider_hints}}`;
 
 /**
- * 生成重新解题提示词
- * @param language - 语言 ('zh' 或 'en')
- * @param questionText - 校正后的题目文本
- * @param subject - 学科提示（可选）
- * @param options - 自定义选项
+ * 生成重新解題提示詞
+ * @param language - 語言 ('zh' 或 'en')
+ * @param questionText - 校正後的題目文本
+ * @param subject - 學科提示（可選）
+ * @param options - 自定義選項
  */
 export function generateReanswerPrompt(
   language: 'zh' | 'en',

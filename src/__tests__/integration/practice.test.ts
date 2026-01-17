@@ -1,6 +1,6 @@
 /**
- * /api/practice API 集成测试
- * 测试举一反三功能（生成类似题目和记录练习结果）
+ * /api/practice API 整合測試
+ * 測試舉一反三功能（生成相似題目和記錄練習結果）
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
@@ -58,7 +58,7 @@ describe('/api/practice', () => {
         vi.mocked(getServerSession).mockResolvedValue(mocks.mockSession);
     });
 
-    describe('POST /api/practice/generate (生成类似题目)', () => {
+    describe('POST /api/practice/generate (生成相似題目)', () => {
         const mockErrorItem = {
             id: 'error-item-1',
             questionText: '求解 x + 2 = 5',
@@ -66,7 +66,7 @@ describe('/api/practice', () => {
             subject: { id: 'math', name: '數學' },
         };
 
-        it('应该成功生成类似题目', async () => {
+        it('應該成功生成相似題目', async () => {
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(mockErrorItem);
             const aiResult = {
                 questionText: '求解 2x - 3 = 7',
@@ -95,10 +95,10 @@ describe('/api/practice', () => {
             expect(data.subject).toBe('數學');
         });
 
-        it('应该支持不同难度级别', async () => {
+        it('應該支持不同難度級別', async () => {
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(mockErrorItem);
             mocks.mockAIService.generateSimilarQuestion.mockResolvedValue({
-                questionText: '简单题目',
+                questionText: '簡單題目',
                 answerText: '答案',
                 analysis: '解析',
                 knowledgePoints: [],
@@ -121,14 +121,14 @@ describe('/api/practice', () => {
                 expect(response.status).toBe(200);
             }
 
-            // 验证 AI 服务被调用时使用了不同难度
+            // 驗證 AI 服務被調用時使用了不同難度
             expect(mocks.mockAIService.generateSimilarQuestion).toHaveBeenCalledTimes(4);
         });
 
-        it('应该默认使用 medium 难度', async () => {
+        it('應該預設使用 medium 難度', async () => {
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(mockErrorItem);
             mocks.mockAIService.generateSimilarQuestion.mockResolvedValue({
-                questionText: '题目',
+                questionText: '題目',
                 answerText: '答案',
                 analysis: '解析',
                 knowledgePoints: [],
@@ -150,11 +150,11 @@ describe('/api/practice', () => {
                 expect.any(String),
                 expect.any(Array),
                 'zh',
-                'medium' // 默认难度
+                'medium' // 預設難度
             );
         });
 
-        it('应该返回 404 当错题不存在', async () => {
+        it('應該返回 404 當錯題不存在', async () => {
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(null);
 
             const request = new Request('http://localhost/api/practice/generate', {
@@ -173,10 +173,10 @@ describe('/api/practice', () => {
             expect(data.message).toBe('Item not found');
         });
 
-        it('应该正确解析知识点标签', async () => {
+        it('應該正確解析知識點標籤', async () => {
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(mockErrorItem);
             mocks.mockAIService.generateSimilarQuestion.mockResolvedValue({
-                questionText: '题目',
+                questionText: '題目',
                 answerText: '答案',
                 analysis: '解析',
                 knowledgePoints: ['一元一次方程式'],
@@ -201,7 +201,7 @@ describe('/api/practice', () => {
             );
         });
 
-        it('应该处理无效的知识点 JSON', async () => {
+        it('應該處理無效的知識點 JSON', async () => {
             const errorItemWithInvalidTags = {
                 ...mockErrorItem,
                 knowledgePoints: 'invalid json{',
@@ -226,16 +226,16 @@ describe('/api/practice', () => {
             const response = await GENERATE_POST(request);
 
             expect(response.status).toBe(200);
-            // 应该使用空数组作为标签
+            // 應該使用空陣列作為標籤
             expect(mocks.mockAIService.generateSimilarQuestion).toHaveBeenCalledWith(
                 expect.any(String),
-                [], // 空数组
+                [], // 空陣列
                 'zh',
                 'medium'
             );
         });
 
-        it('应该处理空的知识点', async () => {
+        it('應該處理空的知識點', async () => {
             const errorItemWithNoTags = {
                 ...mockErrorItem,
                 knowledgePoints: null,
@@ -262,7 +262,7 @@ describe('/api/practice', () => {
             expect(response.status).toBe(200);
         });
 
-        it('应该从数据库获取正确的学科', async () => {
+        it('應該從數據庫獲取正確的學科', async () => {
             const errorItemWithPhysics = {
                 ...mockErrorItem,
                 subject: { id: 'physics', name: '物理' },
@@ -273,7 +273,7 @@ describe('/api/practice', () => {
                 answerText: '答案',
                 analysis: '解析',
                 knowledgePoints: [],
-                subject: undefined, // AI 返回的可能没有学科
+                subject: undefined, // AI 返回的可能沒有學科
             });
 
             const request = new Request('http://localhost/api/practice/generate', {
@@ -292,7 +292,7 @@ describe('/api/practice', () => {
             expect(data.subject).toBe('物理'); // 應該從數據庫注入
         });
 
-        it('应该处理未知学科为"其他"', async () => {
+        it('應該處理未知學科為"其他"', async () => {
             const errorItemWithUnknownSubject = {
                 ...mockErrorItem,
                 subject: { id: 'unknown', name: '未知學科' },
@@ -321,14 +321,14 @@ describe('/api/practice', () => {
             expect(data.subject).toBe('其他');
         });
 
-        it('应该处理没有关联学科的错题', async () => {
+        it('應該處理沒有關聯學科的錯題', async () => {
             const errorItemWithNoSubject = {
                 ...mockErrorItem,
                 subject: null,
             };
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(errorItemWithNoSubject);
             mocks.mockAIService.generateSimilarQuestion.mockResolvedValue({
-                questionText: '题目',
+                questionText: '題目',
                 answerText: '答案',
                 analysis: '解析',
                 knowledgePoints: [],
@@ -350,7 +350,7 @@ describe('/api/practice', () => {
             expect(data.subject).toBe('其他');
         });
 
-        it('应该处理 AI 服务错误', async () => {
+        it('應該處理 AI 服務錯誤', async () => {
             mocks.mockPrismaErrorItem.findUnique.mockResolvedValue(mockErrorItem);
             mocks.mockAIService.generateSimilarQuestion.mockRejectedValue(
                 new Error('AI service unavailable')
@@ -373,8 +373,8 @@ describe('/api/practice', () => {
         });
     });
 
-    describe('POST /api/practice/record (记录练习结果)', () => {
-        it('应该成功记录正确的练习结果', async () => {
+    describe('POST /api/practice/record (記錄練習結果)', () => {
+        it('應該成功記錄正確的練習結果', async () => {
             const createdRecord = {
                 id: 'record-1',
                 userId: 'user-123',
@@ -388,7 +388,7 @@ describe('/api/practice', () => {
             const request = new Request('http://localhost/api/practice/record', {
                 method: 'POST',
                 body: JSON.stringify({
-                    subject: '数学',
+                    subject: '數學',
                     difficulty: 'medium',
                     isCorrect: true,
                 }),
@@ -403,7 +403,7 @@ describe('/api/practice', () => {
             expect(data.isCorrect).toBe(true);
         });
 
-        it('应该成功记录错误的练习结果', async () => {
+        it('應該成功記錄錯誤的練習結果', async () => {
             const createdRecord = {
                 id: 'record-2',
                 userId: 'user-123',
@@ -458,7 +458,7 @@ describe('/api/practice', () => {
             }
         });
 
-        it('应该拒绝未登录用户', async () => {
+        it('應該拒絕未登入用戶', async () => {
             vi.mocked(getServerSession).mockResolvedValue(null);
 
             const request = new Request('http://localhost/api/practice/record', {
@@ -478,7 +478,7 @@ describe('/api/practice', () => {
             expect(data.message).toBe('Unauthorized');
         });
 
-        it('应该拒绝 session 中没有 user 的请求', async () => {
+        it('應該拒絕 session 中沒有 user 的請求', async () => {
             vi.mocked(getServerSession).mockResolvedValue({
                 user: undefined,
                 expires: '2025-12-31',
@@ -501,7 +501,7 @@ describe('/api/practice', () => {
             expect(data.message).toBe('Unauthorized');
         });
 
-        it('应该处理数据库错误', async () => {
+        it('應該處理數據庫錯誤', async () => {
             mocks.mockPrismaPracticeRecord.create.mockRejectedValue(
                 new Error('Database connection failed')
             );

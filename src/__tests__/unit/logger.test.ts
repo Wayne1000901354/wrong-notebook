@@ -10,12 +10,12 @@ describe('logger module', () => {
     });
 
     afterEach(() => {
-        // 恢复环境变量
+        // 恢復環境變量
         process.env = { ...originalEnv };
     });
 
     describe('createLogger', () => {
-        it('应该创建带模块标识的 child logger', async () => {
+        it('應該創建帶模組標識的 child logger', async () => {
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test-module');
 
@@ -31,7 +31,7 @@ describe('logger module', () => {
             expect(typeof logger.divider).toBe('function');
         });
 
-        it('应该支持创建嵌套的 child logger', async () => {
+        it('應該支持創建嵌套的 child logger', async () => {
             const { createLogger } = await import('@/lib/logger');
             const parentLogger = createLogger('parent');
             const childLogger = parentLogger.child({ subModule: 'child' });
@@ -41,9 +41,9 @@ describe('logger module', () => {
         });
     });
 
-    describe('日志级别', () => {
-        it('应该有正确的日志级别数值', async () => {
-            // 测试各级别方法存在
+    describe('日誌級別', () => {
+        it('應該有正確的日誌級別數值', async () => {
+            // 測試各級別方法存在
             const { logger } = await import('@/lib/logger');
 
             expect(logger.trace).toBeDefined();
@@ -55,8 +55,8 @@ describe('logger module', () => {
         });
     });
 
-    describe('日志输出', () => {
-        it('应该支持简单字符串消息', async () => {
+    describe('日誌輸出', () => {
+        it('應該支持簡單字串訊息', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -67,7 +67,7 @@ describe('logger module', () => {
             consoleSpy.mockRestore();
         });
 
-        it('应该支持带上下文的消息', async () => {
+        it('應該支持帶上下文的訊息', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -78,7 +78,7 @@ describe('logger module', () => {
             consoleSpy.mockRestore();
         });
 
-        it('应该使用 console.error 输出 error 级别日志', async () => {
+        it('應該使用 console.error 輸出 error 級別日誌', async () => {
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -89,7 +89,7 @@ describe('logger module', () => {
             consoleErrorSpy.mockRestore();
         });
 
-        it('应该使用 console.warn 输出 warn 级别日志', async () => {
+        it('應該使用 console.warn 輸出 warn 級別日誌', async () => {
             const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -100,7 +100,7 @@ describe('logger module', () => {
             consoleWarnSpy.mockRestore();
         });
 
-        it('应该使用 console.error 输出 fatal 级别日志', async () => {
+        it('應該使用 console.error 輸出 fatal 級別日誌', async () => {
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -112,20 +112,20 @@ describe('logger module', () => {
         });
     });
 
-    describe('装饰性日志', () => {
-        it('应该支持 box 方法输出带边框的日志', async () => {
+    describe('裝飾性日誌', () => {
+        it('應該支持 box 方法輸出帶邊框的日誌', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
 
             logger.box('Test Title', { key: 'value' });
 
-            // box 方法应该调用多次 console.log（边框、标题、内容）
+            // box 方法應該調用多次 console.log（邊框、標題、內容）
             expect(consoleSpy).toHaveBeenCalled();
             consoleSpy.mockRestore();
         });
 
-        it('应该支持 box 方法输出字符串内容', async () => {
+        it('應該支持 box 方法輸出字串內容', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -136,7 +136,7 @@ describe('logger module', () => {
             consoleSpy.mockRestore();
         });
 
-        it('应该支持 divider 方法输出分隔线', async () => {
+        it('應該支持 divider 方法輸出分隔線', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -149,14 +149,14 @@ describe('logger module', () => {
         });
     });
 
-    describe('生产环境 JSON 输出', () => {
-        it('在生产环境应该输出 JSON 格式', async () => {
-            // 注意：由于模块缓存，这个测试可能需要特殊处理
-            // 这里我们验证 JSON.stringify 不会抛出错误
+    describe('正式環境 JSON 輸出', () => {
+        it('在正式環境應該輸出 JSON 格式', async () => {
+            // 注意：由於模組緩存，這個測試可能需要特殊處理
+            // 這裡我們驗證 JSON.stringify 不會拋出錯誤
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
 
-            // 测试各种类型的上下文数据
+            // 測試各種類型的上下文數據
             const testCases = [
                 { string: 'test' },
                 { number: 123 },
@@ -178,8 +178,8 @@ describe('logger module', () => {
         });
     });
 
-    describe('边界情况', () => {
-        it('应该处理空上下文', async () => {
+    describe('邊界情況', () => {
+        it('應該處理空上下文', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -189,7 +189,7 @@ describe('logger module', () => {
             consoleSpy.mockRestore();
         });
 
-        it('应该处理空消息', async () => {
+        it('應該處理空訊息', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -199,18 +199,18 @@ describe('logger module', () => {
             consoleSpy.mockRestore();
         });
 
-        it('应该处理特殊字符', async () => {
+        it('應該處理特殊字符', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
 
-            const specialChars = '特殊字符: "引号" \'单引号\' \n换行\t制表符 {大括号} [中括号]';
+            const specialChars = '特殊字符: "引號" \'單引號\' \n換行\t製表符 {大括號} [中括號]';
             expect(() => logger.info({ msg: specialChars }, 'Special chars')).not.toThrow();
 
             consoleSpy.mockRestore();
         });
 
-        it('应该处理大对象', async () => {
+        it('應該處理大物件', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
             const logger = createLogger('test');
@@ -224,7 +224,7 @@ describe('logger module', () => {
             consoleSpy.mockRestore();
         });
 
-        it('应该处理循环引用（不抛出错误）', async () => {
+        it('應該處理循環引用（不拋出錯誤）', async () => {
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => { });
             const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => { });
             const { createLogger } = await import('@/lib/logger');
@@ -233,12 +233,12 @@ describe('logger module', () => {
             const circularObj: any = { a: 1 };
             circularObj.self = circularObj;
 
-            // 循环引用会导致 JSON.stringify 失败，但不应该崩溃
-            // 注意：当前实现可能会抛出错误，这是一个已知的限制
+            // 循環引用會導致 JSON.stringify 失敗，但不應該崩潰
+            // 注意：當前實現可能會拋出錯誤，這是一個已知的限制
             try {
                 logger.info({ circularObj }, 'Circular reference');
             } catch {
-                // 循环引用导致的错误是预期的
+                // 循環引用導致的錯誤是預期的
             }
 
             consoleSpy.mockRestore();
@@ -246,8 +246,8 @@ describe('logger module', () => {
         });
     });
 
-    describe('模块标识', () => {
-        it('应该在日志中包含模块标识', async () => {
+    describe('模組標識', () => {
+        it('應該在日誌中包含模組標識', async () => {
             let capturedOutput = '';
             const consoleSpy = vi.spyOn(console, 'log').mockImplementation((msg) => {
                 capturedOutput = msg;
@@ -258,7 +258,7 @@ describe('logger module', () => {
 
             logger.info('Test message');
 
-            // 检查输出中包含模块名（无论是 JSON 还是 Pretty 格式）
+            // 檢查輸出中包含模組名（無論是 JSON 還是 Pretty 格式）
             expect(capturedOutput).toContain('my-module');
 
             consoleSpy.mockRestore();

@@ -1,6 +1,6 @@
 /**
- * 年级计算器单元测试
- * 测试 calculateGrade 函数在各种场景下的正确性
+ * 年級計算器單元測試
+ * 測試 calculateGrade 函數在各種場景下的正確性
  */
 import { describe, it, expect } from 'vitest';
 import { calculateGrade } from '@/lib/grade-calculator';
@@ -13,7 +13,7 @@ describe('calculateGrade', () => {
             expect(result).toBe('國一上');
         });
 
-        it('应该正确计算初一上期（英文）', () => {
+        it('應該正確計算國一上學期（英文）', () => {
             const result = calculateGrade('junior_high', 2025, new Date('2025-09-15'), 'en');
             expect(result).toBe('Junior High Grade 1, 1st Semester');
         });
@@ -42,7 +42,7 @@ describe('calculateGrade', () => {
             expect(result).toBe('已畢業上'); // 注意：grade-calculator.ts 可能在畢業後仍會附加學期，需確認邏輯，但此處僅翻譯
         });
 
-        it('应该正确处理已毕业情况（英文）', () => {
+        it('應該正確處理已畢業情況（英文）', () => {
             const result = calculateGrade('junior_high', 2020, new Date('2024-09-15'), 'en');
             expect(result).toBe('Graduated, 1st Semester');
         });
@@ -59,7 +59,7 @@ describe('calculateGrade', () => {
             expect(result).toBe('高二下');
         });
 
-        it('应该正确计算高三上期（英文）', () => {
+        it('應該正確計算高三上學期（英文）', () => {
             const result = calculateGrade('senior_high', 2022, new Date('2024-11-15'), 'en');
             expect(result).toBe('Senior High Grade 3, 1st Semester');
         });
@@ -76,7 +76,7 @@ describe('calculateGrade', () => {
             expect(result).toBe('六年級下');
         });
 
-        it('应该正确计算六年级（英文）', () => {
+        it('應該正確計算六年級（英文）', () => {
             const result = calculateGrade('primary', 2019, new Date('2025-04-15'), 'en');
             expect(result).toBe('Grade 6, 2nd Semester');
         });
@@ -88,7 +88,7 @@ describe('calculateGrade', () => {
             expect(result).toBe('大一上');
         });
 
-        it('应该正确计算大四（英文）', () => {
+        it('應該正確計算大四（英文）', () => {
             const result = calculateGrade('university', 2021, new Date('2024-10-15'), 'en');
             expect(result).toBe('Senior, 1st Semester');
         });

@@ -1,7 +1,7 @@
 /**
- * 应用配置模块单元测试
- * 测试 getAppConfig 和 updateAppConfig 函数
- * 注意：这些测试 mock 了文件系统操作
+ * 應用配置模組單元測試
+ * 測試 getAppConfig 和 updateAppConfig 函數
+ * 注意：這些測試 mock 了文件系統操作
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import fs from 'fs';
@@ -36,17 +36,17 @@ describe('config module', () => {
     });
 
     describe('getAppConfig', () => {
-        it('应该返回默认配置（文件不存在时）', async () => {
+        it('應該返回預設配置（文件不存在時）', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
 
             const { getAppConfig } = await import('@/lib/config');
             const config = getAppConfig();
 
-            expect(config.aiProvider).toBe('gemini'); // 默认值
+            expect(config.aiProvider).toBe('gemini'); // 預設值
             expect(config.allowRegistration).toBe(true);
         });
 
-        it('应该从环境变量读取 AI Provider', async () => {
+        it('應該從環境變量讀取 AI Provider', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             process.env.AI_PROVIDER = 'openai';
 
@@ -56,7 +56,7 @@ describe('config module', () => {
             expect(config.aiProvider).toBe('openai');
         });
 
-        it('应该从环境变量读取 API Keys', async () => {
+        it('應該從環境變量讀取 API Keys', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             process.env.OPENAI_API_KEY = 'sk-env-key';
             process.env.GOOGLE_API_KEY = 'AIza-env-key';
@@ -64,12 +64,12 @@ describe('config module', () => {
             const { getAppConfig } = await import('@/lib/config');
             const config = getAppConfig();
 
-            // OpenAI 现在使用多实例格式
+            // OpenAI 現在使用多實例格式
             expect(config.openai?.instances?.[0]?.apiKey).toBe('sk-env-key');
             expect(config.gemini?.apiKey).toBe('AIza-env-key');
         });
 
-        it('应该从配置文件读取并与默认值合并', async () => {
+        it('應該從配置文件讀取並與預設值合併', async () => {
             // 新格式的配置文件
             const fileConfig = {
                 aiProvider: 'openai',
@@ -92,23 +92,23 @@ describe('config module', () => {
 
             expect(config.aiProvider).toBe('openai');
             expect(config.openai?.instances?.[0]?.apiKey).toBe('sk-file-key');
-            // 其他默认值应该保留
+            // 其他預設值應該保留
             expect(config.allowRegistration).toBe(true);
             expect(config.gemini).toBeDefined();
         });
 
-        it('应该在配置文件解析失败时返回默认值', async () => {
+        it('應該在配置文件解析失敗時返回預設值', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(true);
             vi.mocked(fs.readFileSync).mockReturnValue('invalid json{');
 
             const { getAppConfig } = await import('@/lib/config');
             const config = getAppConfig();
 
-            // 应该回退到默认配置
+            // 應該回退到預設配置
             expect(config.aiProvider).toBeDefined();
         });
 
-        it('应该使用环境变量的模型名称', async () => {
+        it('應該使用環境變量的模型名稱', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             process.env.OPENAI_API_KEY = 'sk-test';
             process.env.OPENAI_MODEL = 'gpt-4-turbo';
@@ -121,7 +121,7 @@ describe('config module', () => {
             expect(config.gemini?.model).toBe('gemini-3.0');
         });
 
-        it('应该使用默认模型名称（无环境变量时）', async () => {
+        it('應該使用預設模型名稱（無環境變量時）', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             process.env.OPENAI_API_KEY = 'sk-test';
             delete process.env.OPENAI_MODEL;
@@ -136,7 +136,7 @@ describe('config module', () => {
     });
 
     describe('updateAppConfig', () => {
-        it('应该成功写入配置文件', async () => {
+        it('應該成功寫入配置文件', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             vi.mocked(fs.writeFileSync).mockImplementation(() => { });
 
@@ -147,7 +147,7 @@ describe('config module', () => {
             expect(result.aiProvider).toBe('openai');
         });
 
-        it('应该合并嵌套配置', async () => {
+        it('應該合併嵌套配置', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             vi.mocked(fs.writeFileSync).mockImplementation(() => { });
 
@@ -166,11 +166,11 @@ describe('config module', () => {
             });
 
             expect(result.openai?.instances?.[0]?.apiKey).toBe('new-key');
-            // 实例应该存在
+            // 實例應該存在
             expect(result.openai?.instances?.length).toBeGreaterThan(0);
         });
 
-        it('应该在写入失败时抛出错误', async () => {
+        it('應該在寫入失敗時拋出錯誤', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             vi.mocked(fs.writeFileSync).mockImplementation(() => {
                 throw new Error('Permission denied');
@@ -181,19 +181,19 @@ describe('config module', () => {
             expect(() => updateAppConfig({ aiProvider: 'openai' })).toThrow();
         });
 
-        it('应该更新提示词配置', async () => {
+        it('應該更新提示詞配置', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             vi.mocked(fs.writeFileSync).mockImplementation(() => { });
 
             const { updateAppConfig } = await import('@/lib/config');
             const result = updateAppConfig({
-                prompts: { analyze: '自定义提示词' },
+                prompts: { analyze: '自定義提示詞' },
             });
 
             expect(result.prompts?.analyze).toBe('自定义提示词');
         });
 
-        it('应该更新注册开关', async () => {
+        it('應該更新註冊開關', async () => {
             vi.mocked(fs.existsSync).mockReturnValue(false);
             vi.mocked(fs.writeFileSync).mockImplementation(() => { });
 

@@ -27,8 +27,8 @@ describe('middleware', () => {
         vi.restoreAllMocks();
     });
 
-    describe('未认证用户', () => {
-        it('应该重定向未认证用户到登录页', async () => {
+    describe('未認證用戶', () => {
+        it('應該重定向未認證用戶到登入頁', async () => {
             vi.mocked(getToken).mockResolvedValue(null);
 
             const req = new NextRequest('http://localhost:3000/notebooks');
@@ -40,17 +40,17 @@ describe('middleware', () => {
             expect(response?.headers.get('location')).toContain('callbackUrl=%2Fnotebooks');
         });
 
-        it('应该允许未认证用户访问登录页', async () => {
+        it('應該允許未認證用戶訪問登入頁', async () => {
             vi.mocked(getToken).mockResolvedValue(null);
 
             const req = new NextRequest('http://localhost:3000/login');
             const response = await middleware(req);
 
-            // 返回 null 表示不拦截
+            // 返回 null 表示不攔截
             expect(response).toBeNull();
         });
 
-        it('应该允许未认证用户访问注册页', async () => {
+        it('應該允許未認證用戶訪問註冊頁', async () => {
             vi.mocked(getToken).mockResolvedValue(null);
 
             const req = new NextRequest('http://localhost:3000/register');
@@ -59,7 +59,7 @@ describe('middleware', () => {
             expect(response).toBeNull();
         });
 
-        it('应该保留查询参数在 callbackUrl 中', async () => {
+        it('應該保留查詢參數在 callbackUrl 中', async () => {
             vi.mocked(getToken).mockResolvedValue(null);
 
             const req = new NextRequest('http://localhost:3000/notebooks/123?tab=details');
@@ -67,29 +67,29 @@ describe('middleware', () => {
 
             expect(response).not.toBeNull();
             const location = response?.headers.get('location') || '';
-            // callbackUrl 应该包含完整路径和查询参数
+            // callbackUrl 應該包含完整路徑和查詢參數
             expect(decodeURIComponent(location)).toContain('/notebooks/123?tab=details');
         });
     });
 
-    describe('已认证用户', () => {
+    describe('已認證用戶', () => {
         const mockToken = {
             sub: 'user-123',
             email: 'test@example.com',
             name: 'Test User',
         };
 
-        it('应该允许已认证用户访问受保护页面', async () => {
+        it('應該允許已認證用戶訪問受保護頁面', async () => {
             vi.mocked(getToken).mockResolvedValue(mockToken as any);
 
             const req = new NextRequest('http://localhost:3000/notebooks');
             const response = await middleware(req);
 
-            // 返回 undefined 表示允许继续
+            // 返回 undefined 表示允許繼續
             expect(response).toBeUndefined();
         });
 
-        it('应该重定向已认证用户离开登录页', async () => {
+        it('應該重定向已認證用戶離開登入頁', async () => {
             vi.mocked(getToken).mockResolvedValue(mockToken as any);
 
             const req = new NextRequest('http://localhost:3000/login');
@@ -100,7 +100,7 @@ describe('middleware', () => {
             expect(response?.headers.get('location')).toBe('http://localhost:3000/');
         });
 
-        it('应该重定向已认证用户离开注册页', async () => {
+        it('應該重定向已認證用戶離開註冊頁', async () => {
             vi.mocked(getToken).mockResolvedValue(mockToken as any);
 
             const req = new NextRequest('http://localhost:3000/register');
@@ -111,7 +111,7 @@ describe('middleware', () => {
             expect(response?.headers.get('location')).toBe('http://localhost:3000/');
         });
 
-        it('应该允许已认证用户访问首页', async () => {
+        it('應該允許已認證用戶訪問首頁', async () => {
             vi.mocked(getToken).mockResolvedValue(mockToken as any);
 
             const req = new NextRequest('http://localhost:3000/');
@@ -121,29 +121,29 @@ describe('middleware', () => {
         });
     });
 
-    describe('错误处理', () => {
-        it('Token 验证失败时应该继续请求而不是崩溃', async () => {
+    describe('錯誤處理', () => {
+        it('Token 驗證失敗時應該繼續請求而不是崩潰', async () => {
             vi.mocked(getToken).mockRejectedValue(new Error('Token validation failed'));
 
             const req = new NextRequest('http://localhost:3000/notebooks');
 
-            // 不应该抛出错误
+            // 不應該拋出錯誤
             const response = await middleware(req);
 
-            // 应该调用 NextResponse.next()，允许请求继续
+            // 應該調用 NextResponse.next()，允許請求繼續
             expect(response).toBeDefined();
         });
 
-        it('Token 验证失败时应该记录错误日志', async () => {
-            // 此测试验证错误处理路径不会崩溃
-            // 由于模块缓存，我们在上面的测试中已经验证了错误处理
-            // 这里只验证中间件导入成功
+        it('Token 驗證失敗時應該記錄錯誤日誌', async () => {
+            // 此測試驗證錯誤處理路徑不會崩潰
+            // 由於模組緩存，我們在上面的測試中已經驗證了錯誤處理
+            // 這裡只驗證中間件導入成功
             expect(middleware).toBeDefined();
         });
     });
 
-    describe('getToken 调用配置', () => {
-        it('应该使用正确的 cookie 名称', async () => {
+    describe('getToken 調用配置', () => {
+        it('應該使用正確的 cookie 名稱', async () => {
             vi.mocked(getToken).mockResolvedValue(null);
 
             const req = new NextRequest('http://localhost:3000/notebooks');
@@ -156,7 +156,7 @@ describe('middleware', () => {
             );
         });
 
-        it('应该传递 NEXTAUTH_SECRET', async () => {
+        it('應該傳遞 NEXTAUTH_SECRET', async () => {
             const originalSecret = process.env.NEXTAUTH_SECRET;
             process.env.NEXTAUTH_SECRET = 'test-secret';
 
@@ -175,16 +175,16 @@ describe('middleware', () => {
         });
     });
 
-    describe('路径匹配', () => {
-        it('中间件配置应该存在', async () => {
-            // 验证中间件导出存在
+    describe('路徑匹配', () => {
+        it('中間件配置應該存在', async () => {
+            // 驗證中間件導出存在
             const middlewareModule = await import('@/middleware');
             expect(middlewareModule.config).toBeDefined();
             expect(middlewareModule.config.matcher).toBeDefined();
             expect(middlewareModule.config.matcher.length).toBeGreaterThan(0);
         });
 
-        it('应该处理根路径', async () => {
+        it('應該處理根路徑', async () => {
             vi.mocked(getToken).mockResolvedValue(null);
 
             const req = new NextRequest('http://localhost:3000/');
@@ -194,7 +194,7 @@ describe('middleware', () => {
             expect(response?.headers.get('location')).toContain('/login');
         });
 
-        it('应该处理嵌套路径', async () => {
+        it('應該處理嵌套路徑', async () => {
             vi.mocked(getToken).mockResolvedValue(null);
 
             const req = new NextRequest('http://localhost:3000/notebooks/123/edit');
