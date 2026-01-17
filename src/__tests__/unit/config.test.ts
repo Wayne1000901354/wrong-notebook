@@ -190,7 +190,7 @@ describe('config module', () => {
                 prompts: { analyze: '自定義提示詞' },
             });
 
-            expect(result.prompts?.analyze).toBe('自定义提示词');
+            expect(result.prompts?.analyze).toBe('自定義提示詞');
         });
 
         it('應該更新註冊開關', async () => {
