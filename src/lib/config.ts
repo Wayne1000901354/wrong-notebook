@@ -6,10 +6,10 @@ const logger = createLogger('config');
 
 const CONFIG_FILE_PATH = path.join(process.cwd(), 'config', 'app-config.json');
 
-// OpenAI 实例配置
+// OpenAI 實例配置
 export interface OpenAIInstance {
-    id: string;           // 唯一标识 (UUID)
-    name: string;         // 用户自定义名称
+    id: string;           // 唯一標識 (UUID)
+    name: string;         // 用戶自定義名稱
     apiKey: string;
     baseUrl: string;
     model: string;
@@ -29,10 +29,10 @@ export interface AppConfig {
     };
     azure?: {
         apiKey?: string;
-        endpoint?: string;       // Azure 资源端点 (https://xxx.openai.azure.com)
-        deploymentName?: string; // 部署名称
+        endpoint?: string;       // Azure 資源端點 (https://xxx.openai.azure.com)
+        deploymentName?: string; // 部署名稱
         apiVersion?: string;     // API 版本
-        model?: string;          // 显示用模型名
+        model?: string;          // 顯示用模型名
     };
     prompts?: {
         analyze?: string;
@@ -43,7 +43,7 @@ export interface AppConfig {
     };
 }
 
-// 旧版 OpenAI 配置格式（用于迁移检测）
+// 舊版 OpenAI 配置格式（用於遷移檢測）
 interface LegacyOpenAIConfig {
     apiKey?: string;
     baseUrl?: string;
@@ -66,7 +66,7 @@ function generateId(): string {
     });
 }
 
-// 迁移旧版 OpenAI 配置到新版多实例格式
+// 遷移舊版 OpenAI 配置到新版多實例格式
 function migrateOpenAIConfig(legacy: LegacyOpenAIConfig): AppConfig['openai'] {
     if (!legacy.apiKey) {
         // 沒有有效配置，返回空實例陣列
@@ -127,12 +127,12 @@ export function getAppConfig(): AppConfig {
             const fileContent = fs.readFileSync(CONFIG_FILE_PATH, 'utf-8');
             const userConfig = JSON.parse(fileContent);
 
-            // 检测并迁移旧版 OpenAI 配置
+            // 檢測並遷移舊版 OpenAI 配置
             let openaiConfig = userConfig.openai;
             if (isLegacyOpenAIConfig(userConfig.openai)) {
                 logger.info('Detected legacy OpenAI config, migrating to multi-instance format...');
                 openaiConfig = migrateOpenAIConfig(userConfig.openai);
-                // 持久化迁移结果
+                // 持久化遷移結果
                 const migratedConfig = {
                     ...userConfig,
                     openai: openaiConfig,
@@ -186,7 +186,7 @@ export function updateAppConfig(newConfig: Partial<AppConfig>) {
     }
 }
 
-// 获取当前激活的 OpenAI 实例配置
+// 獲取當前激活的 OpenAI 實例配置
 export function getActiveOpenAIConfig(): OpenAIInstance | undefined {
     const config = getAppConfig();
     const instances = config.openai?.instances || [];

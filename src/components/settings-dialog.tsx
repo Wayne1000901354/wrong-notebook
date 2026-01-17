@@ -66,10 +66,10 @@ export function SettingsDialog() {
     const [loading, setLoading] = useState(false);
     const [showApiKey, setShowApiKey] = useState(false);
     const [config, setConfig] = useState<AppConfig>({ aiProvider: 'gemini' });
-    // OpenAI 多实例状态
+    // OpenAI 多實例狀態
     const [selectedInstanceId, setSelectedInstanceId] = useState<string | undefined>(undefined);
 
-    // AI 连接测试状态
+    // AI 連接測試狀態
     const [testing, setTesting] = useState(false);
     const [testResult, setTestResult] = useState<{
         success: boolean;
@@ -139,22 +139,22 @@ export function SettingsDialog() {
         const instances = config.openai?.instances || [];
         for (const instance of instances) {
             if (!instance.name?.trim()) {
-                return t.settings?.ai?.validationNameRequired || '实例名称不能为空';
+                return t.settings?.ai?.validationNameRequired || '實例名稱不能為空';
             }
             if (!instance.apiKey?.trim()) {
-                return t.settings?.ai?.validationApiKeyRequired || 'API Key 不能为空';
+                return t.settings?.ai?.validationApiKeyRequired || 'API Key 不能為空';
             }
             if (!instance.baseUrl?.trim()) {
-                return t.settings?.ai?.validationBaseUrlRequired || 'Base URL 不能为空';
+                return t.settings?.ai?.validationBaseUrlRequired || 'Base URL 不能為空';
             }
             if (!instance.model?.trim()) {
-                return t.settings?.ai?.validationModelRequired || '模型名称不能为空';
+                return t.settings?.ai?.validationModelRequired || '模型名稱不能為空';
             }
         }
         return null;
     };
 
-    // 验证 Azure OpenAI 必填字段
+    // 驗證 Azure OpenAI 必填欄位
     const validateAzureConfig = (): string | null => {
         if (config.aiProvider !== 'azure') return null;
         if (!config.azure?.endpoint?.trim()) {
@@ -170,14 +170,14 @@ export function SettingsDialog() {
     };
 
     const handleSaveSettings = async () => {
-        // 验证 OpenAI 实例必填字段
+        // 驗證 OpenAI 實例必填欄位
         const openaiValidationError = validateOpenAIInstances();
         if (openaiValidationError) {
             alert(openaiValidationError);
             return;
         }
 
-        // 验证 Azure 必填字段
+        // 驗證 Azure 必填欄位
         const azureValidationError = validateAzureConfig();
         if (azureValidationError) {
             alert(azureValidationError);
@@ -188,7 +188,7 @@ export function SettingsDialog() {
         try {
             await apiClient.post("/api/settings", config);
             alert(t.settings?.messages?.saved || "Settings saved");
-            // 保存成功后滚动到顶部，方便关闭对话框
+            // 保存成功後滾動到頂部，方便關閉對話框
             dialogContentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
             frontendLogger.error('[SettingsDialog]', 'Failed to save settings', { error: error instanceof Error ? error.message : String(error) });
@@ -201,7 +201,7 @@ export function SettingsDialog() {
     const handleSaveProfile = async () => {
         setProfileSaving(true);
         try {
-            // 验证密码一致性（如果用户输入了密码）
+            // 驗證密碼一致性（如果用戶輸入了密碼）
             if (profile.password && profile.password !== confirmPassword) {
                 alert(t.settings?.messages?.passwordMismatch || 'Passwords do not match');
                 setProfileSaving(false);
@@ -332,17 +332,16 @@ export function SettingsDialog() {
                 }
             }));
         }
-        // OpenAI 配置更新通过 updateOpenAIInstance 处理
     };
 
-    // 获取当前选中的 OpenAI 实例
+    // OpenAI 配置更新通過 updateOpenAIInstance 處理
     const getSelectedInstance = (): OpenAIInstance | undefined => {
         const instances = config.openai?.instances || [];
         const activeId = selectedInstanceId || config.openai?.activeInstanceId;
         return instances.find(i => i.id === activeId);
     };
 
-    // 更新当前选中的 OpenAI 实例属性
+    // 獲取當前選中的 OpenAI 實例
     const updateOpenAIInstance = (key: keyof OpenAIInstance, value: string) => {
         const instances = config.openai?.instances || [];
         const activeId = selectedInstanceId || config.openai?.activeInstanceId;
@@ -358,7 +357,7 @@ export function SettingsDialog() {
         }));
     };
 
-    // 添加新的 OpenAI 实例
+    // 更新當前選中的 OpenAI 實例屬性
     const addOpenAIInstance = () => {
         const instances = config.openai?.instances || [];
         if (instances.length >= MAX_OPENAI_INSTANCES) return;
@@ -381,7 +380,7 @@ export function SettingsDialog() {
         setSelectedInstanceId(newInstance.id);
     };
 
-    // 删除 OpenAI 实例
+    // 添加新的 OpenAI 實例
     const deleteOpenAIInstance = (instanceId: string) => {
         const instances = config.openai?.instances || [];
         const updatedInstances = instances.filter(i => i.id !== instanceId);
@@ -397,7 +396,7 @@ export function SettingsDialog() {
         setSelectedInstanceId(newActiveId);
     };
 
-    // 切换激活的 OpenAI 实例
+    // 刪除 OpenAI 實例
     const setActiveOpenAIInstance = (instanceId: string) => {
         setSelectedInstanceId(instanceId);
         setConfig(prev => ({
@@ -409,7 +408,7 @@ export function SettingsDialog() {
         }));
     };
 
-    // 同步 selectedInstanceId 与 config
+    // 切換激活的 OpenAI 實例
     useEffect(() => {
         if (config.openai?.activeInstanceId && !selectedInstanceId) {
             setSelectedInstanceId(config.openai.activeInstanceId);
@@ -426,7 +425,7 @@ export function SettingsDialog() {
         }));
     };
 
-    // 测试 AI 连接
+    // 同步 selectedInstanceId 與 config
     const handleTestConnection = async () => {
         setTesting(true);
         setTestResult(null);
@@ -566,7 +565,7 @@ export function SettingsDialog() {
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="zh">中文 (Chinese)</SelectItem>
+                                        <SelectItem value="zh-TW">中文 (Traditional Chinese)</SelectItem>
                                         <SelectItem value="en">English</SelectItem>
                                     </SelectContent>
                                 </Select>
@@ -748,7 +747,7 @@ export function SettingsDialog() {
 
                                 {config.aiProvider === 'openai' && (
                                     <div className="space-y-3 animate-in fade-in slide-in-from-top-2">
-                                        {/* 实例选择器 */}
+                                        {/* 實例選擇器 */}
                                         <div className="space-y-2">
                                             <div className="flex items-center justify-between">
                                                 <Label>{t.settings?.ai?.instances || "Instance"}</Label>

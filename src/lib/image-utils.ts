@@ -1,9 +1,9 @@
 /**
- * 压缩图片文件
- * @param file 原始图片文件
- * @param maxSizeMB 最大文件大小（MB），默认 1MB
- * @param maxWidth 最大宽度，默认 1920px
- * @param quality 压缩质量 0-1，默认 0.8
+ * 壓縮圖片文件
+ * @param file 原始圖片文件
+ * @param maxSizeMB 最大文件大小（MB），預設 1MB
+ * @param maxWidth 最大寬度，預設 1920px
+ * @param quality 壓縮品質 0-1，預設 0.8
  * @returns 壓縮後的 Base64 字串
  */
 export async function compressImage(
@@ -22,11 +22,11 @@ export async function compressImage(
                 const ctx = canvas.getContext('2d');
 
                 if (!ctx) {
-                    reject(new Error('无法获取 Canvas 上下文'));
+                    reject(new Error('無法獲取 Canvas 上下文'));
                     return;
                 }
 
-                // 计算新的尺寸（保持宽高比）
+                // 計算新的尺寸（保持寬高比）
                 let width = img.width;
                 let height = img.height;
 
@@ -38,23 +38,23 @@ export async function compressImage(
                 canvas.width = width;
                 canvas.height = height;
 
-                // 绘制图片
+                // 繪製圖片
                 ctx.drawImage(img, 0, 0, width, height);
 
                 // 轉換為 Base64，逐步降低品質直到滿足大小要求
                 let currentQuality = quality;
                 let compressed = canvas.toDataURL('image/jpeg', currentQuality);
 
-                // 检查大小（Base64 字符串长度约等于文件大小的 4/3）
+                // 檢查大小（Base64 字串長度約等於文件大小的 4/3）
                 const sizeInMB = (compressed.length * 3) / 4 / 1024 / 1024;
 
-                // 如果还是太大，继续降低质量
+                // 如果還是太大，繼續降低品質
                 while (sizeInMB > maxSizeMB && currentQuality > 0.1) {
                     currentQuality -= 0.1;
                     compressed = canvas.toDataURL('image/jpeg', currentQuality);
                     const newSize = (compressed.length * 3) / 4 / 1024 / 1024;
 
-                    console.log(`压缩质量: ${currentQuality.toFixed(1)}, 大小: ${newSize.toFixed(2)}MB`);
+                    console.log(`壓縮品質: ${currentQuality.toFixed(1)}, 大小: ${newSize.toFixed(2)}MB`);
 
                     if (newSize <= maxSizeMB) break;
                 }
@@ -64,23 +64,23 @@ export async function compressImage(
                 resolve(compressed);
             };
 
-            img.onerror = () => reject(new Error('图片加载失败'));
+            img.onerror = () => reject(new Error('圖片加載失敗'));
             img.src = e.target?.result as string;
         };
 
-        reader.onerror = () => reject(new Error('文件读取失败'));
+        reader.onerror = () => reject(new Error('文件讀取失敗'));
         reader.readAsDataURL(file);
     });
 }
 
 /**
- * 检查并压缩图片（如果需要）
- * @param file 图片文件
- * @returns Base64 字符串
+ * 檢查並壓縮圖片（如果需要）
+ * @param file 圖片文件
+ * @returns Base64 字串
  */
 export async function processImageFile(file: File): Promise<string> {
     const fileSizeMB = file.size / 1024 / 1024;
-    const threshold = 1; // 1MB 阈值
+    const threshold = 1; // 1MB 閾值
 
     console.log(`文件大小: ${fileSizeMB.toFixed(2)}MB`);
 
@@ -88,7 +88,7 @@ export async function processImageFile(file: File): Promise<string> {
         console.log('檔案超過閾值，開始壓縮...');
         return await compressImage(file, threshold);
     } else {
-        console.log('文件大小合适，无需压缩');
+        console.log('文件大小合適，無需壓縮');
         // 直接返回 Base64
         return new Promise((resolve, reject) => {
             const reader = new FileReader();

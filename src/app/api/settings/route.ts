@@ -28,7 +28,7 @@ export async function POST(req: Request) {
             const currentInstances = currentConfig.openai?.instances || [];
             body.openai.instances = body.openai.instances.map((instance: OpenAIInstance) => {
                 if (instance.apiKey === '********') {
-                    // 查找原有实例并保留其 API Key
+                    // 查找原有實例並保留其 API Key
                     const originalInstance = currentInstances.find((i: OpenAIInstance) => i.id === instance.id);
                     return {
                         ...instance,

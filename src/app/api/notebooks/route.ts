@@ -9,7 +9,7 @@ const logger = createLogger('api:notebooks');
 
 /**
  * GET /api/notebooks
- * 获取用户所有错题本（Subjects）
+ * 獲取用戶所有錯題本（Subjects）
  */
 export async function GET() {
     const session = await getServerSession(authOptions);
@@ -136,7 +136,7 @@ export async function POST(req: Request) {
             return badRequest("Notebook name is required");
         }
 
-        // 检查是否已存在同名错题本
+        // 檢查是否已存在同名錯題本
         const existing = await prisma.subject.findUnique({
             where: {
                 name_userId: {

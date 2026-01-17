@@ -1,6 +1,6 @@
 /**
- * 知识点标签 API
- * GET /api/tags - 获取标签树
+ * 知識點標籤 API
+ * GET /api/tags - 獲取標籤樹
  * POST /api/tags - 創建自定義標籤
  */
 
@@ -21,7 +21,7 @@ interface TagTreeNode {
 }
 
 /**
- * 构建标签树
+ * 構建標籤樹
  */
 function buildTagTree(tags: any[]): TagTreeNode[] {
     const tagMap = new Map<string, TagTreeNode>();
@@ -38,7 +38,7 @@ function buildTagTree(tags: any[]): TagTreeNode[] {
         });
     }
 
-    // 第二遍：建立父子关系
+    // 第二遍：建立父子關係
     for (const tag of tags) {
         const node = tagMap.get(tag.id)!;
         if (tag.parentId && tagMap.has(tag.parentId)) {
@@ -54,8 +54,8 @@ function buildTagTree(tags: any[]): TagTreeNode[] {
 /**
  * GET /api/tags
  * Query params:
- *   - subject: 学科 (必填, e.g., 'math')
- *   - flat: 是否返回扁平列表 (可选, 默认 false 返回树)
+ *   - subject: 學科 (必填, e.g., 'math')
+ *   - flat: 是否返回扁平列表 (可選, 默認 false 返回樹)
  */
 export async function GET(request: NextRequest) {
     try {
@@ -72,7 +72,7 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: 'Subject is required' }, { status: 400 });
         }
 
-        // 获取系统标签 + 当前用户的自定义标签
+        // 獲取系統標籤 + 當前用戶的自定義標籤
         const tags = await prisma.knowledgeTag.findMany({
             where: {
                 subject,
@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
         });
 
         if (flat) {
-            // 返回扁平列表 (仅叶子节点，即实际的知识点)
+            // 返回扁平列表 (僅葉子節點，即實際的知識點)
             const leafTags = tags.filter(t =>
                 !tags.some(other => other.parentId === t.id)
             );
@@ -106,7 +106,7 @@ export async function GET(request: NextRequest) {
             });
         }
 
-        // 返回树状结构
+        // 返回樹狀結構
         const tree = buildTagTree(tags);
         if (tags.length > 0) {
             logger.debug({
@@ -144,8 +144,8 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Name and subject are required' }, { status: 400 });
         }
 
-        // 检查是否已存在 (在同一父节点下)
-        // 注意：Prisma对于可选字段的查询需要特殊处理。如果是null，必须显式指定。
+        // 檢查是否已存在 (在同一父節點下)
+        // 注意：Prisma對於可選字段的查詢需要特殊處理。如果是null，必須顯式指定。
         const existing = await prisma.knowledgeTag.findFirst({
             where: {
                 name: name.trim(),

@@ -43,12 +43,12 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
     const [paperLevelFilter, setPaperLevelFilter] = useState<"all" | "a" | "b" | "other">("all");
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
     const [expandedTags, setExpandedTags] = useState<Set<string>>(new Set());
-    // 分页状态
+    // 分頁狀態
     const [page, setPage] = useState(1);
     const [pageSize] = useState(DEFAULT_PAGE_SIZE);
     const [total, setTotal] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    // 多选模式状态
+    // 多選模式狀態
     const [isSelectMode, setIsSelectMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
     const [isDeleting, setIsDeleting] = useState(false);
@@ -69,7 +69,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
             params.append("tag", selectedTag);
         }
         if (gradeFilter) params.append("gradeSemester", gradeFilter);
-        if (chapterFilter) params.append("chapter", chapterFilter); // 章节筛选
+        if (chapterFilter) params.append("chapter", chapterFilter); // 章節篩選
         if (paperLevelFilter !== "all") params.append("paperLevel", paperLevelFilter);
 
         router.push(`/print-preview?${params.toString()}`);
@@ -82,11 +82,11 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
     const handleFilterChange = ({ gradeSemester, chapter, tag }: any) => {
         if (gradeSemester !== undefined) setGradeFilter(gradeSemester);
         if (chapter !== undefined) setChapterFilter(chapter);
-        // 注意：tag 可能是 undefined（表示清除），需要用 'tag' in obj 来判断是否传入了该参数
-        // 但由于我们的结构是直接解构，这里改用 null 作为清除标识
-        // 实际上 KnowledgeFilter 传入的是 { tag: undefined }，所以 tag 参数确实会被设置
-        // 问题在于 !== undefined 不能区分"未传入"和"传入undefined"
-        // 正确的做法是检查参数对象中是否有该 key
+        // 注意：tag 可能是 undefined（表示清除），需要用 'tag' in obj 來判斷是否傳入了該參數
+        // 但由於我們的結構是直接結構，這裡改用 null 作為清除標識
+        // 實際上 KnowledgeFilter 傳入的是 { tag: undefined }，所以 tag 參數確實會被設置
+        // 問題在於 !== undefined 不能區分"未傳入"和"傳入undefined"
+        // 正確的做法是檢查參數對像中是否有該 key
         setSelectedTag(tag === undefined ? null : tag);
 
         // Clear dependent filters and reset page
@@ -100,7 +100,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
         setPage(1); // 筛选变化时重置页码
     };
 
-    // 使用服务端 items 直接渲染，章节过滤已在 KnowledgeFilter 中通过 tag 实现
+    // 使用服務端 items 直接渲染，章節過濾已在 KnowledgeFilter 中通過 tag 實現
     const filteredItems = items;
 
     const toggleTagsExpanded = (itemId: string, e: React.MouseEvent) => {
@@ -117,7 +117,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
         });
     };
 
-    // 多选模式相关函数
+    // 多選模式相關函數
     const toggleSelectMode = () => {
         setIsSelectMode(!isSelectMode);
         setSelectedIds(new Set());
@@ -161,7 +161,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
         }
     };
 
-    // 追踪筛选条件是否变化（用于判断是否需要重置页码）
+    // 追蹤篩選條件是否變化（用於判斷是否需要重置頁碼）
     const prevFiltersRef = useRef({ search, masteryFilter, timeFilter, selectedTag, subjectId, gradeFilter, chapterFilter, paperLevelFilter });
 
     useEffect(() => {
@@ -180,12 +180,12 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
         prevFiltersRef.current = { search, masteryFilter, timeFilter, selectedTag, subjectId, gradeFilter, chapterFilter, paperLevelFilter };
 
         if (filtersChanged && page !== 1) {
-            // 筛选条件变化且不在第一页，重置到第一页（会再次触发此 effect）
+            // 篩選條件變化且不在第一頁，重置到第一頁（會再次觸發此 effect）
             setPage(1);
             return;
         }
 
-        // 正常请求数据
+        // 正常請求數據
         fetchItems();
     }, [page, search, masteryFilter, timeFilter, selectedTag, subjectId, gradeFilter, chapterFilter, paperLevelFilter]);
 
@@ -205,9 +205,9 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
                 params.append("tag", selectedTag);
             }
             if (gradeFilter) params.append("gradeSemester", gradeFilter);
-            if (chapterFilter) params.append("chapter", chapterFilter); // 章节筛选
+            if (chapterFilter) params.append("chapter", chapterFilter); // 章節篩選
             if (paperLevelFilter !== "all") params.append("paperLevel", paperLevelFilter);
-            // 分页参数
+            // 分頁參數
             params.append("page", page.toString());
             params.append("pageSize", pageSize.toString());
 
@@ -270,14 +270,14 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
                 </DropdownMenu>
                 <Button variant="outline" onClick={handleExportPrint}>
                     <Printer className="mr-2 h-4 w-4" />
-                    {t.notebook?.exportPrint || "导出打印"}
+                    {t.notebook?.exportPrint || "導出列印"}
                 </Button>
                 <Button
                     variant={isSelectMode ? "secondary" : "outline"}
                     onClick={toggleSelectMode}
                 >
                     <ListChecks className="mr-2 h-4 w-4" />
-                    {isSelectMode ? (t.notebook?.cancelSelect || "取消") : (t.notebook?.selectMode || "多选")}
+                    {isSelectMode ? (t.notebook?.cancelSelect || "取消") : (t.notebook?.selectMode || "多選")}
                 </Button>
             </div>
 
@@ -337,7 +337,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {filteredItems.map((item) => {
-                    // 优先使用 tags 关联，回退到 knowledgePoints
+                    // 優先使用 tags 關聯，回退到 knowledgePoints
                     let tags: string[] = [];
                     if ((item as any).tags && (item as any).tags.length > 0) {
                         tags = (item as any).tags.map((t: any) => t.name);
@@ -350,7 +350,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
                     }
                     return (
                         <div key={item.id} className="relative">
-                            {/* 选择模式下的复选框 */}
+                            {/* 選擇模式下的複選框 */}
                             {isSelectMode && (
                                 <div
                                     className="absolute top-2 left-2 z-10"
@@ -436,7 +436,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
                 })}
             </div>
 
-            {/* 分页器 */}
+            {/* 分頁器 */}
             <Pagination
                 page={page}
                 totalPages={totalPages}
@@ -445,7 +445,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
                 onPageChange={setPage}
             />
 
-            {/* 多选模式底部操作栏 */}
+            {/* 多選模式底部操作欄 */}
             {isSelectMode && (
                 <div className="fixed bottom-0 left-0 right-0 bg-background border-t shadow-lg p-4 z-50">
                     <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
@@ -466,7 +466,7 @@ export function ErrorList({ subjectId, subjectName }: ErrorListProps = {}) {
                                 disabled={selectedIds.size === 0 || isDeleting}
                             >
                                 <Trash2 className="mr-2 h-4 w-4" />
-                                {t.notebook?.deleteSelected || "删除选中"}
+                                {t.notebook?.deleteSelected || "刪除選中"}
                             </Button>
                         </div>
                     </div>

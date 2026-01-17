@@ -5,16 +5,16 @@ import { z } from 'zod';
  * Ensures type safety and business rule compliance
  */
 export const ParsedQuestionSchema = z.object({
-    questionText: z.string().min(1, "题目文本不能为空"),
-    answerText: z.string().min(1, "答案不能为空"),
-    analysis: z.string().min(1, "解析不能为空"),
+    questionText: z.string().min(1, "題目文本不能為空"),
+    answerText: z.string().min(1, "答案不能為空"),
+    analysis: z.string().min(1, "解析不能為空"),
     subject: z.enum([
         "數學", "物理", "化學", "生物",
         "英語", "國文", "歷史", "地理",
         "公民", "其他"
-    ]).describe("题目所属学科"),
-    knowledgePoints: z.array(z.string()).max(5, "知识点最多 5 个"),
-    requiresImage: z.boolean().optional().default(false), // 题目是否依赖图片（如几何题）
+    ]).describe("題目所屬學科"),
+    knowledgePoints: z.array(z.string()).max(5, "知識點最多 5 個"),
+    requiresImage: z.boolean().optional().default(false), // 題目是否依賴圖片（如幾何題）
 });
 
 /**

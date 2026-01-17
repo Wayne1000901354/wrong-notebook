@@ -22,12 +22,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "AI智能错题本",
-  description: "基于AI的智能错题管理系统，帮助学生高效整理、分析和复习错题",
+  title: "AI智能錯題本",
+  description: "基於AI的智能錯題管理系統，幫助學生高效整理、分析和複習錯題",
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: '智能错题本',
+    title: '智能錯題本',
   },
   formatDetection: {
     telephone: false,

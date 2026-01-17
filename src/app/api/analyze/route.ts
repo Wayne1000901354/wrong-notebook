@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
     const session = await getServerSession(authOptions);
 
-    // 认证检查
+    // 認證檢查
     if (!session) {
         logger.warn('Unauthorized access attempt');
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -46,13 +46,13 @@ export async function POST(req: Request) {
             }
         }
 
-        // 先获取用户年级信息，用于动态生成 AI prompt 中的标签列表
+        // 先獲取用戶年級信息，用於動態生成 AI prompt 中的標籤列表
         let userGrade: 7 | 8 | 9 | 10 | 11 | 12 | null = null;
         let subjectName: 'math' | 'physics' | 'chemistry' | 'biology' | 'english' | 'chinese' | 'history' | 'geography' | 'politics' | null = null;
 
         if (session?.user?.email) {
             try {
-                // 获取用户信息
+                // 獲取用戶信息
                 const user = await prisma.user.findUnique({
                     where: { email: session.user.email },
                     select: { educationStage: true, enrollmentYear: true }
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
                     logger.debug({ userGrade }, 'Calculated user grade');
                 }
 
-                // 获取错题本信息以推断学科
+                // 獲取錯題本信息以推斷學科
                 if (subjectId) {
                     const subject = await prisma.subject.findUnique({
                         where: { id: subjectId },
@@ -77,12 +77,12 @@ export async function POST(req: Request) {
                 }
             } catch (error) {
                 logger.error({ error }, 'Error fetching user/subject info');
-                // 继续执行，不传递年级参数（会返回所有年级的标签）
+                // 繼續執行，不傳遞年級參數（會返回所有年級的標籤）
             }
         }
 
 
-        // 将内部科目名称转换为中文科目名称
+        // 將內部科目名稱轉換為中文科目名稱
         const subjectNameMapping: Record<string, string> = {
             'math': '數學',
             'physics': '物理',
@@ -107,7 +107,7 @@ export async function POST(req: Request) {
             isArray: Array.isArray(analysisResult.knowledgePoints)
         }, 'AI returned knowledge points');
 
-        // AI 现在从数据库获取标签列表，返回的标签已经是标准化的，不需要额外处理
+        // AI 現在從數據庫獲取標籤列表，返回的標籤已經是標準化的，不需要額外處理
         if (!analysisResult.knowledgePoints || analysisResult.knowledgePoints.length === 0) {
             logger.warn('Knowledge points is empty or null');
         }
@@ -121,10 +121,10 @@ export async function POST(req: Request) {
             stack: error.stack
         }, 'Analysis error occurred');
 
-        // 返回具体的错误类型，便于前端显示详细提示
+        // 返回具體的錯誤類型，便於前端顯示詳細提示
         let errorMessage = error.message || "Failed to analyze image";
 
-        // 识别特定错误类型
+        // 識別特定錯誤類型
         if (error.message && (
             error.message === 'AI_CONNECTION_FAILED' ||
             error.message === 'AI_RESPONSE_ERROR' ||
@@ -136,14 +136,14 @@ export async function POST(req: Request) {
             error.message === 'AI_SERVICE_UNAVAILABLE' ||
             error.message === 'AI_UNKNOWN_ERROR'
         )) {
-            // 直接传递 AI Provider 定义的错误类型 (如果是 AI_AUTH_ERROR，提取出来)
+            // 直接傳遞 AI Provider 定義的錯誤類型 (如果是 AI_AUTH_ERROR，提取出來)
             if (error.message.includes('AI_AUTH_ERROR')) {
                 errorMessage = 'AI_AUTH_ERROR';
             } else {
                 errorMessage = error.message;
             }
         } else if (error.message?.includes('Zod') || error.message?.includes('validate')) {
-            // Zod 验证错误
+            // Zod 驗證錯誤
             errorMessage = 'AI_RESPONSE_ERROR';
         }
 

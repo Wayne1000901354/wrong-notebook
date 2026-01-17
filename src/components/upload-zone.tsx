@@ -27,11 +27,11 @@ export function UploadZone({ onImageSelect, isAnalyzing }: UploadZoneProps) {
     const { t } = useLanguage();
     const [isScreenshotting, setIsScreenshotting] = useState(false);
     const [isClient, setIsClient] = useState(false);
-    // 确保只在客户端渲染屏幕截图功能
+    // 確保只在客戶端渲染螢幕截圖功能
     useEffect(() => {
         setIsClient(true);
 
-        // 请求通知权限
+        // 請求通知權限
         if ('Notification' in window && Notification.permission === 'default') {
             Notification.requestPermission();
         }
@@ -41,7 +41,7 @@ export function UploadZone({ onImageSelect, isAnalyzing }: UploadZoneProps) {
         (acceptedFiles: File[]) => {
             const file = acceptedFiles[0];
             if (file) {
-                // 直接传递 File 对象，让父组件处理压缩
+                // 直接傳遞 File 對象，讓父組件處理壓縮
                 onImageSelect(file);
             }
         },
@@ -56,14 +56,14 @@ export function UploadZone({ onImageSelect, isAnalyzing }: UploadZoneProps) {
         maxFiles: 1,
         disabled: isAnalyzing,
     });
-    // 检查是否支持屏幕截图
+    // 檢查是否支持螢幕截圖
     const isScreenshotSupported = () => {
         return isClient &&
             typeof navigator !== 'undefined' &&
             'mediaDevices' in navigator &&
             'getDisplayMedia' in navigator.mediaDevices;
     };
-    // 屏幕截图功能
+    // 螢幕截圖功能
     const handleScreenshot = async () => {
         if (!isScreenshotSupported()) {
             alert(t.upload.screenshotNotSupported);
@@ -73,20 +73,20 @@ export function UploadZone({ onImageSelect, isAnalyzing }: UploadZoneProps) {
         setIsScreenshotting(true);
 
         try {
-            // 创建 CaptureController 来控制焦点行为
+            // 創建 CaptureController 來控制焦點行為
             let controller;
             if ('CaptureController' in window) {
                 controller = new window.CaptureController();
             }
 
-            // 请求屏幕共享权限，优先当前标签页
+            // 請求螢幕共享權限，優先當前標籤頁
             const displayMediaOptions: DisplayMediaStreamOptions & {
                 preferCurrentTab?: boolean;
                 controller?: any;
             } = {
                 video: true,
                 audio: false,
-                preferCurrentTab: false,  // 优先显示"此标签页"选项
+                preferCurrentTab: false,  // 優先顯示"此標籤頁"選項
             };
 
             if (controller) {
@@ -95,29 +95,29 @@ export function UploadZone({ onImageSelect, isAnalyzing }: UploadZoneProps) {
 
             const stream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
 
-            // 获取视频轨道并检查捕获类型
+            // 獲取視頻軌道並檢查捕獲類型
             const [videoTrack] = stream.getVideoTracks();
             const settings = videoTrack.getSettings();
-            const displaySurface = (settings as any).displaySurface;  // 'browser' 表示标签页
+            const displaySurface = (settings as any).displaySurface;  // 'browser' 表示標籤頁
 
-            // 如果是标签页或窗口，设置不切换焦点
+            // 如果是標籤頁或窗口，設置不切換焦點
             if (controller && (displaySurface === 'browser' || displaySurface === 'window')) {
                 try {
-                    controller.setFocusBehavior('no-focus-change');  // 关键：不切换焦点到选中标签页
-                    console.log('✅ 已设置不切换焦点行为');
+                    controller.setFocusBehavior('no-focus-change');  // 關鍵：不切換焦點到選中標籤頁
+                    console.log('✅ 已設置不切換焦點行為');
                 } catch (e) {
-                    console.warn('⚠️ 无法设置焦点行为:', e);
+                    console.warn('⚠️ 無法設置焦點行為:', e);
                 }
             }
 
-            // 创建视频元素
+            // 創建視頻元素
             const video = document.createElement('video');
             video.srcObject = stream;
             video.muted = true;
             video.autoplay = true;
             video.playsInline = true;
 
-            // 等待视频准备并播放
+            // 等待視頻準備並播放
             await new Promise<void>((resolve, reject) => {
                 video.onloadedmetadata = () => {
                     video.play().then(() => {
@@ -127,40 +127,40 @@ export function UploadZone({ onImageSelect, isAnalyzing }: UploadZoneProps) {
                 video.onerror = reject;
             });
 
-            // 等待一帧渲染（确保稳定）
+            // 等待一幀渲染（確保穩定）
             await new Promise(resolve => setTimeout(resolve, 500));
 
-            // 检查视频尺寸
+            // 檢查視頻尺寸
             if (video.videoWidth === 0 || video.videoHeight === 0) {
-                throw new Error('视频没有有效尺寸');
+                throw new Error('視頻沒有有效尺寸');
             }
 
-            // 创建canvas并捕获
+            // 創建canvas並捕獲
             const canvas = document.createElement('canvas');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
 
             const ctx = canvas.getContext('2d');
             if (!ctx) {
-                throw new Error('无法获取canvas上下文');
+                throw new Error('無法獲取canvas上下文');
             }
 
-            // 绘制视频帧
+            // 繪製視頻幀
             ctx.drawImage(video, 0, 0);
 
-            // 停止屏幕共享
+            // 停止螢幕共享
             stream.getTracks().forEach(track => track.stop());
 
-            // 转换为blob并创建文件
+            // 轉換為blob並創建文件
             canvas.toBlob((blob) => {
                 if (blob) {
                     const file = new File([blob], `screenshot-${Date.now()}.png`, {
                         type: 'image/png'
                     });
                     onImageSelect(file);
-                    console.log('✅ 截图完成，当前页面未跳转');
+                    console.log('✅ 截圖完成，當前頁面未跳轉');
                 } else {
-                    alert('截图转换失败');
+                    alert('截圖轉換失敗');
                 }
             }, 'image/png', 1.0);
 
@@ -206,7 +206,7 @@ export function UploadZone({ onImageSelect, isAnalyzing }: UploadZoneProps) {
                     </div>
                 </CardContent>
             </Card>
-            {/* 屏幕截图按钮 - 只在客户端渲染 */}
+            {/* 螢幕截圖按鈕 - 只在客戶端渲染 */}
             {isScreenshotSupported() && (
                 <div className="flex flex-col items-center gap-2">
                     <Button

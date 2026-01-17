@@ -25,7 +25,7 @@ interface LogOptions {
   sendToBackend?: boolean; // Whether to send this log to backend (default: true for info/warn/error)
 }
 
-/** 默认刷新延迟（毫秒） */
+/** 默認刷新延遲（毫秒） */
 const FLUSH_DELAY_MS = 1000;
 
 /** 緩衝區最大條目數，超過自動重新整理 */
@@ -53,13 +53,13 @@ class FrontendLogger {
 
     this.buffer.push(entry);
 
-    // 如果缓冲区已满，立即刷新
+    // 如果緩衝區已滿，立即刷新
     if (this.buffer.length >= MAX_BUFFER_SIZE) {
       this.flush();
       return;
     }
 
-    // 否则，安排延迟刷新
+    // 否則，安排延遲刷新
     this.scheduleFlush();
   }
 
@@ -81,7 +81,7 @@ class FrontendLogger {
     // 如果緩衝區為空，直接返回
     if (this.buffer.length === 0) return;
 
-    // 取出所有日志并清空缓冲区
+    // 取出所有日誌並清空緩衝區
     const logs = [...this.buffer];
     this.buffer = [];
 

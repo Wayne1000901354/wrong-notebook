@@ -80,7 +80,7 @@ export const MATH_CURRICULUM: Record<string, Array<{ chapter: string; sections: 
         },
         {
             chapter: '解決問題', sections: [
-                { section: '兩步驟計算', tags: ['含有乘除法的两步驟計算應用題'] },
+                { section: '兩步驟計算', tags: ['含有乘除法的兩步驟計算應用題'] },
             ]
         },
         {

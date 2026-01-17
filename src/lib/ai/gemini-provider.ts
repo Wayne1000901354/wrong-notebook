@@ -21,8 +21,8 @@ export class GeminiProvider implements AIService {
             throw new Error("AI_AUTH_ERROR: GOOGLE_API_KEY is required for Gemini provider");
         }
 
-        // 使用 httpOptions.baseUrl 来配置自定义 API 地址，避免全局 setDefaultBaseUrls 的竞态条件
-        // 参考：@google/genai 的 GoogleGenAIOptions.httpOptions.baseUrl
+        // 使用 httpOptions.baseUrl 來配置自定義 API 地址，避免全局 setDefaultBaseUrls 的競態條件
+        // 參考：@google/genai 的 GoogleGenAIOptions.httpOptions.baseUrl
         this.ai = new GoogleGenAI({
             apiKey,
             httpOptions: baseUrl ? {
@@ -148,12 +148,12 @@ export class GeminiProvider implements AIService {
     async analyzeImage(imageBase64: string, mimeType: string = "image/jpeg", language: 'zh' | 'en' = 'zh', grade?: 7 | 8 | 9 | 10 | 11 | 12 | null, subject?: string | null): Promise<ParsedQuestion> {
         const config = getAppConfig();
 
-        // 从数据库获取各学科标签
-        const prefetchedMathTags = (subject === '数学' || !subject) ? await getMathTagsFromDB(grade || null) : [];
+        // 從資料庫獲取各學科標籤
+        const prefetchedMathTags = (subject === '數學' || !subject) ? await getMathTagsFromDB(grade || null) : [];
         const prefetchedPhysicsTags = (subject === '物理' || !subject) ? await getTagsFromDB('physics') : [];
-        const prefetchedChemistryTags = (subject === '化学' || !subject) ? await getTagsFromDB('chemistry') : [];
+        const prefetchedChemistryTags = (subject === '化學' || !subject) ? await getTagsFromDB('chemistry') : [];
         const prefetchedBiologyTags = (subject === '生物' || !subject) ? await getTagsFromDB('biology') : [];
-        const prefetchedEnglishTags = (subject === '英语' || !subject) ? await getTagsFromDB('english') : [];
+        const prefetchedEnglishTags = (subject === '英語' || !subject) ? await getTagsFromDB('english') : [];
 
         const prompt = generateAnalyzePrompt(language, grade, subject, {
             customTemplate: config.prompts?.analyze,
@@ -176,7 +176,7 @@ export class GeminiProvider implements AIService {
         logger.box('📝 Full Prompt', prompt);
 
         try {
-            // 构建请求参数（用于日志显示）
+            // 構建請求參數（用於日誌顯示）
             const requestParamsForLog = {
                 model: this.modelName,
                 contents: [
@@ -192,7 +192,7 @@ export class GeminiProvider implements AIService {
                 ]
             };
 
-            logger.box('📤 API Request (发送给 AI 的原始请求)', JSON.stringify(requestParamsForLog, null, 2));
+            logger.box('📤 API Request (發送給 AI 的原始請求)', JSON.stringify(requestParamsForLog, null, 2));
 
             const response = await this.retryOperation(() => this.ai.models.generateContent({
                 model: this.modelName,
@@ -291,10 +291,10 @@ export class GeminiProvider implements AIService {
         logger.debug({ prompt }, 'Full prompt');
 
         try {
-            // 根据是否有图片构建不同的请求内容
+            // 根據是否有圖片構建不同的請求內容
             let contents: any;
             if (imageBase64) {
-                // 移除 data:image/xxx;base64, 前缀（如果存在）
+                // 移除 data:image/xxx;base64, 前綴（如果存在）
                 const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '');
                 contents = [
                     { text: prompt },
@@ -315,7 +315,7 @@ export class GeminiProvider implements AIService {
 
             if (!text) throw new Error("Empty response from AI");
 
-            // 解析响应
+            // 解析響應
             const answerText = this.extractTag(text, "answer_text") || "";
             const analysis = this.extractTag(text, "analysis") || "";
             const knowledgePointsRaw = this.extractTag(text, "knowledge_points") || "";
@@ -339,25 +339,25 @@ export class GeminiProvider implements AIService {
             if (msg.includes('fetch failed') || msg.includes('network') || msg.includes('connect')) {
                 throw new Error("AI_CONNECTION_FAILED");
             }
-            // 超时错误 (包括 408 Request Timeout)
+            // 超時錯誤 (包括 408 Request Timeout)
             if (msg.includes('timeout') || msg.includes('timed out') || msg.includes('aborted') || msg.includes('408')) {
                 throw new Error("AI_TIMEOUT_ERROR");
             }
-            // 配额/频率限制错误
-            if (msg.includes('quota') || msg.includes('额度') || msg.includes('rate limit') || msg.includes('429') || msg.includes('too many')) {
+            // 配額/頻率限制錯誤
+            if (msg.includes('quota') || msg.includes('額度') || msg.includes('rate limit') || msg.includes('429') || msg.includes('too many')) {
                 throw new Error("AI_QUOTA_EXCEEDED");
             }
-            // 权限/403 错误
+            // 權限/403 錯誤
             if (msg.includes('403') || msg.includes('forbidden') || msg.includes('permission')) {
                 throw new Error("AI_PERMISSION_DENIED");
             }
-            // 资源不存在/404 错误
+            // 資源不存在/404 錯誤
             if (msg.includes('404') || msg.includes('not found') || msg.includes('does not exist')) {
                 throw new Error("AI_NOT_FOUND");
             }
-            // 服务器错误 (500/502/503/504)
+            // 伺服器錯誤 (500/502/503/504)
             if (msg.includes('500') || msg.includes('502') || msg.includes('503') || msg.includes('504') ||
-                msg.includes('无可用') || msg.includes('overloaded') || msg.includes('unavailable')) {
+                msg.includes('無可用') || msg.includes('overloaded') || msg.includes('unavailable')) {
                 throw new Error("AI_SERVICE_UNAVAILABLE");
             }
             if (msg.includes('invalid json') || msg.includes('parse')) {

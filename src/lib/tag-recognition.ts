@@ -24,7 +24,7 @@ export async function findParentTagIdForGrade(gradeSemester: string | null | und
     if (exactMatch) return exactMatch.id;
 
     // 2. Try Mapped Match (Text Heuristics)
-    // Convert input specifically to match the likely seed data format (e.g. "七年级上")
+    // Convert input specifically to match the likely seed data format (e.g. "七年級上")
     // Input might be "初一，上期", "Grade 7, 1st Semester", etc.
 
     // Helper map for Chinese Grade names
@@ -65,14 +65,14 @@ export async function findParentTagIdForGrade(gradeSemester: string | null | und
     }
 
     // Construct candidates
-    // Candidate 1: Grade + Semester (e.g. "七年级上")
-    // Candidate 2: Grade (e.g. "一年级", or "高三")
+    // Candidate 1: Grade + Semester (e.g. "七年級上")
+    // Candidate 2: Grade (e.g. "一年級", or "高三")
 
     const candidates = [];
     if (targetSemester) {
-        candidates.push(`${targetGradePrefix}${targetSemester}`); // e.g. "七年级上"
+        candidates.push(`${targetGradePrefix}${targetSemester}`); // e.g. "七年級上"
     }
-    candidates.push(targetGradePrefix); // e.g. "一年级", "高三"
+    candidates.push(targetGradePrefix); // e.g. "一年級", "高三"
 
     for (const candidate of candidates) {
         const match = rootTags.find(t => t.name === candidate);

@@ -298,7 +298,7 @@ export default function TagsPage() {
                                         </div>
                                     ) : tags.filter(t => t.isSystem).length === 0 ? (
                                         <div className="text-center py-4 text-muted-foreground">
-                                            {t.tags?.stats?.empty || "暂无系统标签"}
+                                            {t.tags?.stats?.empty || "暫無系統標籤"}
                                         </div>
                                     ) : (
                                         tags.filter(t => t.isSystem).map(node => renderTreeNode(node))
@@ -337,10 +337,10 @@ export default function TagsPage() {
 
                             <Select value={newTagGrade} onValueChange={setNewTagGrade}>
                                 <SelectTrigger className="w-[140px]">
-                                    <SelectValue placeholder={t.tags?.custom?.selectGrade || "选择年级"} />
+                                    <SelectValue placeholder={t.tags?.custom?.selectGrade || "選擇年級"} />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="none">{t.tags?.custom?.noGrade || "不选择年级"}</SelectItem>
+                                    <SelectItem value="none">{t.tags?.custom?.noGrade || "不選擇年級"}</SelectItem>
                                     {gradeOptions.map((grade) => (
                                         <SelectItem key={grade.id} value={grade.id}>{grade.name}</SelectItem>
                                     ))}

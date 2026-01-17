@@ -28,7 +28,7 @@ export async function POST(req: Request) {
             paperLevel,
         } = body;
 
-        // 记录请求参数（不记录完整图片数据）
+        // 記錄請求參數（不記錄完整圖片數據）
         logger.debug({
             hasQuestionText: !!questionText,
             questionTextLength: questionText?.length || 0,
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
             paperLevel,
         }, 'Request parameters received');
 
-        // 查找用户
+        // 查找用戶
         let user;
         if (session?.user?.email) {
             user = await prisma.user.findUnique({
@@ -58,9 +58,9 @@ export async function POST(req: Request) {
             return unauthorized("No user found in DB");
         }
 
-        // ========== 去重检查：2秒内同一用户提交相同题目视为重复 ==========
+        // ========== 去重檢查：2秒內同一用戶提交相同題目視為重複 ==========
         const DEDUP_WINDOW_MS = 2000; // 2秒去重窗口
-        const questionTextPrefix = questionText?.substring(0, 100) || ''; // 取前100字符比较
+        const questionTextPrefix = questionText?.substring(0, 100) || ''; // 取前100字符比較
 
         if (questionTextPrefix) {
             const recentDuplicate = await prisma.errorItem.findFirst({
@@ -87,28 +87,28 @@ export async function POST(req: Request) {
 
                 return NextResponse.json({
                     ...recentDuplicate,
-                    duplicate: true, // 标记为重复提交
+                    duplicate: true, // 標記為重複提交
                 }, { status: 200 }); // 返回 200 而非 201
             }
         }
 
-        // 计算年级
+        // 計算年級
         let finalGradeSemester = gradeSemester;
         if (!finalGradeSemester && user.educationStage && user.enrollmentYear) {
             finalGradeSemester = calculateGrade(user.educationStage, user.enrollmentYear);
             logger.debug({ finalGradeSemester, educationStage: user.educationStage, enrollmentYear: user.enrollmentYear }, 'Grade calculated');
         }
 
-        // 处理知识点标签
+        // 處理由知識點標籤
         const tagNames: string[] = Array.isArray(knowledgePoints) ? knowledgePoints : [];
         const tagConnections: { id: string }[] = [];
 
-        // 推断学科
+        // 推斷學科
         const subject = await prisma.subject.findUnique({ where: { id: subjectId || '' } });
         const subjectKey = inferSubjectFromName(subject?.name ?? null) || 'other';
         logger.debug({ subjectId, subjectName: subject?.name, subjectKey }, 'Subject inferred');
 
-        // 处理每个标签
+        // 處理每個標籤
         for (const tagName of tagNames) {
             try {
                 let tag = await prisma.knowledgeTag.findFirst({

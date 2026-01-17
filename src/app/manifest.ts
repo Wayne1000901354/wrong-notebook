@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: '智能错题本',
-        short_name: '错题本',
-        description: 'AI 驱动的智能错题管理系统，帮助学生高效整理、分析和复习错题',
+        name: '智能錯題本',
+        short_name: '錯題本',
+        description: 'AI 驅動的智能錯題管理系統，幫助學生高效整理、分析和複習錯題',
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',

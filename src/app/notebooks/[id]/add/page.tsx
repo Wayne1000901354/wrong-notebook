@@ -207,7 +207,7 @@ export default function AddErrorPage() {
                 } else if (error?.message) {
                     // Fallback：检查 error.message（用于非 API 错误）
                     if (error.message.includes('fetch') || error.message.includes('network')) {
-                        errorMessage = t.errors?.AI_CONNECTION_FAILED || '网络连接失败';
+                        errorMessage = t.errors?.AI_CONNECTION_FAILED || '網路連接失敗';
                     } else if (typeof error.data === 'string') {
                         // 如果 data 是字符串（例如 HTML 错误页），可能包含提示
                         frontendLogger.info('[AddError]', 'Raw error data', {

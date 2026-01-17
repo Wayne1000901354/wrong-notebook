@@ -223,7 +223,7 @@ function HomeContent() {
                 } else if (error?.message) {
                     // Fallback：检查 error.message（用于非 API 错误）
                     if (error.message.includes('fetch') || error.message.includes('network')) {
-                        errorMessage = t.errors?.AI_CONNECTION_FAILED || '网络连接失败';
+                        errorMessage = t.errors?.AI_CONNECTION_FAILED || '網路連接失敗';
                     } else if (typeof error.data === 'string') {
                         frontendLogger.info('[HomeError]', 'Raw error data', {
                             errorDataPreview: error.data.substring(0, 100)

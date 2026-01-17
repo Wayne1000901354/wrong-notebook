@@ -27,8 +27,8 @@ interface ErrorItemDetail {
     questionText: string;
     answerText: string;
     analysis: string;
-    knowledgePoints: string; // 保留兼容旧数据
-    tags: KnowledgeTag[]; // 新的标签关联
+    knowledgePoints: string; // 保留兼容舊數據
+    tags: KnowledgeTag[]; // 新的標籤關聯
     masteryLevel: number;
     originalImageUrl: string;
     userNotes: string | null;
@@ -133,11 +133,11 @@ export default function ErrorDetailPage() {
 
     const startEditingTags = () => {
         if (item) {
-            // 优先使用新的 tags 关联
+            // 優先使用新的 tags 關聯
             if (item.tags && item.tags.length > 0) {
                 setTagsInput(item.tags.map(t => t.name));
             } else if (item.knowledgePoints) {
-                // 回退到旧的 knowledgePoints 字段
+                // 回退到舊的 knowledgePoints 欄位
                 try {
                     const tags = JSON.parse(item.knowledgePoints);
                     setTagsInput(tags);
@@ -153,9 +153,9 @@ export default function ErrorDetailPage() {
 
     const saveTagsHandler = async () => {
         try {
-            // 直接传递标签名称数组，后端会处理关联
+            // 直接傳遞標籤名稱數組，後端會處理關聯
             await apiClient.put(`/api/error-items/${item?.id}`, {
-                knowledgePoints: tagsInput, // 后端接收数组
+                knowledgePoints: tagsInput, // 後端接收數組
             });
 
             setIsEditingTags(false);
@@ -303,7 +303,7 @@ export default function ErrorDetailPage() {
     if (loading) return <div className="p-8 text-center">{t.common.loading}</div>;
     if (!item) return <div className="p-8 text-center">{t.detail.notFound || "Item not found"}</div>;
 
-    // 优先从 tags 关联获取，回退到 knowledgePoints
+    // 優先從 tags 關聯獲取，回退到 knowledgePoints
     let tags: string[] = [];
     if (item.tags && item.tags.length > 0) {
         tags = item.tags.map(t => t.name);
@@ -480,7 +480,7 @@ export default function ErrorDetailPage() {
                                     )}
                                 </div>
 
-                                {/* 年级/学期 和 试卷等级 */}
+                                {/* 年級/學期 和 試卷等級 */}
                                 <div className="space-y-2 pt-4 border-t">
                                     <div className="flex justify-between items-center">
                                         <h4 className="text-sm font-semibold">

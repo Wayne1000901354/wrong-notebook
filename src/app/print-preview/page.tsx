@@ -27,7 +27,7 @@ function PrintPreviewContent() {
     const fetchItems = async () => {
         try {
             const params = new URLSearchParams(searchParams.toString());
-            // 打印预览需要所有符合条件的数据，设置较大的 pageSize
+            // 打印預覽需要所有符合條件的數據，設置較大的 pageSize
             params.set("pageSize", String(PRINT_PREVIEW_PAGE_SIZE));
             const response = await apiClient.get<PaginatedResponse<ErrorItem>>(`/api/error-items/list?${params.toString()}`);
             setItems(response.items);
@@ -127,7 +127,7 @@ function PrintPreviewContent() {
             {/* Print Content */}
             <div className="max-w-4xl mx-auto p-8 print:p-0">
                 {items.map((item, index) => {
-                    // 优先使用 tags 关联，回退到 knowledgePoints
+                    // 優先使用 tags 關聯，回退到 knowledgePoints
                     let tags: string[] = [];
                     if (item.tags && item.tags.length > 0) {
                         tags = item.tags.map(t => t.name);

@@ -1,20 +1,20 @@
 /**
- * 分页相关常量配置
+ * 分頁相關常量配置
  */
 
-/** 默认每页显示条数 */
+/** 預設每頁顯示條數 */
 export const DEFAULT_PAGE_SIZE = 18;
 
-/** 每页最大显示条数 */
+/** 每頁最大顯示條數 */
 export const MAX_PAGE_SIZE = 1000;
 
-/** 每页最小显示条数 */
+/** 每頁最小顯示條數 */
 export const MIN_PAGE_SIZE = 1;
 
-/** 分页器最多显示的页码按钮数 */
+/** 分頁器最多顯示的頁碼按鈕數 */
 export const MAX_VISIBLE_PAGES = 5;
 
-/** 打印预览获取所有数据的 pageSize */
+/** 列印預覽獲取所有數據的 pageSize */
 export const PRINT_PREVIEW_PAGE_SIZE = 200;
 
 

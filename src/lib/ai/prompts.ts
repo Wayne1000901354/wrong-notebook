@@ -135,9 +135,9 @@ function replaceVariables(template: string, variables: Record<string, string>): 
 
 /**
  * 獲取指定年級的累進數學標籤
- * 初一(7)：只包含七年級標籤
- * 初二(8)：包含七年級+八年級標籤
- * 初三(9)：包含七年級+八年級+九年級標籤
+ * 國一(7)：只包含七年級標籤
+ * 國二(8)：包含七年級+八年級標籤
+ * 國三(9)：包含七年級+八年級+九年級標籤
  * 高一(10)：只包含高一標籤（不含國中）
  * 高二(11)：包含高一+高二標籤
  * 高三(12)：包含高一+高二+高三標籤
@@ -155,7 +155,7 @@ export function getMathTagsForGrade(
   grade: 7 | 8 | 9 | 10 | 11 | 12 | null,
   prefetchedTags?: string[]
 ): string[] {
-  // 必须使用预获取的数据库标签
+  // 必須使用預獲取的資料庫標籤
   if (prefetchedTags && prefetchedTags.length > 0) {
     return prefetchedTags;
   }

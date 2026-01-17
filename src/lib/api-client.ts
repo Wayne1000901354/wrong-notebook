@@ -1,6 +1,6 @@
 type RequestOptions = RequestInit & {
     params?: Record<string, string>;
-    timeout?: number; // 超时时间（毫秒），默认 60000
+    timeout?: number; // 超時時間（毫秒），預設 60000
 };
 
 export class ApiError extends Error {
@@ -23,7 +23,7 @@ async function request<T>(url: string, options: RequestOptions = {}): Promise<T>
         'Content-Type': 'application/json',
     };
 
-    // 创建 AbortController 用于超时控制
+    // 創建 AbortController 用於超時控制
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 

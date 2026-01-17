@@ -32,7 +32,7 @@ export function ModelSelector({ provider, apiKey, baseUrl, currentModel, onModel
     const [customModel, setCustomModel] = useState(currentModel || '');
     const [useCustom, setUseCustom] = useState(false);
 
-    // 当外部 currentModel 变化时同步更新 customModel（用于实例切换）
+    // 當外部 currentModel 變化時同步更新 customModel（用於實例切換）
     useEffect(() => {
         setCustomModel(currentModel || '');
     }, [currentModel]);

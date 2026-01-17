@@ -1,40 +1,40 @@
-# 日志系统使用指南 (v1.2.0)
+# 日誌系統使用指南 (v1.2.0)
 
-**状态**: ✅ 稳定运行
-**更新时间**: 2025-12-19
+**狀態**: ✅ 穩定運行
+**更新時間**: 2025-12-19
 
-## 📋 目录
+## 📋 目錄
 
 - [概述](#概述)
 - [使用方法](#使用方法)
-- [日志级别](#日志级别)
-- [最佳实践](#最佳实践)
-- [故障排查](#故障排查)
-- [前端日志](#前端日志-frontend-logger)
+- [日誌級別](#日誌級別)
+- [最佳實踐](#最佳實踐)
+- [故障排除](#故障排除)
+- [前端日誌](#前端日誌-frontend-logger)
 
 ---
 
 ## 概述
 
-项目使用**自定义轻量级结构化 logger**，位于 `src/lib/logger.ts`。
+專案使用**自定義輕量級結構化 logger**，位於 `src/lib/logger.ts`。
 
-### 特点
+### 特點
 
-- ✅ 无外部依赖，完全兼容 Next.js Turbopack
-- ✅ 结构化 JSON 日志输出
-- ✅ 支持 `LOG_LEVEL` 环境变量控制
-- ✅ 模块化 child logger
-- ✅ API 与 pino 兼容
+- ✅ 無外部依賴，完全相容 Next.js Turbopack
+- ✅ 結構化 JSON 日誌輸出
+- ✅ 支援 `LOG_LEVEL` 環境變數控制
+- ✅ 模組化 child logger
+- ✅ API 與 pino 相容
 
-### 为什么不使用 pino？
+### 為什麼不使用 pino？
 
-`pino` 使用 `thread-stream` 进行多线程日志传输，这与 Next.js Turbopack 打包机制不兼容。因此我们移除了 `pino` 相关依赖，实现了完全兼容其 API 的轻量级替代方案，确保了开发体验和构建稳定性。
+`pino` 使用 `thread-stream` 進行多執行緒日誌傳輸，這與 Next.js Turbopack 打包機制不相容。因此我們移除了 `pino` 相關依賴，實現了完全相容其 API 的輕量級替代方案，確保了開發體驗和構建穩定性。
 
 ---
 
 ## 使用方法
 
-### 1. 导入 logger
+### 1. 導入 logger
 
 ```typescript
 import { createLogger } from '@/lib/logger';
@@ -42,30 +42,30 @@ import { createLogger } from '@/lib/logger';
 const logger = createLogger('your-module-name');
 ```
 
-### 2. 命名规范
+### 2. 命名規範
 
-| 模块类型 | 命名格式 | 示例 |
+| 模組類型 | 命名格式 | 範例 |
 |---------|---------|------|
-| API 路由 | `api:路径` | `api:analyze`, `api:tags:suggestions` |
-| 库文件 | `模块名` | `auth`, `middleware`, `config` |
-| AI 层 | `ai:子模块` | `ai:openai`, `ai:gemini`, `ai:tag-service` |
+| API 路由 | `api:路徑` | `api:analyze`, `api:tags:suggestions` |
+| 庫文件 | `模組名` | `auth`, `middleware`, `config` |
+| AI 層 | `ai:子模組` | `ai:openai`, `ai:gemini`, `ai:tag-service` |
 
 ### 3. 基本用法
 
 ```typescript
-// 简单消息
+// 簡單消息
 logger.info('Server started');
 
-// 带上下文数据
+// 帶上下文數據
 logger.info({ userId: 123, action: 'login' }, 'User logged in');
 
-// 调试信息
+// 除錯資訊
 logger.debug({ requestBody: data }, 'Processing request');
 
 // 警告
 logger.warn({ config: 'missing' }, 'Using default configuration');
 
-// 错误处理
+// 錯誤處理
 try {
     // ...
 } catch (error) {
@@ -73,27 +73,27 @@ try {
 }
 ```
 
-### 4. 装饰性日志（用于调试）
+### 4. 裝飾性日誌（用於除錯）
 
-用于输出带边框和 Emoji 的美化日志，适合 AI 调用等需要详细追踪的场景：
+用於輸出帶邊框和 Emoji 的美化日誌，適合 AI 調用等需要詳細追蹤的場景：
 
 ```typescript
-// 带边框的标题和内容
+// 帶邊框的標題和內容
 logger.box('🔍 AI Image Analysis Request', {
     imageSize: '413868 bytes',
     mimeType: 'image/jpeg',
     model: 'gpt-4o'
 });
 
-// 输出完整 JSON
+// 輸出完整 JSON
 logger.box('📤 API Request', JSON.stringify(requestParams, null, 2));
 
-// 分隔线
+// 分隔線
 logger.divider();
-logger.divider('=');  // 使用 = 作为分隔符
+logger.divider('=');  // 使用 = 作為分隔符
 ```
 
-**输出效果**（仅开发环境）：
+**輸出效果**（僅開發環境）：
 
 ```
 ================================================================================
@@ -107,82 +107,82 @@ model: gpt-4o
 
 ---
 
-## 日志级别
+## 日誌級別
 
-### 级别定义
+### 級別定義
 
-| 级别 | 数值 | 使用场景 | 示例 |
+| 級別 |數值 | 使用場景 | 範例 |
 |------|-----|---------|------|
-| `trace` | 10 | 最详细的追踪 | 函数入口/出口 |
-| `debug` | 20 | 调试信息 | 请求参数、中间结果 |
-| `info` | 30 | 重要业务事件 | 用户登录、API 请求成功 |
-| `warn` | 40 | 警告但不影响运行 | 配置缺失、弃用功能 |
-| `error` | 50 | 错误和异常 | 数据库连接失败、API 错误 |
-| `fatal` | 60 | 致命错误 | 系统无法启动 |
+| `trace` | 10 | 最詳細的追蹤 | 函數入口/出口 |
+| `debug` | 20 | 除錯資訊 | 請求參數、中間結果 |
+| `info` | 30 | 重要業務事件 | 用戶登入、API 請求成功 |
+| `warn` | 40 | 警告但不影響運行 | 配置缺失、棄用功能 |
+| `error` | 50 | 錯誤和異常 | 資料庫連接失敗、API 錯誤 |
+| `fatal` | 60 | 致命錯誤 | 系統無法啟動 |
 
-### 环境配置
+### 環境配置
 
-在 `.env` 文件中设置：
+在 `.env` 文件中設定：
 
 ```env
-# 开发环境 - 显示所有日志
+# 開發環境 - 顯示所有日誌
 LOG_LEVEL=debug
 
-# 生产环境 - 只显示 info 及以上
+# 生產環境 - 只顯示 info 及以上
 LOG_LEVEL=info
 
-# 静默模式 - 只显示错误
+# 靜默模式 - 只顯示錯誤
 LOG_LEVEL=error
 ```
 
 ---
 
-## 最佳实践
+## 最佳實踐
 
-### 1. 结构化优于字符串拼接
+### 1. 結構化優於字串拼接
 
-❌ **错误**:
+❌ **錯誤**:
 ```typescript
 logger.info(`User ${userId} logged in at ${timestamp}`);
 ```
 
-✅ **正确**:
+✅ **正確**:
 ```typescript
 logger.info({ userId, timestamp }, 'User logged in');
 ```
 
-### 2. 上下文数据与消息分离
+### 2. 上下文數據與消息分離
 
-❌ **错误**:
+❌ **錯誤**:
 ```typescript
 logger.info('Processing request with data: ' + JSON.stringify(data));
 ```
 
-✅ **正确**:
+✅ **正確**:
 ```typescript
 logger.info({ data }, 'Processing request');
 ```
 
-### 3. 错误日志包含完整信息
+### 3. 錯誤日誌包含完整資訊
 
-❌ **错误**:
+❌ **錯誤**:
 ```typescript
 logger.error('Something failed');
 ```
 
-✅ **正确**:
+✅ **正確**:
 ```typescript
 logger.error({ error, context: 'additional info' }, 'Operation failed');
 ```
 
-### 4. 敏感信息脱敏
+### 4. 敏感資訊脫敏
 
-❌ **不要记录**:
+❌ **不要記錄**:
 ```typescript
 logger.info({ password: credentials.password }, 'Login attempt');
 ```
 
-✅ **记录布尔值或长度**:
+✅ **記錄布林值或長度**:
 ```typescript
 logger.info({ 
     email: credentials.email,
@@ -190,14 +190,14 @@ logger.info({
 }, 'Login attempt');
 ```
 
-### 5. 避免记录大对象
+### 5. 避免記錄大物件
 
-❌ **错误**:
+❌ **錯誤**:
 ```typescript
 logger.debug({ hugeObject }, 'Processing');
 ```
 
-✅ **正确**:
+✅ **正確**:
 ```typescript
 logger.debug({
     id: hugeObject.id,
@@ -208,42 +208,42 @@ logger.debug({
 
 ---
 
-## 故障排查
+## 故障排除
 
-### 问题 1: 日志未显示
+### 問題 1: 日誌未顯示
 
-**原因**: `LOG_LEVEL` 设置过高
+**原因**: `LOG_LEVEL` 設定過高
 
-**解决**:
+**解決**:
 ```env
 LOG_LEVEL=debug
 ```
 
-### 问题 2: 找不到 logger 模块
+### 問題 2: 找不到 logger 模組
 
-**原因**: 导入路径错误
+**原因**: 導入路徑錯誤
 
-**解决**: 确保使用正确的导入：
+**解決**: 確保使用正確的導入：
 ```typescript
 import { createLogger } from '@/lib/logger';
 ```
 
-### 问题 3: 生产环境日志过多
+### 問題 3: 生產環境日誌過多
 
-**原因**: `LOG_LEVEL` 未设置或设置为 debug
+**原因**: `LOG_LEVEL` 未設定或設定為 debug
 
-**解决**: 生产环境设置：
+**解決**: 生產環境設定：
 ```env
 LOG_LEVEL=info
 ```
 
 ---
 
-## 输出格式
+## 輸出格式
 
 ### JSON 格式
 
-所有日志输出为 JSON 格式，便于日志聚合平台解析：
+所有日誌輸出為 JSON 格式，便於日誌聚合平台解析：
 
 ```json
 {
@@ -256,20 +256,20 @@ LOG_LEVEL=info
 }
 ```
 
-### 字段说明
+### 欄位說明
 
-| 字段 | 说明 |
+| 欄位 | 說明 |
 |------|------|
-| `level` | 日志级别 (trace/debug/info/warn/error/fatal) |
-| `time` | ISO 格式时间戳 |
-| `env` | 运行环境 (development/production/test) |
-| `module` | 日志模块标识 |
-| `msg` | 日志消息 |
-| `...` | 其他上下文数据 |
+| `level` | 日誌級別 (trace/debug/info/warn/error/fatal) |
+| `time` | ISO 格式時間戳 |
+| `env` | 運行環境 (development/production/test) |
+| `module` | 日誌模組標識 |
+| `msg` | 日誌消息 |
+| `...` | 其他上下文數據 |
 
 ---
 
-## 日志聚合集成
+## 日誌聚合集成
 
 ### ELK Stack
 
@@ -299,19 +299,19 @@ output {
 
 ### DataDog
 
-DataDog Agent 自动识别 JSON 日志，可按 `module` 字段分组，按 `level` 字段过滤和告警。
+DataDog Agent 自動識別 JSON 日誌，可按 `module` 欄位分組，按 `level` 欄位過濾和告警。
 
 ### CloudWatch Logs
 
-AWS CloudWatch Agent 自动解析 JSON 格式，可创建 Metric Filter 和告警。
+AWS CloudWatch Agent 自動解析 JSON 格式，可創建 Metric Filter 和告警。
 
 ---
 
-## 前端日志 (Frontend Logger)
+## 前端日誌 (Frontend Logger)
 
-用于浏览器端日志，自动批量发送到后端。
+用於瀏覽器端日誌，自動批量發送到後端。
 
-### 导入
+### 導入
 
 ```typescript
 import { frontendLogger } from '@/lib/frontend-logger';
@@ -320,40 +320,40 @@ import { frontendLogger } from '@/lib/frontend-logger';
 ### 使用方法
 
 ```typescript
-// 普通日志
+// 普通日誌
 frontendLogger.info('[PageName]', 'Operation completed', { userId: 123 });
 
 // 警告
 frontendLogger.warn('[PageName]', 'Slow response detected', { duration: 5000 });
 
-// 错误
+// 錯誤
 frontendLogger.error('[PageName]', 'Failed to load data', { error: err.message });
 
-// 仅 console 输出，不发送到后端
+// 僅 console 輸出，不發送到後端
 frontendLogger.info('[Debug]', 'Local debug info', {}, { sendToBackend: false });
 ```
 
-### 批量发送机制
+### 批量發送機制
 
-前端日志采用**批量发送**策略，减少网络请求：
+前端日誌採用**批量發送**策略，減少網路請求：
 
-| 触发条件 | 说明 |
+| 觸發條件 | 說明 |
 |---------|------|
-| **时间窗口** | 1 秒内的日志合并为一次请求 |
-| **缓冲区满** | 累计 20 条日志立即发送 |
+| **時間窗口** | 1 秒內的日誌合併為一次請求 |
+| **緩衝區滿** | 累計 20 條日誌立即發送 |
 
-### 强制刷新
+### 強制刷新
 
-页面卸载等场景需立即发送日志：
+頁面卸載等場景需立即發送日誌：
 
 ```typescript
-// 在 beforeunload 事件中调用
+// 在 beforeunload 事件中調用
 frontendLogger.forceFlush();
 ```
 
-### 后端接收
+### 後端接收
 
-日志发送到 `POST /api/logs/frontend`，格式：
+日誌發送到 `POST /api/logs/frontend`，格式：
 
 ```json
 {
@@ -366,9 +366,9 @@ frontendLogger.forceFlush();
 
 ---
 
-**文档更新时间**: 2025-12-19
+**文件更新時間**: 2025-12-19
 
-## 📚 相关文档
+## 📚 相關文件
 
-- [日志迁移报告](./LOGGING_MIGRATION_FINAL_REPORT.md)
-- [项目健康报告](./PROJECT_HEALTH_REPORT.md)
+- [日誌遷移報告](./LOGGING_MIGRATION_FINAL_REPORT.md)
+- [專案健康報告](./PROJECT_HEALTH_REPORT.md)
