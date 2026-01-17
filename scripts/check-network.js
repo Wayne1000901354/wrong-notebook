@@ -1,9 +1,9 @@
 /**
- * 网络连接测试脚本
+ * 網路連線測試腳本
  * 功能：
- * 1. 测试 DNS 解析 (1.1.1.1)。
- * 2. 测试对 Google API (generativelanguage.googleapis.com) 的连通性。
- * 用途：用于排查服务器网络问题，特别是确认是否能连接到境外 AI 服务接口。
+ * 1. 測試 DNS 解析 (1.1.1.1)。
+ * 2. 測試對 Google API (generativelanguage.googleapis.com) 的連通性。
+ * 用途：用於排查伺服器網路問題，特別是確認是否能連接到境外 AI 服務介面。
  */
 const dns = require('dns');
 

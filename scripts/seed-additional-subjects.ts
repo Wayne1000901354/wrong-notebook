@@ -1,6 +1,6 @@
 /**
- * 额外学科（语文、历史、地理、政治）标签导入脚本
- * 仅导入年级结构，以支持自定义标签的年级选择
+ * 額外學科（國文、歷史、地理、公民）標籤導入腳本
+ * 僅導入年級結構，以支持自定義標籤的年級選擇
  * 
  * 使用方法: npx tsx scripts/seed-additional-subjects.ts
  */
@@ -19,17 +19,17 @@ async function seedSubject(
     curriculum: Record<string, any[]>,
     gradeOrder: Record<string, number>
 ) {
-    console.log(`\n📚 处理学科: ${subjectName} (${subjectKey})`);
+    console.log(`\n📚 處理學科: ${subjectName} (${subjectKey})`);
 
-    // 清空现有系统标签
-    console.log(`  🗑️  清空现有系统标签...`);
+    // 清空現有系統標籤
+    console.log(`  🗑️  清空現有系統標籤...`);
     await prisma.knowledgeTag.deleteMany({
         where: { isSystem: true, subject: subjectKey }
     });
 
     let count = 0;
     for (const [gradeSemester, _] of Object.entries(curriculum)) {
-        // 创建年级节点
+        // 創建年級節點
         await prisma.knowledgeTag.create({
             data: {
                 name: gradeSemester,
@@ -41,23 +41,23 @@ async function seedSubject(
         });
         count++;
     }
-    console.log(`  ✅ ${subjectName} 年级节点创建完成: ${count} 个`);
+    console.log(`  ✅ ${subjectName} 年級節點創建完成: ${count} 個`);
 }
 
 async function main() {
-    console.log('🚀 开始导入额外学科标签结构...');
+    console.log('🚀 開始導入額外學科標籤結構...');
 
-    await seedSubject('chinese', '语文', CHINESE_CURRICULUM, CHINESE_GRADE_ORDER);
-    await seedSubject('history', '历史', HISTORY_CURRICULUM, HISTORY_GRADE_ORDER);
+    await seedSubject('chinese', '國文', CHINESE_CURRICULUM, CHINESE_GRADE_ORDER);
+    await seedSubject('history', '歷史', HISTORY_CURRICULUM, HISTORY_GRADE_ORDER);
     await seedSubject('geography', '地理', GEOGRAPHY_CURRICULUM, GEOGRAPHY_GRADE_ORDER);
-    await seedSubject('politics', '政治', POLITICS_CURRICULUM, POLITICS_GRADE_ORDER);
+    await seedSubject('politics', '公民', POLITICS_CURRICULUM, POLITICS_GRADE_ORDER);
 
-    console.log('\n✨ 所有额外学科标签导入完成!');
+    console.log('\n✨ 所有額外學科標籤導入完成!');
 }
 
 main()
     .catch((e) => {
-        console.error('❌ 导入失败:', e);
+        console.error('❌ 導入失敗:', e);
         process.exit(1);
     })
     .finally(async () => {

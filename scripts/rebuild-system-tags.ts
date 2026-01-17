@@ -1,6 +1,6 @@
 /**
- * 系统标签重建脚本 - 可在 Docker entrypoint 中自动运行
- * 用于版本升级时自动重建系统标签并保留关联关系
+ * 系統標籤重建腳本 - 可在 Docker entrypoint 中自動運行
+ * 用於版本升級時自動重建系統標籤並保留關聯關係
  */
 import { PrismaClient } from '@prisma/client';
 import {
@@ -135,7 +135,7 @@ async function main() {
     let customTagsCreated = 0;
 
     await prisma.$transaction(async (tx) => {
-        // ========== STEP 1: 备份现有关联关系 ==========
+        // ========== STEP 1: 備份現有關聯關係 ==========
         console.log('[RebuildTags] Step 1: Backing up tag associations...');
         const associations: TagAssociation[] = [];
 
@@ -160,7 +160,7 @@ async function main() {
         }
         console.log(`[RebuildTags] Backed up ${associations.length} associations from ${errorItemsWithSystemTags.length} items`);
 
-        // ========== STEP 2: 删除旧标签并重建 ==========
+        // ========== STEP 2: 刪除舊標籤並重建 ==========
         console.log('[RebuildTags] Step 2: Rebuilding system tags...');
 
         // Math
@@ -201,7 +201,7 @@ async function main() {
 
         console.log(`[RebuildTags] Created ${totalCreated} tags`);
 
-        // ========== STEP 3: 恢复关联关系 ==========
+        // ========== STEP 3: 恢復關聯關係 ==========
         console.log('[RebuildTags] Step 3: Restoring associations...');
 
         const associationsByItem = new Map<string, TagAssociation[]>();
@@ -211,7 +211,7 @@ async function main() {
             associationsByItem.set(assoc.errorItemId, list);
         }
 
-        // 获取第一个 admin 用户用于创建自定义标签
+        // 獲取第一個 admin 用戶用於創建自定義標籤
         const adminUser = await tx.user.findFirst({
             where: { role: 'admin' },
             select: { id: true }
@@ -234,7 +234,7 @@ async function main() {
                     newTagIds.push(newTag.id);
                     associationsRestored++;
                 } else if (adminUser) {
-                    // 系统标签未找到，创建为自定义标签
+                    // 系統標籤未找到，創建為自定義標籤
                     console.warn(`[RebuildTags] Tag not found: "${assoc.tagName}" (${assoc.subject}), creating as custom tag`);
 
                     let customTag = await tx.knowledgeTag.findFirst({

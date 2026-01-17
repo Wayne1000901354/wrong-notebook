@@ -1,7 +1,7 @@
 /**
- * 数据库用户检查脚本
- * 功能：列出数据库中所有的用户信息 (ID, Email, Name)。
- * 用途：用于确认用户注册情况，获取用户 ID 用于调试。
+ * 資料庫用戶檢查腳本
+ * 功能：列出資料庫中所有的用戶資訊 (ID, Email, Name)。
+ * 用途：用於確認用戶註冊情況，獲取用戶 ID 用於調試。
  */
 const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();

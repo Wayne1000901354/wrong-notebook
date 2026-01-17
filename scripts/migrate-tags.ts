@@ -6,7 +6,7 @@ import { findParentTagIdForGrade } from '../src/lib/tag-recognition';
 const prisma = new PrismaClient();
 
 async function main() {
-    console.log('🚀 开始迁移旧版标签数据...');
+    console.log('🚀 開始遷移舊版標籤數據...');
 
     const errorItems = await prisma.errorItem.findMany({
         where: {
@@ -30,7 +30,7 @@ async function main() {
         },
     });
 
-    console.log(`📦 找到 ${errorItems.length} 个包含旧版标签数据的错题。`);
+    console.log(`📦 找到 ${errorItems.length} 個包含舊版標籤數據的錯題。`);
 
     let updatedCount = 0;
 
@@ -75,8 +75,8 @@ async function main() {
             });
 
             if (!tag) {
-                console.log(`   ✨ 创建新标签: ${tagName} for user ${item.userId}`);
-                // 尝试根据错题的年级学期查找 parentId
+                console.log(`   ✨ 創建新標籤: ${tagName} for user ${item.userId}`);
+                // 嘗試根據錯題的年級學期查找 parentId
                 const gradeStr = item.gradeSemester; // item need to include gradeSemester
                 const parentId = await findParentTagIdForGrade(gradeStr, subjectKey);
 
@@ -120,7 +120,7 @@ async function main() {
         }
     }
 
-    console.log(`\n✅ 迁移完成! 更新了 ${updatedCount} 个错题的标签关联。`);
+    console.log(`\n✅ 遷移完成! 更新了 ${updatedCount} 個錯題的標籤關聯。`);
 }
 
 main()

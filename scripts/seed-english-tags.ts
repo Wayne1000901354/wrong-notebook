@@ -1,6 +1,6 @@
 /**
- * 英语标签导入脚本
- * 将英语课程大纲导入到 KnowledgeTag 表
+ * 英語標籤導入腳本
+ * 將英語課程大綱導入到 KnowledgeTag 表
  * 
  * 使用方法: npx tsx scripts/seed-english-tags.ts
  */
@@ -11,10 +11,10 @@ import { ENGLISH_CURRICULUM, ENGLISH_GRADE_ORDER } from '../src/lib/tag-data/eng
 const prisma = new PrismaClient();
 
 async function main() {
-    console.log('📚 开始导入英语标签...');
+    console.log('📚 開始導入英語標籤...');
 
-    // 清空现有英语系统标签
-    console.log('🗑️  清空现有英语系统标签...');
+    // 清空現有英語系統標籤
+    console.log('🗑️  清空現有英語系統標籤...');
     await prisma.knowledgeTag.deleteMany({
         where: { isSystem: true, subject: 'english' }
     });
@@ -22,9 +22,9 @@ async function main() {
     let totalCreated = 0;
 
     for (const [gradeSemester, chapters] of Object.entries(ENGLISH_CURRICULUM)) {
-        console.log(`\n📚 处理年级: ${gradeSemester}`);
+        console.log(`\n📚 處理年級: ${gradeSemester}`);
 
-        // 创建年级节点
+        // 創建年級節點
         const gradeNode = await prisma.knowledgeTag.create({
             data: {
                 name: gradeSemester,
@@ -38,9 +38,9 @@ async function main() {
 
         for (let chapterIdx = 0; chapterIdx < chapters.length; chapterIdx++) {
             const chapter = chapters[chapterIdx];
-            console.log(`  📖 章节: ${chapter.chapter}`);
+            console.log(`  📖 章節: ${chapter.chapter}`);
 
-            // 创建章节节点
+            // 創建章節節點
             const chapterNode = await prisma.knowledgeTag.create({
                 data: {
                     name: chapter.chapter,
@@ -52,7 +52,7 @@ async function main() {
             });
             totalCreated++;
 
-            // 创建知识点
+            // 創建知識點
             for (let tagIdx = 0; tagIdx < chapter.tags.length; tagIdx++) {
                 const tagName = chapter.tags[tagIdx];
                 await prisma.knowledgeTag.create({
@@ -69,12 +69,12 @@ async function main() {
         }
     }
 
-    console.log(`\n✅ 英语标签导入完成! 共创建 ${totalCreated} 个标签`);
+    console.log(`\n✅ 英語標籤導入完成! 共創建 ${totalCreated} 個標籤`);
 }
 
 main()
     .catch((e) => {
-        console.error('❌ 导入失败:', e);
+        console.error('❌ 導入失敗:', e);
         process.exit(1);
     })
     .finally(async () => {

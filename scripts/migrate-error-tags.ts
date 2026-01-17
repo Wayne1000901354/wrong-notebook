@@ -1,6 +1,6 @@
 /**
- * 错题知识点迁移脚本
- * 将现有 ErrorItem.knowledgePoints (JSON string) 迁移到 KnowledgeTag 关联
+ * 錯題知識點遷移腳本
+ * 將現有 ErrorItem.knowledgePoints (JSON string) 遷移到 KnowledgeTag 關聯
  * 
  * 使用: npx tsx scripts/migrate-error-tags.ts
  */
@@ -11,9 +11,9 @@ import { findParentTagIdForGrade } from '../src/lib/tag-recognition';
 const prisma = new PrismaClient();
 
 async function main() {
-    console.log('🚀 开始迁移错题知识点数据...\n');
+    console.log('🚀 開始遷移錯題知識點數據...\n');
 
-    // 获取所有有 knowledgePoints 的错题
+    // 獲取所有有 knowledgePoints 的錯題
     const errorItems = await prisma.errorItem.findMany({
         where: {
             knowledgePoints: { not: null }
@@ -28,7 +28,7 @@ async function main() {
         }
     });
 
-    console.log(`📊 找到 ${errorItems.length} 条需要迁移的错题\n`);
+    console.log(`📊 找到 ${errorItems.length} 條需要遷移的錯題\n`);
 
     let migratedCount = 0;
     let createdTagsCount = 0;
@@ -37,7 +37,7 @@ async function main() {
     for (const item of errorItems) {
         if (!item.knowledgePoints) continue;
 
-        // 解析知识点 (可能是 JSON 数组或逗号分隔字符串)
+        // 解析知識點 (可能是 JSON 陣列或逗號分隔字串)
         let tags: string[] = [];
         try {
             const parsed = JSON.parse(item.knowledgePoints);
@@ -45,20 +45,20 @@ async function main() {
                 tags = parsed.filter((t): t is string => typeof t === 'string');
             }
         } catch {
-            // 尝试逗号分隔
+            // 嘗試逗號分隔
             tags = item.knowledgePoints.split(',').map(t => t.trim()).filter(Boolean);
         }
 
         if (tags.length === 0) continue;
 
-        // 推断学科
+        // 推斷學科
         const subject = item.subject?.name?.toLowerCase() || 'math';
-        const subjectKey = subject.includes('math') || subject.includes('数学') ? 'math' :
-            subject.includes('english') || subject.includes('英语') ? 'english' :
+        const subjectKey = subject.includes('math') || subject.includes('數學') ? 'math' :
+            subject.includes('english') || subject.includes('英語') ? 'english' :
                 subject.includes('physics') || subject.includes('物理') ? 'physics' :
-                    subject.includes('chemistry') || subject.includes('化学') ? 'chemistry' : 'other';
+                    subject.includes('chemistry') || subject.includes('化學') ? 'chemistry' : 'other';
 
-        // 为每个标签找到或创建对应的 KnowledgeTag
+        // 為每個標籤找到或創建對應的 KnowledgeTag
         const tagIds: string[] = [];
         for (const tagName of tags) {
             // 先查找是否存在
@@ -69,9 +69,9 @@ async function main() {
                 }
             });
 
-            // 不存在则创建为自定义标签 (系统级)
+            // 不存在則創建為自定義標籤 (系統級)
             if (!tag) {
-                // 尝试根据错题的年级学期查找 parentId
+                // 嘗試根據錯題的年級學期查找 parentId
                 const gradeStr = item.gradeSemester;
                 const parentId = await findParentTagIdForGrade(gradeStr, subjectKey);
 
@@ -79,7 +79,7 @@ async function main() {
                     data: {
                         name: tagName,
                         subject: subjectKey,
-                        isSystem: false, // 标记为非系统标签，但无用户归属
+                        isSystem: false, // 標記為非系統標籤，但無用戶歸屬
                         parentId: parentId || null
                     }
                 });
@@ -89,7 +89,7 @@ async function main() {
             tagIds.push(tag.id);
         }
 
-        // 关联到错题
+        // 關聯到錯題
         if (tagIds.length > 0) {
             await prisma.errorItem.update({
                 where: { id: item.id },
@@ -104,19 +104,19 @@ async function main() {
 
         migratedCount++;
         if (migratedCount % 50 === 0) {
-            console.log(`  已处理 ${migratedCount}/${errorItems.length} 条...`);
+            console.log(`  已處理 ${migratedCount}/${errorItems.length} 條...`);
         }
     }
 
-    console.log(`\n✅ 迁移完成!`);
-    console.log(`   - 处理错题数: ${migratedCount}`);
-    console.log(`   - 新建标签数: ${createdTagsCount}`);
-    console.log(`   - 创建关联数: ${linkedTagsCount}`);
+    console.log(`\n✅ 遷移完成!`);
+    console.log(`   - 處理錯題數: ${migratedCount}`);
+    console.log(`   - 新建標籤數: ${createdTagsCount}`);
+    console.log(`   - 創建關聯數: ${linkedTagsCount}`);
 }
 
 main()
     .catch((e) => {
-        console.error('❌ 迁移失败:', e);
+        console.error('❌ 遷移失敗:', e);
         process.exit(1);
     })
     .finally(async () => {
