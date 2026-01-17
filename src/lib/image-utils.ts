@@ -4,7 +4,7 @@
  * @param maxSizeMB 最大文件大小（MB），默认 1MB
  * @param maxWidth 最大宽度，默认 1920px
  * @param quality 压缩质量 0-1，默认 0.8
- * @returns 压缩后的 Base64 字符串
+ * @returns 壓縮後的 Base64 字串
  */
 export async function compressImage(
     file: File,
@@ -41,7 +41,7 @@ export async function compressImage(
                 // 绘制图片
                 ctx.drawImage(img, 0, 0, width, height);
 
-                // 转换为 Base64，逐步降低质量直到满足大小要求
+                // 轉換為 Base64，逐步降低品質直到滿足大小要求
                 let currentQuality = quality;
                 let compressed = canvas.toDataURL('image/jpeg', currentQuality);
 
@@ -59,7 +59,7 @@ export async function compressImage(
                     if (newSize <= maxSizeMB) break;
                 }
 
-                console.log(`原始文件: ${(file.size / 1024 / 1024).toFixed(2)}MB, 压缩后: ${((compressed.length * 3) / 4 / 1024 / 1024).toFixed(2)}MB`);
+                console.log(`原始檔案: ${(file.size / 1024 / 1024).toFixed(2)}MB, 壓縮後: ${((compressed.length * 3) / 4 / 1024 / 1024).toFixed(2)}MB`);
 
                 resolve(compressed);
             };
@@ -85,7 +85,7 @@ export async function processImageFile(file: File): Promise<string> {
     console.log(`文件大小: ${fileSizeMB.toFixed(2)}MB`);
 
     if (fileSizeMB > threshold) {
-        console.log('文件超过阈值，开始压缩...');
+        console.log('檔案超過閾值，開始壓縮...');
         return await compressImage(file, threshold);
     } else {
         console.log('文件大小合适，无需压缩');

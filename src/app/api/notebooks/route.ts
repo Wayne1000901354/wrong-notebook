@@ -97,7 +97,7 @@ export async function GET() {
 
 /**
  * POST /api/notebooks
- * 创建新错题本
+ * 創建新錯題本
  */
 export async function POST(req: Request) {
     const session = await getServerSession(authOptions);

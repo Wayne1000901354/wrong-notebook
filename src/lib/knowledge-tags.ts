@@ -1,14 +1,14 @@
 /**
- * 知识点标签工具函数
+ * 知識點標籤工具函數
  * 
  * 注意：課程數據已遷移到數據庫，通過 seed scripts 導入。
  * 此文件僅保留通用工具函數。
  */
 
 /**
- * 根据教育阶段和入学年份计算当前年级数字
+ * 根據教育階段和入學年份計算當前年級數字
  * @param educationStage 教育阶段 ('junior_high' | 'senior_high')
- * @param enrollmentYear 入学年份
+ * @param enrollmentYear 入學年份
  * @returns 年级 (7-12) 或 null
  */
 export function calculateGradeNumber(
@@ -27,10 +27,10 @@ export function calculateGradeNumber(
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth() + 1; // 1-12
 
-    // 计算入学后的年数
+    // 計算入學後的年數
     let yearsInSchool = currentYear - enrollmentYear;
 
-    // 如果当前月份在9月之前,说明还没开学,年级要减1
+    // 如果當前月份在9月之前,說明還沒開學,年級要減1
     if (currentMonth < 9) {
         yearsInSchool -= 1;
     }
@@ -53,9 +53,9 @@ export function calculateGradeNumber(
 }
 
 /**
- * 从错题本名称推断学科
- * @param subjectName 错题本名称
- * @returns 学科标识
+ * 從錯題本名稱推斷學科
+ * @param subjectName 錯題本名稱
+ * @returns 學科標識
  */
 export function inferSubjectFromName(subjectName: string | null): 'math' | 'physics' | 'chemistry' | 'biology' | 'english' | 'chinese' | 'history' | 'geography' | 'politics' | null {
     if (!subjectName) return null;

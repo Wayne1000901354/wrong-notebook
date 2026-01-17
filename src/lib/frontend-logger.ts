@@ -28,7 +28,7 @@ interface LogOptions {
 /** 默认刷新延迟（毫秒） */
 const FLUSH_DELAY_MS = 1000;
 
-/** 缓冲区最大条目数，超过自动刷新 */
+/** 緩衝區最大條目數，超過自動重新整理 */
 const MAX_BUFFER_SIZE = 20;
 
 class FrontendLogger {
@@ -64,7 +64,7 @@ class FrontendLogger {
   }
 
   private scheduleFlush() {
-    if (this.flushTimer) return; // 已有定时器
+    if (this.flushTimer) return; // 已有定時器
 
     this.flushTimer = setTimeout(() => {
       this.flush();
@@ -72,20 +72,20 @@ class FrontendLogger {
   }
 
   private flush() {
-    // 清除定时器
+    // 清除定時器
     if (this.flushTimer) {
       clearTimeout(this.flushTimer);
       this.flushTimer = null;
     }
 
-    // 如果缓冲区为空，直接返回
+    // 如果緩衝區為空，直接返回
     if (this.buffer.length === 0) return;
 
     // 取出所有日志并清空缓冲区
     const logs = [...this.buffer];
     this.buffer = [];
 
-    // 异步发送，不阻塞主线程
+    // 非同步發送，不阻塞主執行緒
     this.sendBatch(logs);
   }
 
@@ -129,7 +129,7 @@ class FrontendLogger {
   }
 
   /**
-   * 立即刷新缓冲区（用于页面卸载等场景）
+   * 立即重新整理緩衝區（用於頁面解除安裝等場景）
    */
   forceFlush() {
     this.flush();

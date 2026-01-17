@@ -148,7 +148,7 @@ export async function POST(req: Request) {
 
         logger.info({ tagNames, tagConnectionsCount: tagConnections.length }, 'Creating ErrorItem with tags');
 
-        // 创建错题记录
+        // 創建錯題記錄
         try {
             const errorItem = await prisma.errorItem.create({
                 data: {

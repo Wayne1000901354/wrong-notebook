@@ -384,7 +384,7 @@ export const translations = {
                 visionSupport: "Vision/Multimodal",
                 supported: "Supported",
                 notSupported: "Not Supported",
-                // 错误代码翻译（匹配 AI Provider 返回的错误代码）
+                // 錯誤代碼翻譯（匹配 AI Provider 返回的錯誤代碼）
                 errors: {
                     AI_AUTH_ERROR: "Invalid or expired API Key",
                     AI_PERMISSION_DENIED: "Permission denied, check API Key permissions",

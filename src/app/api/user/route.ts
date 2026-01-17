@@ -69,8 +69,8 @@ export async function PATCH(req: Request) {
             updateData.enrollmentYear = enrollmentYear;
         }
 
-        // 验证邮箱格式（如果提供了邮箱）
-        // 支持标准邮箱和本地邮箱（如 admin@localhost）
+        // 驗證信箱格式（如果提供了信箱）
+        // 支持標準信箱和本地信箱（如 admin@localhost）
         if (email && email.trim()) {
             const emailRegex = /^[^\s@]+@[^\s@]+$/;
             if (!emailRegex.test(email.trim())) {
@@ -79,7 +79,7 @@ export async function PATCH(req: Request) {
             updateData.email = email.trim();
         }
 
-        // 验证密码长度（如果提供了密码）
+        // 驗證密碼長度（如果提供了密碼）
         if (password && password.length > 0) {
             if (password.length < 6) {
                 return badRequest("Password must be at least 6 characters");

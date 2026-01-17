@@ -1,7 +1,7 @@
 /**
  * 知识点标签 API
  * GET /api/tags - 获取标签树
- * POST /api/tags - 创建自定义标签
+ * POST /api/tags - 創建自定義標籤
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -27,7 +27,7 @@ function buildTagTree(tags: any[]): TagTreeNode[] {
     const tagMap = new Map<string, TagTreeNode>();
     const roots: TagTreeNode[] = [];
 
-    // 第一遍：创建所有节点
+    // 第一遍：創建所有節點
     for (const tag of tags) {
         tagMap.set(tag.id, {
             id: tag.id,
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Tag already exists in this group' }, { status: 409 });
         }
 
-        // 创建自定义标签
+        // 創建自定義標籤
         const tag = await prisma.knowledgeTag.create({
             data: {
                 name: name.trim(),
@@ -197,7 +197,7 @@ export async function DELETE(request: NextRequest) {
             return NextResponse.json({ error: 'Tag ID is required' }, { status: 400 });
         }
 
-        // 只能删除自己的自定义标签
+        // 只能刪除自己的自定義標籤
         const tag = await prisma.knowledgeTag.findFirst({
             where: {
                 id: tagId,

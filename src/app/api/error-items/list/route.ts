@@ -47,12 +47,12 @@ export async function GET(req: Request) {
             whereClause.subjectId = subjectId;
         }
 
-        // 搜索条件需要使用 AND 包装，避免与其他 OR 条件冲突
+        // 搜尋條件需要使用 AND 包裝，避免與其他 OR 條件衝突
         // 最终的 whereClause.AND 会包含所有需要同时满足的条件
         const andConditions: any[] = [];
 
         if (query) {
-            // 搜索条件：在题目、解析、知识点中任一匹配即可
+            // 搜尋條件：在題目、解析、知識點中任一匹配即可
             andConditions.push({
                 OR: [
                     { questionText: { contains: query } },

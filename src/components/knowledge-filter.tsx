@@ -31,25 +31,25 @@ interface KnowledgeFilterProps {
     className?: string;
 }
 
-// 年级编号到学期名称的映射 (用于根据用户入学年份计算当前年级)
+// 年級編號到學期名稱的映射 (用於根據用戶入學年份計算當前年級)
 const EDUCATION_GRADE_MAP: Record<string, number[]> = {
     'primary': [1, 2, 3, 4, 5, 6],
     'junior_high': [7, 8, 9],
     'senior_high': [10, 11, 12],
 };
 
-// 年级编号到学期key的映射
-// 注意：國小目前數據庫中只存儲了"一年級"這種粒度，沒有分上下冊，後續如果有變化需要更新這裡
+// 年級編號到學期key的映射
+// 注意：國小目前資料庫中只存儲了"一年級"這種粒度，沒有分上下冊，後續如果有變化需要更新這裡
 const GRADE_TO_SEMESTERS: Record<number, string[]> = {
-    1: ['一年级'],
-    2: ['二年级'],
-    3: ['三年级'],
-    4: ['四年级'],
-    5: ['五年级'],
-    6: ['六年级'],
-    7: ['七年级上', '七年级下', '七年级'], // 兼容可能存在的不同命名
-    8: ['八年级上', '八年级下', '八年级'],
-    9: ['九年级上', '九年级下', '九年级'],
+    1: ['一年級'],
+    2: ['二年級'],
+    3: ['三年級'],
+    4: ['四年級'],
+    5: ['五年級'],
+    6: ['六年級'],
+    7: ['國一上', '國一下', '國一', '七年級上', '七年級下', '七年級'], // 兼容可能存在的不同命名
+    8: ['國二上', '國二下', '國二', '八年級上', '八年級下', '八年級'],
+    9: ['國三上', '國三下', '國三', '九年級上', '九年級下', '九年級'],
     10: ['高一上', '高一下', '高一'],
     11: ['高二上', '高二下', '高二'],
     12: ['高三上', '高三下', '高三'],
@@ -66,14 +66,14 @@ export function KnowledgeFilter({
     const [chapter, setChapter] = useState<string>("");
     const [tag, setTag] = useState<string>(initialTag || "");
 
-    // 从数据库加载的标签树
+    // 從資料庫載入的標籤樹
     const [tagTree, setTagTree] = useState<TagTreeNode[]>([]);
     const [loading, setLoading] = useState(true);
 
-    // 用户信息 (教育阶段和入学年份)
+    // 用戶資訊 (教育階段和入學年份)
     const [userInfo, setUserInfo] = useState<{ educationStage?: string; enrollmentYear?: number }>({});
 
-    // 可用的年级学期选项 (根据用户信息过滤)
+    // 可用的年級學期選項 (根據用戶資訊過濾)
     const [availableGrades, setAvailableGrades] = useState<string[]>([]);
 
     // Sync with props
@@ -85,13 +85,13 @@ export function KnowledgeFilter({
         if (initialTag !== undefined) setTag(initialTag || "");
     }, [initialTag]);
 
-    // 计算用户当前年级 (返回原始年级数值，不进行范围截断，以便判断由初升高等情况)
+    // 計算用戶當前年級 (返回原始年級數值，不進行範圍截斷，以便判斷由初升高的情況)
     const calculateCurrentGrade = useCallback((educationStage: string, enrollmentYear: number): number => {
         const now = new Date();
         const currentYear = now.getFullYear();
         const currentMonth = now.getMonth() + 1; // 1-12
 
-        // 学年从9月开始
+        // 學年從9月開始
         const academicYear = currentMonth >= 9 ? currentYear : currentYear - 1;
         const yearsInSchool = academicYear - enrollmentYear + 1;
 
@@ -101,17 +101,17 @@ export function KnowledgeFilter({
             // 國中: 1年級=7, ...
             return yearsInSchool + 6;
         } else if (educationStage === 'senior_high') {
-            // 高中: 1年级=10, ...
+            // 高中: 1年級=10, ...
             return yearsInSchool + 9;
         }
         return 0;
     }, []);
 
-    // 根据用户信息生成可用年级列表
+    // 根據用戶資訊生成可用年級列表
     const generateAvailableGrades = useCallback((educationStage?: string, enrollmentYear?: number): string[] => {
         let grades: number[] = [];
 
-        // 默认: 显示所有年级
+        // 默認: 顯示所有年級
         if (!educationStage) {
             grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         } else if (educationStage === 'primary') {
@@ -121,7 +121,7 @@ export function KnowledgeFilter({
             // 國中生: 預設顯示國中全部 (7-9)
             grades = [7, 8, 9];
 
-            // 如果有入学年份，且推算年级已达到高中 (>=10)，则追加高中年级
+            // 如果有入學年份，且推算年級已達到高中 (>=10)，則追加高中年級
             if (enrollmentYear) {
                 const currentGrade = calculateCurrentGrade(educationStage, enrollmentYear);
                 if (currentGrade >= 10) {
@@ -129,35 +129,35 @@ export function KnowledgeFilter({
                 }
             }
         } else if (educationStage === 'senior_high') {
-            // 高中生: 仅显示高中全部
+            // 高中生: 僅顯示高中全部
             grades = [10, 11, 12];
         } else {
-            // 其他情况
+            // 其他情況
             grades = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         }
 
-        // 可以在这里根据 enrollmentYear 做进一步优化，比如高亮当前年级
-        // 但目前先返回该阶段的所有年级
+        // 可以在這裡根據 enrollmentYear 做進一步優化，比如高亮當前年級
+        // 但目前先返回該階段的所有年級
 
         return grades.flatMap(g => GRADE_TO_SEMESTERS[g] || []);
     }, [calculateCurrentGrade]);
 
-    // 加载用户信息和标签树
+    // 載入用戶資訊和標籤樹
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                // 1. 获取用户信息
+                // 1. 獲取用戶資訊
                 const user = await apiClient.get<{ educationStage?: string; enrollmentYear?: number }>('/api/user');
                 setUserInfo(user);
 
-                // 2. 生成可用年级
+                // 2. 生成可用年級
                 const grades = generateAvailableGrades(user.educationStage, user.enrollmentYear);
                 setAvailableGrades(grades);
 
-                // 3. 获取标签树 (所有科目)
+                // 3. 獲取標籤樹 (所有科目)
                 const subject = subjectName ? inferSubjectFromName(subjectName) : 'math';
-                // 移除仅 math 的限制，尝试获取当前科目的标签
+                // 移除僅 math 的限制，嘗試獲取當前科目的標籤
                 try {
                     const data = await apiClient.get<{ tags: TagTreeNode[] }>(`/api/tags?subject=${subject}`);
                     setTagTree(data.tags);
@@ -205,42 +205,42 @@ export function KnowledgeFilter({
         });
     };
 
-    // 从标签树中找到当前年级节点
+    // 從標籤樹中找到當前年級節點
     const currentGradeNode = tagTree.find(node => node.name === gradeSemester);
     const chapters = currentGradeNode?.children || [];
 
-    // 从标签树中找到当前章节节点
+    // 從標籤樹中找到當前章節節點
     const currentChapterNode = chapters.find(node => node.name === chapter);
 
-    // 递归获取所有叶子标签
+    // 遞歸獲取所有葉子標籤
     const getLeafTags = (node: TagTreeNode): string[] => {
         if (node.children.length === 0) return [node.name];
         return node.children.flatMap(child => getLeafTags(child));
     };
-    // 去重标签，避免 React key 冲突
+    // 去重標籤，避免 React key 衝突
     const tags = currentChapterNode
         ? [...new Set(getLeafTags(currentChapterNode))]
         : [];
 
-    // 过滤可用年级 (只显示数据库中存在的)
-    // 对于非数学科目，如果不按照年级结构存储，这里可能会被清空
-    // 我们检查 tagTree 的顶层节点是否包含 gradeSemester
+    // 過濾可用年級 (只顯示資料庫中存在的)
+    // 對於非數學科目，如果不按照年級結構存儲，這裡可能會被清空
+    // 我們檢查 tagTree 的頂層節點是否包含 gradeSemester
     const filteredGrades = availableGrades.filter(g =>
         tagTree.some(node => node.name === g)
     );
 
-    // 如果过滤后没有年级（可能是因为该科目标签结构不同，比如没有按年级分类），
-    // 或者 tagTree 为空，我们至少应该显示 availableGrades 或者不显示
-    // 但根据现在的 seed 脚本，所有科目都是按年级分类的，所以应该没问题。
+    // 如果過濾後沒有年級（可能是因為該科目標籤結構不同，比如沒有按年級分類），
+    // 或者 tagTree 為空，我們至少應該顯示 availableGrades 或者不顯示
+    // 但根據現在的 seed 腳本，所有科目都是按年級分類的，所以應該沒問題。
 
     return (
         <div className={`flex gap-2 ${className}`}>
             <Select value={gradeSemester} onValueChange={handleGradeChange} disabled={loading}>
                 <SelectTrigger className="w-[140px]">
-                    <SelectValue placeholder="年级/学期" />
+                    <SelectValue placeholder="年級/學期" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="all">全部年级</SelectItem>
+                    <SelectItem value="all">全部年級</SelectItem>
                     {filteredGrades.map(gs => (
                         <SelectItem key={gs} value={gs}>{gs}</SelectItem>
                     ))}
@@ -249,10 +249,10 @@ export function KnowledgeFilter({
 
             <Select value={chapter} onValueChange={handleChapterChange} disabled={!gradeSemester || gradeSemester === "all"}>
                 <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="章节" />
+                    <SelectValue placeholder="章節" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="all">全部章节</SelectItem>
+                    <SelectItem value="all">全部章節</SelectItem>
                     {chapters.map(c => (
                         <SelectItem key={c.id} value={c.name}>
                             {c.name.replace(/^第\d+章\s*/, '')}
@@ -263,10 +263,10 @@ export function KnowledgeFilter({
 
             <Select value={tag} onValueChange={handleTagChange} disabled={!chapter || chapter === "all"}>
                 <SelectTrigger className="w-[140px]">
-                    <SelectValue placeholder="知识点" />
+                    <SelectValue placeholder="知識點" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="all">全部知识点</SelectItem>
+                    <SelectItem value="all">全部知識點</SelectItem>
                     {tags.map(t => (
                         <SelectItem key={t} value={t}>{t}</SelectItem>
                     ))}

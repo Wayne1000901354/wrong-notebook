@@ -8,13 +8,13 @@ const logger = createLogger('api:tags:suggestions');
 
 /**
  * GET /api/tags/suggestions
- * 获取标签建议（支持搜索）
- * Query params: 
- *   - q: 搜索词
- *   - subject: 学科 (可选, e.g., 'math')
- *   - stage: 学段 (可选)
+ * 獲取標籤建議（支持搜尋）
+ * 查詢參數: 
+ *   - q: 搜尋詞
+ *   - subject: 學科 (可選, e.g., 'math')
+ *   - stage: 學段 (可選)
  * 
- * 现在从数据库 KnowledgeTag 表查询，包含系统标签和用户的自定义标签
+ * 現在從資料庫 KnowledgeTag 表查詢，包含系統標籤和使用者的自訂標籤
  */
 export async function GET(req: Request) {
     try {
@@ -34,7 +34,7 @@ export async function GET(req: Request) {
 
         // 如果没有 session, 尝试默认用户? 还是只返回系统标签? 
         // 按照现有逻辑，很多地方都有 fallback 到默认用户的逻辑，这里也保持一致比较好，
-        // 或者只返回系统标签。稳妥起见，如果已登录则返回用户标签。
+        // 或者只返回系統標籤。穩妥起見，如果已登入則返回用戶標籤。
 
         const whereCondition: any = {
             ...(subject ? { subject } : {}),

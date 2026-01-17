@@ -9,7 +9,7 @@ const logger = createLogger('api:error-items:batch-delete');
 
 /**
  * POST /api/error-items/batch-delete
- * 批量删除错题
+ * 批量刪除錯題
  * Body: { ids: string[] }
  */
 export async function POST(req: Request) {
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
 
         logger.debug({ userId: user.id, idsCount: ids.length }, 'Batch delete request');
 
-        // 查询所有要删除的错题，验证所有权
+        // 查詢所有要刪除的錯題，驗證所有權
         const itemsToDelete = await prisma.errorItem.findMany({
             where: {
                 id: { in: ids },
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
             logger.warn({ unauthorizedIds }, 'Some items do not belong to user or do not exist');
         }
 
-        // 执行删除
+        // 執行刪除
         let deletedCount = 0;
         if (ownedIds.length > 0) {
             const result = await prisma.errorItem.deleteMany({

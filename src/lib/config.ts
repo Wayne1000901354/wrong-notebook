@@ -50,10 +50,10 @@ interface LegacyOpenAIConfig {
     model?: string;
 }
 
-// 检测是否为旧版配置格式
+// 檢測是否為舊版配置格式
 function isLegacyOpenAIConfig(config: unknown): config is LegacyOpenAIConfig {
     if (!config || typeof config !== 'object') return false;
-    // 旧版配置包含 apiKey 直接字段，而新版包含 instances 数组
+    // 舊版配置包含 apiKey 直接欄位，而新版包含 instances 陣列
     return 'apiKey' in config && !('instances' in config);
 }
 
@@ -69,7 +69,7 @@ function generateId(): string {
 // 迁移旧版 OpenAI 配置到新版多实例格式
 function migrateOpenAIConfig(legacy: LegacyOpenAIConfig): AppConfig['openai'] {
     if (!legacy.apiKey) {
-        // 没有有效配置，返回空实例数组
+        // 沒有有效配置，返回空實例陣列
         return { instances: [], activeInstanceId: undefined };
     }
 
@@ -199,6 +199,6 @@ export function getActiveOpenAIConfig(): OpenAIInstance | undefined {
     return instances.find(i => i.id === activeId);
 }
 
-// 最大实例数限制
+// 最大實例數限制
 export const MAX_OPENAI_INSTANCES = 10;
 

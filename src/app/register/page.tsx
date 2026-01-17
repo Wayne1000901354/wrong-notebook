@@ -46,7 +46,7 @@ export default function RegisterPage() {
         setLoading(true);
         setError("");
 
-        // 验证两次密码是否一致
+        // 驗證兩次密碼是否一致
         if (password !== confirmPassword) {
             setError(t.auth?.register?.passwordMismatch || 'Passwords do not match');
             setLoading(false);
@@ -86,7 +86,7 @@ export default function RegisterPage() {
         );
     }
 
-    // 注册已禁用
+    // 註冊已禁用
     if (allowRegistration === false) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">

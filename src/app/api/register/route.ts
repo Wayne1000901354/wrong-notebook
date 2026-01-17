@@ -5,7 +5,7 @@ import { z } from "zod"
 import { getAppConfig } from "@/lib/config"
 
 const userSchema = z.object({
-    // 支持标准邮箱和本地邮箱（如 user@localhost）
+    // 支持標準信箱和本地信箱（如 user@localhost）
     email: z.string().regex(/^[^\s@]+@[^\s@]+$/, "Invalid email format"),
     password: z.string().min(6),
     name: z.string().min(1),
@@ -15,7 +15,7 @@ const userSchema = z.object({
 
 export async function POST(req: Request) {
     try {
-        // 检查是否允许注册
+        // 檢查是否允許註冊
         const config = getAppConfig();
         if (config.allowRegistration === false) {
             return NextResponse.json(

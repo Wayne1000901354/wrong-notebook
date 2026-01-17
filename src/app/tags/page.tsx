@@ -168,7 +168,7 @@ export default function TagsPage() {
         }
     };
 
-    // 删除自定义标签
+    // 刪除自定義標籤
     const handleRemoveCustomTag = async (tagId: string, tagName: string, subject: SubjectKey) => {
         if (!confirm((t.tags?.custom?.deleteConfirm || "Are you sure you want to delete tag \"{tag}\"?").replace("{tag}", tagName))) {
             return;
